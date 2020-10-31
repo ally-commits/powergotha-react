@@ -1,0 +1,62 @@
+.container {
+    width: 100%;
+    overflow-y: scroll;
+    height: 100%;
+    background-color: var(--primary-color);
+}
+.container::-webkit-scrollbar {
+    width: 0px;
+}
+
+.container::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    width: 0px;
+}
+
+.container::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+    width: 0px;
+}
+
+.head {
+    color: white;
+    font-size: 22px;
+    height: 70px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    margin: 0px;
+    justify-content: center;
+}
+.navItems {
+    display: flex;
+    flex-direction: column;
+}
+.navItem,
+.activeNavItem {
+    display: flex;
+    width: 100%;
+    padding: 15px 25px; 
+    align-items: center;
+    color: white;
+    margin: 4px 0px;
+    transition: all 0.5s;
+}
+.navItem p,
+.activeNavItem p {
+    margin: 0px;
+    margin-left: 15px;
+    font-size: 14px;
+}
+.navItem:hover,
+.activeNavItem:hover {
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    background-color: var(--primary-color-light);
+}
+.activeNavItem { 
+    background-color: var(--primary-color-light);
+}

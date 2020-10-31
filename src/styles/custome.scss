@@ -1,0 +1,10 @@
+$theme-colors: (
+    "info": tomato,
+    "danger": teal,
+    "primary": #015185
+);
+ 
+body {
+    font-family: 'Poppins' !important;
+}
+@import "~bootstrap/scss/bootstrap";

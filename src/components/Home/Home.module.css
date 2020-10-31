@@ -1,0 +1,118 @@
+.container {
+    width: 100%;
+    display: flex;
+}
+.leftContent {
+    width: 50%;
+}
+.regGraphCard {
+    width: calc(100% - 40px);
+    margin: 20px; 
+    height: 300px;
+    padding: 20px;
+}
+.regGraphCard div {
+    width: 100%;
+    height: 100%;
+}
+.subContent {
+    margin: 20px;
+    display: flex;
+    width: calc(100% - 40px);
+    justify-content: space-between;
+}
+.subCard {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: calc(48% - 40px);
+}
+.subCard p {
+    color: #333;
+    font-size: 14px;
+}
+.profText {
+    color: #F49B35 !important;
+}
+.passText  {
+    color: #E6185D !important;
+}
+.count {
+    width: 80px;
+    height: 80px;
+    background-color: var(--primary-color);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.count p {
+    margin: 0;
+    color: white;
+    font-weight: 400;
+    font-size: 25px;
+}
+.rightContent {
+    width: 50%;
+    padding: 20px; 
+    margin: 20px;
+    height: calc(100vh - 100px);
+    margin-bottom: 0px;
+    overflow-y: scroll;
+}
+.rightContent::-webkit-scrollbar  {
+    display: none;
+}
+.images {
+    width: 100%; 
+    flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.imgContainer {
+    width: 49%;
+    height: 200px;
+    margin: 10px 0px;
+    position: relative; 
+    transition: all 1s;
+}
+.imgContainer:hover {
+    cursor: pointer;
+}
+.bottomHint {
+    position: absolute;
+    width: 100%;
+    background-color: var(--primary-color);
+    bottom: 0px;
+    right: 0px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: white;
+    font-size: 13px;
+    text-align: center;
+    padding: 8px;
+    opacity: 0; 
+    transition: all 0.5s;
+}
+.imgContainer:hover .bottomHint{
+    cursor: pointer;
+    opacity: 0.74;
+}
+.imgContent {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 1450px) {
+    .subCard {
+        width: 48%;
+        text-align: center;
+    }
+    .imgContainer {
+        height: 160px;
+    }
+}

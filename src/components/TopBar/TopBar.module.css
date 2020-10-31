@@ -1,0 +1,33 @@
+.container {
+    width: calc(100% - var(--nav-width));
+    margin: 0 auto;
+    height: 74px;
+    z-index: 1000;
+    position: fixed; 
+    background-color: white;
+    box-shadow: 1px 1px 20px rgba(51, 51, 51, 0.1);
+}
+.content {
+    width: 97%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+}
+.container h2 {
+    font-size: 16px;
+    margin: 0px;
+}
+.profile {
+    width: 50px;
+    height: 50px;
+    border-radius: 200%;
+}
+.profile:hover {
+    cursor: pointer;
+}
+.spacer {
+    height: 74px;
+}
+ 

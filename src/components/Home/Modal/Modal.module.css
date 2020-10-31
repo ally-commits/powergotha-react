@@ -1,0 +1,15 @@
+.container {
+    padding: 20px;
+    position: relative;
+}
+.container svg {
+    position: absolute;
+    right: 20px;
+}
+.container svg:hover {
+    cursor: pointer;
+}
+.imgContent {
+    width: 100%;
+    height: auto;
+}
