@@ -11,7 +11,14 @@
     height: 300px;
     padding: 20px;
 }
-.regGraphCard div {
+.regGraphCard p {
+    margin: 0;
+}
+.regGraphCard .contentGraph div {
+    width: 100%;
+    height: 100%;
+}
+.regGraphCard .contentGraph  {
     width: 100%;
     height: 100%;
 }
@@ -33,10 +40,10 @@
     font-size: 14px;
 }
 .profText {
-    color: #F49B35 !important;
+    color: var( --professionals-color) !important;
 }
 .passText  {
-    color: #E6185D !important;
+    color: var(--passionists-color) !important;
 }
 .count {
     width: 80px;
@@ -105,6 +112,40 @@
     width: 100%;
     border-radius: 10px;
     overflow: hidden;
+}
+
+.header {
+    display: flex;
+    width: 100%;
+    height: 40px; 
+    align-items: center;
+    justify-content: space-between;
+    margin: 0px;
+}
+.alignContent {
+    display: flex;
+    align-items: center;
+}
+.element {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+.element span {
+    width: 12px;
+    height: 12px; 
+    border-radius: 100%;
+    margin-right: 4px;
+}
+.element p {
+    margin: 0px;
+    font-size: 14px;
+}
+.element:nth-child(1) span {
+    background-color: var(--professionals-color);
+}
+.element:nth-child(2) span {
+    background-color: var(--passionists-color);
 }
 
 @media only screen and (max-width: 1450px) {

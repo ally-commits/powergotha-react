@@ -11,6 +11,7 @@ const TopBar = (props) => {
             <div className={styles.container}>
                 <div className={styles.content}>
                     <h2>{props.head}</h2>
+
                     <Dropdown>
                         <Dropdown.Toggle id="dropdown-basic" className={styles.dropDown}>
                             <img src={profileImg} alt="" className={styles.profile} />
@@ -21,10 +22,12 @@ const TopBar = (props) => {
                             <Dropdown.Item href="/login">Logout</Dropdown.Item> 
                         </Dropdown.Menu>
                     </Dropdown>
+
                 </div>
             </div>
-            <div className={styles.spacer}>&nbsp;</div>
 
+            <div className={styles.spacer}>&nbsp;</div>
+            
             <Profile show={modal} onHide={() => setModal(false)}/>
         </React.Fragment>
     )

@@ -2,6 +2,9 @@
     --primary-color: #015185;
     --primary-color-light: #006bb3;
     
+    --professionals-color: #F49B35;
+    --passionists-color: #E6185D;
+
     --heading: 18px;
     --sub-heading: 16px;
     --content: 14px;
@@ -23,6 +26,25 @@ body::-webkit-scrollbar-thumb {
     outline: 1px solid slategrey;
     width: 4px;
 }
+
+/* GRAPH COLORS */
+.ct-series-a .ct-line {
+    stroke: var(--professionals-color); 
+    stroke-width: 5px; 
+}
+.ct-series-a .ct-point {
+    stroke: var(--professionals-color);  
+}
+
+.ct-series-b .ct-line {
+    stroke: var(--passionists-color); 
+    stroke-width: 5px; 
+}
+.ct-series-b .ct-point {
+    stroke: var(--passionists-color);  
+}
+
+/* END GRPAH LINE COLORS */
 
 @media only screen and (max-width: 1450px) {
     :root {

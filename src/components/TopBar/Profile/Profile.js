@@ -15,7 +15,6 @@ const Profile = (props) => {
             <div className={styles.container}>
                 <X color="black" size="40" onClick={() => props.onHide()} className={styles.close} />
 
-
                 <div className={styles.content}>
                     <h1>Profile</h1>
                     <img src={profileImg} alt="" className={styles.profileImg} />

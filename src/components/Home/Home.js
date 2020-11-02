@@ -18,8 +18,26 @@ const Home = () => {
             <div className={styles.container}>
                 <div className={styles.leftContent}>
                     <Card className={styles.regGraphCard}> 
-                        <p>Users Registred in last 1 month</p>
-                        <RegGraph /> 
+                        <div className={styles.header}>
+                            <p>Users Registred in last 1 month</p>
+
+                            <div className={styles.alignContent}> 
+                                <div className={styles.element}>
+                                    <span>&nbsp;</span>
+                                    <p>Professionals</p>
+                                </div>
+
+                                <div className={styles.element}>
+                                    <span>&nbsp;</span>
+                                    <p>Passionists</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        
+                        <div className={styles.contentGraph}>
+                            <RegGraph /> 
+                        </div>
                     </Card>
 
                     <div className={styles.subContent}>
