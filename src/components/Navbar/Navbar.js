@@ -24,10 +24,10 @@ const NavBar = (props) => {
                     <p>Passionists</p>
                 </NavLink>
 
-                <div className={styles.navItem}  activeClassName={styles.activeNavItem}>
+                <NavLink className={styles.navItem}  to="/admin/transactions" activeClassName={styles.activeNavItem}>
                     <CashStack />
                     <p>Transactions</p>
-                </div>
+                </NavLink>
             </div>
         </div>
     )

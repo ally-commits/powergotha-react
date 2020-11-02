@@ -25,6 +25,7 @@ import PrivateRoute from './routes/PrivateRoute';
 import Home from './components/Home/Home';
 import Professional from './components/Professionals/Professional';
 import Passionists from './components/Passionists/Passionists';
+import Transactions from './components/Transactions/Transactions';
 
 
 // import {theme} from './theme/theme'
@@ -69,6 +70,7 @@ const App = (props) => {
                 <PrivateRoute path="/admin/home" component={Home} />
                 <PrivateRoute path="/admin/professionals" component={Professional} />
                 <PrivateRoute path="/admin/passionists" component={Passionists} />
+                <PrivateRoute path="/admin/transactions" component={Transactions} />
 
                 <Redirect from="/" to="/login" />
               </Switch> 
