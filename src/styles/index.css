@@ -1,3 +1,6 @@
+* {
+    outline: none !important;
+}
 :root {
     --primary-color: #015185;
     --primary-color-light: #006bb3;

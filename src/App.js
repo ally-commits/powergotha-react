@@ -1,24 +1,12 @@
 import React from 'react'; 
+
+import './styles/custome.scss' 
+import styles from './styles/app.module.css';
+
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
+import { createBrowserHistory } from "history"; 
 import axios from 'axios'
 
-import './styles/custome.scss'
-
-// import { ThemeProvider} from '@material-ui/core/styles'
-import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
-import { createBrowserHistory } from "history";
-// import firebase from 'firebase/app'
-// import 'firebase/storage'
-import BackDropLoader from './components/utils/BackDropLoader/BackDropLoader'
-
-
-// import Login from './components/auth/login/Login'
-// import Register from './components/auth/register/Register'
-// import Admin from './layout/Admin' 
-
-// import { backendUrl } from './config/keys';
-
-
-import styles from './styles/app.module.css';
 import Login from './components/Login/Login';
 import NavBar from './components/Navbar/Navbar';
 import PrivateRoute from './routes/PrivateRoute';
@@ -27,54 +15,69 @@ import Professional from './components/Professionals/Professional';
 import Passionists from './components/Passionists/Passionists';
 import Transactions from './components/Transactions/Transactions';
 
+import { backendUrl } from './config/config';
+import ShowAlert from './components/Alert/Alert';
+import BackDropLoader from './components/utils/BackDropLoader/BackDropLoader';
 
-// import {theme} from './theme/theme'
-// import {firebaseConfig} from './config/keys'
+axios.interceptors.request.use(async (config) => {
+  config.url = backendUrl + config.url
 
-// import {setUser} from './containers/app/actions';
-// import {connect} from 'react-redux'; 
-// import BackDrop from './components/utils/BackDrop/BackDrop';
-
-// firebase.initializeApp(firebaseConfig);
-// export const storage = firebase.storage()
-
-
-// axios.interceptors.request.use(async (config) => {
-//   config.url = backendUrl + config.url
-
-//   return config
-// });
+  return config
+});
  
-
-
 const hist = createBrowserHistory();
 
 const App = (props) => {
   const [loaded,setLoaded] = React.useState(false);
 
   React.useEffect(() => {
-     
+    // if(localStorage.user) {
+    //   axios({
+    //     method: "post",
+    //     url: "/getUser",
+    //     data: {
+    //       contactNum: localStorage.getItem("user")
+    //     }
+    //   }).then(res => {
+    //     if(res.data.data && res.data.data != null) {
+    //       props.setUser(res.data.data);
+    //     }  
+    //     setLoaded(true);
+    //   }).catch(res => {
+    //     setLoaded(true)
+    //   })
+    // } else {
+    //   setLoaded(true);
+    // }
+
+    setTimeout(() => setLoaded(true),2000);
   },[]);
 
   return (
     <div className={styles.appContainer}>
       <Router history={hist}> 
-        <div className={styles.navContainer}>
-          <NavBar />
-        </div>
-        <div className={styles.mainContainer}>
-          
-              <Switch>  
-                <Route exact path="/login" component={Login} />
+        {!loaded 
+          ?
+        <BackDropLoader />
+          :
+        <React.Fragment>
+          <ShowAlert />
+          <div className={styles.navContainer}>
+            <NavBar />
+          </div>
+          <div className={styles.mainContainer}>
+            <Switch>  
+              <Route exact path="/login" component={Login} />
 
-                <PrivateRoute path="/admin/home" component={Home} />
-                <PrivateRoute path="/admin/professionals" component={Professional} />
-                <PrivateRoute path="/admin/passionists" component={Passionists} />
-                <PrivateRoute path="/admin/transactions" component={Transactions} />
+              <PrivateRoute path="/admin/home" component={Home} />
+              <PrivateRoute path="/admin/professionals" component={Professional} />
+              <PrivateRoute path="/admin/passionists" component={Passionists} />
+              <PrivateRoute path="/admin/transactions" component={Transactions} />
 
-                <Redirect from="/" to="/login" />
-              </Switch> 
-        </div> 
+              <Redirect from="/" to="/login" />
+            </Switch> 
+          </div> 
+        </React.Fragment>}
       </Router>
     </div>
   );

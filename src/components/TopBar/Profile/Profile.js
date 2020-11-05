@@ -89,7 +89,7 @@ const Profile = (props) => {
                                     <ShieldLockFill />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <FormControl id="accNumber" placeholder="Email" />
+                            <FormControl id="accNumber" placeholder="Account Number" />
                         </InputGroup>                    
                     </div>
 
