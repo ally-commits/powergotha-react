@@ -8,8 +8,16 @@ import FormControl from 'react-bootstrap/FormControl'
 
 import {X,Person,EnvelopeFill,HouseFill,Shop,ShieldLockFill,LockFill} from 'react-bootstrap-icons'
 import profileImg from '../../../assets/img/profile.jpg'
+import {connect} from 'react-redux';
 
 const Profile = (props) => {
+    const [user,setUser] = React.useState({});
+
+    React.useEffect(() => {
+        if(props.auth) { 
+            setUser(props.auth)
+        }
+    },[props.auth]); 
     return (
         <Modal centered show={props.show} onHide={() => props.onHide()} size="md">
             <div className={styles.container}>
@@ -33,7 +41,7 @@ const Profile = (props) => {
                                     <Person />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <FormControl id="username" placeholder="UserName" />
+                            <FormControl id="username" placeholder="UserName" value={user.fullName}/>
                         </InputGroup>
 
                         <Form.Label htmlFor="email" srOnly>
@@ -45,7 +53,7 @@ const Profile = (props) => {
                                     <EnvelopeFill />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <FormControl id="email" placeholder="Email" />
+                            <FormControl id="email" placeholder="Email" value={user.emailId} />
                         </InputGroup>                    
                     </div>
 
@@ -61,7 +69,7 @@ const Profile = (props) => {
                                     <HouseFill />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <FormControl id="address" placeholder="Address" />
+                            <FormControl id="address" placeholder="Address" value={user.address} />
                         </InputGroup>                  
                     </div>
 
@@ -109,12 +117,14 @@ const Profile = (props) => {
                         </InputGroup>
                     </div>
 
-                    <Button>Update Profile</Button>
+                    {/* <Button>Update Profile</Button> */}
                 </div>
 
             </div>
         </Modal>
     )
 }
-
-export default Profile;
+const mapStateToProps = state => ({
+    auth: state.app.auth
+})
+export default connect(mapStateToProps)(Profile);

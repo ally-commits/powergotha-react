@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import Spinner from 'react-bootstrap/Spinner'
 import {connect} from 'react-redux'
-import {showAlert} from '../../containers/app/actions'
+import {showAlert,setAuth} from '../../containers/app/actions'
 
 
 const Login = (props) => {
@@ -50,13 +50,21 @@ const Login = (props) => {
                 method: "post",
                 url: "/loginUser",
                 data: {
-                    ...formData
+                    ...formData,
+                    emailId: formData.email
                 }
             }).then(res => {
-                console.log(res)
+                if(res.data.success){
+                    props.setAuth(res.data.user)
+                    localStorage.setItem("user",res.data.user._id)
+                    props.showAlert("Logged In Successfully")
+                } else { 
+                    props.showAlert(res.data.msg)
+                }
                 setLoading(false);
             }).catch(err => {
-                
+                props.showAlert("Something went wrong Try Again")
+                setLoading(false);
             });
         }
     }
@@ -117,4 +125,4 @@ const Login = (props) => {
 const mapStateToProps = state => ({
     auth: state.app.auth
 });
-export default connect(mapStateToProps,{showAlert})(Login);
+export default connect(mapStateToProps,{showAlert,setAuth})(Login);
