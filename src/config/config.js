@@ -1,1 +1,1 @@
-export const backendUrl = "http://11"
+export const backendUrl = "http://52.66.209.53/api"

@@ -11,22 +11,28 @@ import {showAlert} from '../../containers/app/actions'
 
 const Login = (props) => {
     const [formData,setFormData] = React.useState({
-        username: '',
+        email: '',
         password: "",
     });
     const [formError,setFormError] = React.useState({
-        username: false,
+        email: false,
         password: false,
     });
     const [loading,setLoading] = React.useState(false);
 
+    React.useEffect(() => {
+        if(props.auth) {
+            props.history.push("/admin/home")
+        }
+    },[props.auth]);
+    
     const validate = () => {
         let value = true;
-        let err = {username: false,password: false}
+        let err = {email: false,password: false}
         setFormError({...err});
-        if(formData.username == "") {
+        if(formData.email == "") {
             value = false;
-            err.username = "Enter valid Email"
+            err.email = "Enter valid Email"
         }
         if(formData.password == "") {
             value = false;
@@ -40,23 +46,18 @@ const Login = (props) => {
         if(validate()) {
             setLoading(true);
 
-            // axios({
-            //     method: "pddost",
-            //     url: "/login",
-            //     data: {
-            //         ...formData
-            //     }
-            // }).then(res => {
-            //     setLoading(false);
-            // }).catch(err => {
-                setTimeout(() => {
-                    setLoading(false);
-                    props.history.push("/admin/home");
-                    
-                    props.showAlert("Error: Something went wrong Try Again")
-                },3000)
-                // props.history.push
-            // });
+            axios({
+                method: "post",
+                url: "/loginUser",
+                data: {
+                    ...formData
+                }
+            }).then(res => {
+                console.log(res)
+                setLoading(false);
+            }).catch(err => {
+                
+            });
         }
     }
     return (
@@ -74,12 +75,12 @@ const Login = (props) => {
 
                     <Form>
                         <Form.Group controlId="Email">
-                            <Form.Label>Username</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Username" size="lg" value={formData.username} onChange={(e) => setFormData({...formData,username: e.target.value})} />
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control type="text" placeholder="Enter email" size="lg" value={formData.email} onChange={(e) => setFormData({...formData,email: e.target.value})} />
                             
-                            {formError.username &&
+                            {formError.email &&
                                 <Form.Text className={styles.error}>
-                                    Enter valid Username
+                                    Enter valid email
                                 </Form.Text>}
 
                         </Form.Group>
@@ -113,5 +114,7 @@ const Login = (props) => {
         </div>
     )
 }
-
-export default connect(null,{showAlert})(Login);
+const mapStateToProps = state => ({
+    auth: state.app.auth
+});
+export default connect(mapStateToProps,{showAlert})(Login);

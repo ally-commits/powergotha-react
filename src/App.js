@@ -19,6 +19,9 @@ import { backendUrl } from './config/config';
 import ShowAlert from './components/Alert/Alert';
 import BackDropLoader from './components/utils/BackDropLoader/BackDropLoader';
 
+import {setAuth} from './containers/app/actions'
+import {connect} from 'react-redux'
+
 axios.interceptors.request.use(async (config) => {
   config.url = backendUrl + config.url
 
@@ -28,29 +31,28 @@ axios.interceptors.request.use(async (config) => {
 const hist = createBrowserHistory();
 
 const App = (props) => {
-  const [loaded,setLoaded] = React.useState(false);
+  const [loaded,setLoaded] = React.useState(false );
 
   React.useEffect(() => {
-    // if(localStorage.user) {
-    //   axios({
-    //     method: "post",
-    //     url: "/getUser",
-    //     data: {
-    //       contactNum: localStorage.getItem("user")
-    //     }
-    //   }).then(res => {
-    //     if(res.data.data && res.data.data != null) {
-    //       props.setUser(res.data.data);
-    //     }  
-    //     setLoaded(true);
-    //   }).catch(res => {
-    //     setLoaded(true)
-    //   })
-    // } else {
-    //   setLoaded(true);
-    // }
-
-    setTimeout(() => setLoaded(true),2000);
+    if(localStorage.user) {
+      axios({
+        method: "post",
+        url: "/getUserDetails",
+        data: {
+          userId: localStorage.getItem("user")
+        }
+      }).then(res => {
+        if(res.data.success) {
+          props.setAuth(res.data.data);
+          setTimeout(() => setLoaded(true),1000);
+        }   
+      }).catch(res => {
+        setLoaded(true)
+      })
+    } else {
+      setLoaded(true);
+    }
+ 
   },[]);
 
   return (
@@ -74,7 +76,7 @@ const App = (props) => {
               <PrivateRoute path="/admin/passionists" component={Passionists} />
               <PrivateRoute path="/admin/transactions" component={Transactions} />
 
-              <Redirect from="/" to="/login" />
+              <Redirect from="/" to="/admin/home" />
             </Switch> 
           </div> 
         </React.Fragment>}
@@ -83,4 +85,4 @@ const App = (props) => {
   );
 }
 
-export default App;
+export default connect(null,{setAuth})(App);

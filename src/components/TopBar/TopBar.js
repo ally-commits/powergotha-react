@@ -19,7 +19,10 @@ const TopBar = (props) => {
 
                         <Dropdown.Menu className={styles.menu}>
                             <Dropdown.Item href="#" onClick={() => setModal(true)}>Profile</Dropdown.Item>
-                            <Dropdown.Item href="/login">Logout</Dropdown.Item> 
+                            <Dropdown.Item href="#" onClick={() => {
+                                localStorage.clear();
+                                window.location.replace("/login")
+                            }}>Logout</Dropdown.Item> 
                         </Dropdown.Menu>
                     </Dropdown>
 
