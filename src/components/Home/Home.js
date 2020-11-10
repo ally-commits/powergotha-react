@@ -58,7 +58,7 @@ const Home = (props) => {
                             </div>
                             
                             <div className={styles.contentGraph}>
-                                <RegGraph />  
+                                <RegGraph data={data} />  
                             </div>
                         </Card>
 

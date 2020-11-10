@@ -6,18 +6,52 @@ import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 
-import {X,Person,EnvelopeFill,HouseFill,Shop,ShieldLockFill,LockFill} from 'react-bootstrap-icons'
-import profileImg from '../../../assets/img/profile.jpg'
+import {X,Person,EnvelopeFill,HouseFill,ShieldLockFill,LockFill} from 'react-bootstrap-icons'
+import profileImg from '../../../assets/img/profile.png'
 import {connect} from 'react-redux';
+import axios from 'axios'
+import {showAlert} from '../../../containers/app/actions'
 
 const Profile = (props) => {
     const [user,setUser] = React.useState({});
+    const [password,setPassword] = React.useState("");
+    const [error,setError] = React.useState(false);
+    const [loading,setLoading] = React.useState(false);
 
     React.useEffect(() => {
         if(props.auth) { 
             setUser(props.auth)
         }
     },[props.auth]); 
+
+    const onSubmit = () => {
+        setError(false)
+        if(password.length < 8) {
+            setError("Password Length Should atleast 8 charactor")
+        } else {
+            setLoading(true);
+
+            axios({
+                method: "post",
+                url: "/updatePassword",
+                data: {
+                    contactNum: user.contactNum,
+                    password
+                }
+            }).then(res => {
+                setLoading(false)
+                if(res.data.success) {
+                    props.showAlert("Password Updated")
+                    setPassword("")
+                } else {
+                    props.showAlert("Something went wrong,Try Again")
+                }
+            }).catch(err => {
+                setLoading(false)
+                props.showAlert("Something went wrong,Try Again")
+            })
+        }
+    }
     return (
         <Modal centered show={props.show} onHide={() => props.onHide()} size="md">
             <div className={styles.container}>
@@ -26,8 +60,6 @@ const Profile = (props) => {
                 <div className={styles.content}>
                     <h1>Profile</h1>
                     <img src={profileImg} alt="" className={styles.profileImg} />
-                    <Button variant="link">Change Photo</Button>
-
 
                     <div className={styles.formContent}>
                         <p>Personal Details</p>
@@ -74,22 +106,10 @@ const Profile = (props) => {
                     </div>
 
                     <div className={styles.formContent}>
-                        <p>Bank Details</p>
-                        
-                        <Form.Label htmlFor="bankName" srOnly>
-                            Bank Name
-                        </Form.Label>
-                        <InputGroup className="mb-2">
-                            <InputGroup.Prepend>
-                                <InputGroup.Text>
-                                    <Shop />
-                                </InputGroup.Text>
-                            </InputGroup.Prepend>
-                            <FormControl id="bankName" placeholder="Bank Name" />
-                        </InputGroup>
+                        <p>Contact Details</p> 
 
-                        <Form.Label htmlFor="accNumber" srOnly>
-                            Account Number
+                        <Form.Label htmlFor="cNumber" srOnly>
+                            Contact Number
                         </Form.Label>
                         <InputGroup className="mb-2">
                             <InputGroup.Prepend>
@@ -97,7 +117,7 @@ const Profile = (props) => {
                                     <ShieldLockFill />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <FormControl id="accNumber" placeholder="Account Number" />
+                            <FormControl id="cNumber" placeholder="Contact Number" value={user.contactNum} />
                         </InputGroup>                    
                     </div>
 
@@ -113,13 +133,20 @@ const Profile = (props) => {
                                     <LockFill />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <FormControl id="password" placeholder="Password" />
+                            <FormControl id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                         </InputGroup>
+                        {error && 
+                            <Form.Text className={styles.error}>
+                                {error}
+                            </Form.Text>}
                     </div>
 
-                    {/* <Button>Update Profile</Button> */}
+                    {loading
+                        ?
+                    <Button>Updating....</Button>
+                        :
+                    <Button onClick={onSubmit}>Update Password</Button>}
                 </div>
-
             </div>
         </Modal>
     )
@@ -127,4 +154,4 @@ const Profile = (props) => {
 const mapStateToProps = state => ({
     auth: state.app.auth
 })
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps,{showAlert})(Profile);

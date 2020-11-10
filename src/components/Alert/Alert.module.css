@@ -3,6 +3,6 @@
     top: 10px;
     right: 10px;
     outline: none !important;
-    z-index: 200;
+    z-index: 20000;
     font-size: 14px;
 } 

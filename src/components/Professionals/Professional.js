@@ -14,7 +14,13 @@ const Professional = (props) => {
         if(!props.users) {
             props.getUserList()
         } else {
-            setData(props.users.professionalUsers);
+            let arr = props.users.professionalUsers.map(val => {
+                return {
+                    ...val,
+                    unlocked: val.unlockedProfessionalUser.length
+                }
+            })
+            setData([...arr])
         }
     },[props.users])
 
@@ -53,6 +59,11 @@ const Professional = (props) => {
         {
             label: 'Address',
             field: 'address', 
+            width: 100,
+        },
+        {
+            label: 'Unlocked',
+            field: 'unlocked', 
             width: 100,
         },
     ];

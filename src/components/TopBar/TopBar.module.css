@@ -22,7 +22,7 @@
 .profile {
     width: 50px;
     height: 50px;
-    border-radius: 200%;
+    border-radius: 200%; 
 }
 .profile:hover {
     cursor: pointer;

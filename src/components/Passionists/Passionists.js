@@ -14,8 +14,13 @@ const Passionists = (props) => {
         if(!props.users) {
             props.getUserList()
         } else {
-            setData(props.users.passionistUsers);
-
+            let arr = props.users.passionistUsers.map(val => {
+                return {
+                    ...val,
+                    unlocked: val.unlockedProfessionalUser.length
+                }
+            })
+            setData([...arr])
         }
     },[props.users]);
 
@@ -53,6 +58,11 @@ const Passionists = (props) => {
         {
             label: 'Address',
             field: 'address', 
+            width: 100,
+        },
+        {
+            label: 'Unlocked',
+            field: 'unlocked', 
             width: 100,
         },
     ];

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './TopBar.module.css'
-import profileImg from '../../assets/img/profile.jpg'
+import profileImg from '../../assets/img/profile.png'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Profile from './Profile/Profile';
 
