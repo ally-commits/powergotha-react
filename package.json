@@ -1,5 +1,5 @@
 {
-  "name": "hobbyit-react",
+  "name": "yopaan-node",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,13 +7,8 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.0",
-    "bootstrap": "^4.5.3",
     "chartist": "^0.11.4",
-    "mdbreact": "^4.27.0",
-    "node-sass": "^4.14.1",
     "react": "^17.0.1",
-    "react-bootstrap": "^1.4.0",
-    "react-bootstrap-icons": "^1.0.0",
     "react-chartist": "^0.14.3",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
