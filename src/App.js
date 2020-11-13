@@ -108,6 +108,7 @@ const App = (props) => {
                 <PrivateRoute exact path="/admin/products" component={Products} />
                 <PrivateRoute exact path="/admin/users" component={Users} />
 
+                <Redirect from="/" to="/admin/home" />
               </Switch> 
             </div> 
           </React.Fragment>}
