@@ -1,13 +1,11 @@
 import React from 'react'
 import styles from './Login.module.css'
-import logo from '../../assets/img/logo.png'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import axios from 'axios'
-import Spinner from 'react-bootstrap/Spinner'
+import logo from '../../assets/img/logo.png' 
+import axios from 'axios' 
 import {connect} from 'react-redux'
 import {showAlert,setAuth} from '../../containers/app/actions'
-
+import TextField from '@material-ui/core/TextField'
+import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
 
 const Login = (props) => {
     const [formData,setFormData] = React.useState({
@@ -48,77 +46,80 @@ const Login = (props) => {
 
             axios({
                 method: "post",
-                url: "/loginUser",
+                url: "/auth/login",
                 data: {
                     ...formData,
                     emailId: formData.email
                 }
-            }).then(res => {
-                if(res.data.success){
-                    props.setAuth(res.data.user)
-                    localStorage.setItem("user",res.data.user._id)
+            }).then(res => { 
+                if(res.data.user.userType != "ADMIN") {
+                    props.showAlert("401: You don't have enough access")
+                } else {
+                    props.setAuth({...res.data.user,token: res.data.token})
+                    localStorage.setItem("token",res.data.token)
                     props.showAlert("Logged In Successfully")
-                } else { 
-                    props.showAlert(res.data.msg)
                 }
                 setLoading(false);
             }).catch(err => {
-                props.showAlert("Something went wrong Try Again")
+                if(err && err.response) 
+                    props.showAlert(err.response.data.error)
+                else 
+                    props.showAlert("Something went wrong Try Again")
+
                 setLoading(false);
             });
         }
     }
     return (
         <div className={styles.container}>
-            <div className={styles.containerLeft}>
-                &nbsp;
-            </div>
+            <div className={styles.content}>
+                <div className={styles.header}>
+                    <img src={logo} alt="" className={logo} />
+                    <h1 className={styles.head}>YoPaan</h1>
+                </div>
 
-            <div className={styles.containerRight}>
-                <div className={styles.rightContainer}>
+                <div className={styles.loginContainer}>
+                    <div className={styles.loginContent}>
+                        <h1 className={styles.loginHead}>Sign In</h1>
 
-                    <img src={logo} alt="hobbyIt" className={styles.logo} />
+                        <TextField
+                            variant="standard"
+                            fullWidth
+                            label="Email Address"
+                            className={styles.textField}
+                            value={formData.email}
+                            onChange={(e) => setFormData({...formData,email: e.target.value})}
+                            error={formError.email}
+                            helperText={formError.email}
+                        /> 
 
-                    <h1 className={styles.head}>Login</h1>
+                        <TextField
+                            variant="standard"
+                            fullWidth
+                            label="Password"
+                            className={styles.textField}
+                            value={formData.password}
+                            onChange={(e) => setFormData({...formData,password: e.target.value})}
+                            error={formError.password}
+                            helperText={formError.password}
+                        />
 
-                    <Form>
-                        <Form.Group controlId="Email">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control type="text" placeholder="Enter email" size="lg" value={formData.email} onChange={(e) => setFormData({...formData,email: e.target.value})} />
-                            
-                            {formError.email &&
-                                <Form.Text className={styles.error}>
-                                    Enter valid email
-                                </Form.Text>}
-
-                        </Form.Group>
-
-                        <Form.Group controlId="Password">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Enter Password" size="lg" value={formData.password} onChange={(e) => setFormData({...formData,password: e.target.value})}/>
-
-                            {formError.password && 
-                                <Form.Text className={styles.error}>
-                                    Enter valid Password 
-                                </Form.Text>}
-
-                        </Form.Group>
-                    </Form>
-                    
-                    {loading 
-                        ?
-                    <Button variant="primary" size="lg" block className={styles.btnLoading} >
-                        <Spinner animation="grow" />
-                        LOADING...</Button>
-                        :
-                    <Button variant="primary" size="lg" block onClick={onSubmit}>LOGIN</Button>
-                    }
-                    
-                    <div className={styles.alignRight}>
-                        <a href="#">Forgot Password ?</a>
+                        {loading
+                            ?
+                        <button className={styles.signIn}>
+                            Loading...
+                            <ArrowForwardRoundedIcon />
+                        </button>
+                            :
+                        <button className={styles.signIn} onClick={onSubmit}>
+                            Sign In
+                            <ArrowForwardRoundedIcon />
+                        </button>}
                     </div>
                 </div>
-            </div> 
+
+                <div className={styles.loginFooter}>&nbsp;</div>
+            </div>
         </div>
     )
 }

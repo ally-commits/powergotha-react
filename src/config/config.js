@@ -1,1 +1,3 @@
-export const backendUrl = "http://52.66.209.53/api"
+// export const backendUrl = "https://yopaan-node.codedeployment.tk/api"   
+
+export const backendUrl = "http://localhost:9000/api"   

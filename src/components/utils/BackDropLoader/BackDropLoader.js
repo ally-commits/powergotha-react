@@ -1,11 +1,11 @@
 import React from 'react';
-import Spinner from 'react-bootstrap/Spinner'
 import styles from './style.module.css'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const BackDropLoader = () => {
     return (
         <div className={styles.container}>
-            <Spinner animation="grow" variant="primary" />
+            <CircularProgress color="primary" />
         </div>
     )
 }

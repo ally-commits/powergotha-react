@@ -1,23 +1,29 @@
 import React from 'react'
-import Alert from 'react-bootstrap/Alert'
+import Snackbar from '@material-ui/core/Snackbar';
 import {connect} from 'react-redux';
 import styles from './Alert.module.css'
+import MuiAlert from '@material-ui/lab/Alert';
+
+const Alert = (props) => {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const AlertComp = (props) => {
     const [show,setShow] = React.useState(false);
 
     React.useEffect(() => {
-        setShow(props.showAlert)
+        if(props.showAlert) 
+            setShow(props.showAlert)
     },[props.showAlert])
 
     return (
         <React.Fragment>
-            {show &&
-                <div className={styles.container}>
-                    <Alert variant={"info"} dismissible onClose={() => setShow(false)}>
-                        {show}
-                    </Alert>
-                </div>}
+            {show && 
+            <Snackbar open={show} autoHideDuration={6000} onClose={() =>setShow(false)} anchorOrigin={{ vertical: "top", horizontal: "right" }}>
+                <Alert onClose={() => setShow(false)} severity="info">
+                    {show}
+                </Alert>
+            </Snackbar>}
         </React.Fragment>
     )
 }

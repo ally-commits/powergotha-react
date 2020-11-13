@@ -1,33 +1,35 @@
 import React from 'react'
 import styles from './navbar.module.css';
-import {HouseFill,PersonCheckFill,PersonFill,CashStack} from 'react-bootstrap-icons'
 import {NavLink} from 'react-router-dom';
+import logo from '../../assets/img/logo.png'
+import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
+import StorefrontRoundedIcon from '@material-ui/icons/StorefrontRounded';
+import GroupRoundedIcon from '@material-ui/icons/GroupRounded';
 
 const NavBar = (props) => {
     return (
         <div className={styles.container}>
-            <h1 className={styles.head}>Hobbyit</h1>
+            <div className={styles.header}>
+                <img src={logo} alt=""/>
+                <h1>Yopaan</h1>
+            </div>
+
 
             <div className={styles.navItems}>
                 <NavLink className={styles.navItem} to="/admin/home" activeClassName={styles.activeNavItem}>
-                    <HouseFill />
+                    <HomeRoundedIcon />
                     <p>Home</p>
                 </NavLink>
 
-                <NavLink className={styles.navItem} to="/admin/professionals" activeClassName={styles.activeNavItem}>
-                    <PersonCheckFill />
-                    <p>Professionals</p>
+                <NavLink className={styles.navItem} to="/admin/products" activeClassName={styles.activeNavItem}>
+                    <StorefrontRoundedIcon />
+                    <p>Products</p>
                 </NavLink>
 
-                <NavLink className={styles.navItem}  to="/admin/passionists" activeClassName={styles.activeNavItem}>
-                    <PersonFill />
-                    <p>Passionists</p>
-                </NavLink>
-
-                <NavLink className={styles.navItem}  to="/admin/transactions" activeClassName={styles.activeNavItem}>
-                    <CashStack />
-                    <p>Transactions</p>
-                </NavLink>
+                <NavLink className={styles.navItem}  to="/admin/users" activeClassName={styles.activeNavItem}>
+                    <GroupRoundedIcon />
+                    <p>Users</p>
+                </NavLink> 
             </div>
         </div>
     )

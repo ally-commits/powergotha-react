@@ -1,13 +1,17 @@
 * {
     outline: none !important;
+    margin: 0;
+    padding: 0px;
+    font-family: 'Poppins';
 }
 :root {
-    --primary-color: #015185;
-    --primary-color-light: #006bb3;
+    --primary-color: #2743FD;
     
-    --professionals-color: #F49B35;
-    --passionists-color: #E6185D;
-
+    --primary-color-light: rgba(39, 67, 253, 0.75);;
+    
+    --background-color: white;
+    --text-color: #333;
+    
     --heading: 18px;
     --sub-heading: 16px;
     --content: 14px;
