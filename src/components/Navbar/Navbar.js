@@ -5,6 +5,7 @@ import logo from '../../assets/img/logo.png'
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import StorefrontRoundedIcon from '@material-ui/icons/StorefrontRounded';
 import GroupRoundedIcon from '@material-ui/icons/GroupRounded';
+import CategoryRoundedIcon from '@material-ui/icons/CategoryRounded';
 
 const NavBar = (props) => {
     return (
@@ -21,9 +22,14 @@ const NavBar = (props) => {
                     <p>Home</p>
                 </NavLink>
 
-                <NavLink className={styles.navItem} to="/admin/products" activeClassName={styles.activeNavItem}>
+                <NavLink className={styles.navItem} to="/admin/product/VIEW-PRODUCTS" activeClassName={styles.activeNavItem}>
                     <StorefrontRoundedIcon />
                     <p>Products</p>
+                </NavLink>
+
+                <NavLink className={styles.navItem} to="/admin/category/VIEW-CATEGORY" activeClassName={styles.activeNavItem}>
+                    <CategoryRoundedIcon />
+                    <p>Category</p>
                 </NavLink>
 
                 <NavLink className={styles.navItem}  to="/admin/users" activeClassName={styles.activeNavItem}>

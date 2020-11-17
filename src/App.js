@@ -6,6 +6,8 @@ import { ThemeProvider} from '@material-ui/core/styles'
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history"; 
 import axios from 'axios'
+import firebase from 'firebase/app'
+import 'firebase/storage'
 
 import Login from './components/Login/Login';
 import NavBar from './components/Navbar/Navbar';
@@ -19,9 +21,17 @@ import BackDropLoader from './components/utils/BackDropLoader/BackDropLoader';
 
 import {setAuth,showAlert} from './containers/app/actions'
 import {connect} from 'react-redux' 
+
 import TopBar from './components/TopBar/TopBar';
+import Product from './containers/product/Product'
+
+import {firebaseConfig} from './config/config'
+import Category from './containers/category/Category';
  
 const hist = createBrowserHistory();
+
+firebase.initializeApp(firebaseConfig);
+export const storage = firebase.storage()
 
 axios.interceptors.request.use(async (config) => {
   config.url = backendUrl + config.url
@@ -41,14 +51,7 @@ const Dashbaord = () => {
       <TopBar head="Dashboard" />
     </React.Fragment>
   )
-}
-const Products = () => {
-  return (
-    <React.Fragment>
-      <TopBar head="Products" />
-    </React.Fragment>
-  )
-}
+} 
 const Users = () => {
   return (
     <React.Fragment>
@@ -105,7 +108,8 @@ const App = (props) => {
                 <Route exact path="/login" component={Login} />
 
                 <PrivateRoute exact path="/admin/home" component={Dashbaord} />
-                <PrivateRoute exact path="/admin/products" component={Products} />
+                <PrivateRoute exact path="/admin/product/:type" component={Product} />
+                <PrivateRoute exact path="/admin/category/:type" component={Category} />
                 <PrivateRoute exact path="/admin/users" component={Users} />
 
                 <Redirect from="/" to="/admin/home" />

@@ -1,0 +1,33 @@
+.container {
+    width: 97%;
+    margin: 0 auto;
+}
+.paper {
+    padding: 0px 30px;
+}
+.paper h1 {
+    font-size: 20px;
+    padding-top: 20px;
+    margin: 10px;
+    font-weight: 500;
+}
+.row {
+    display: flex;
+    align-items: center;
+    margin: 15px 0px;
+}
+.productName {
+    flex: 2;
+    margin: 10px !important;
+}
+.productPrice {
+    flex: 1;
+    margin: 10px !important;
+}
+.category {
+    margin: 10px !important;
+    width: 400px;
+}
+.switch {
+    margin: 10px !important;
+}

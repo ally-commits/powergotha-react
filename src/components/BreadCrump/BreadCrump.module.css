@@ -1,0 +1,17 @@
+.container {
+    height: var(--breadcrump-height); 
+    position: fixed; 
+    width: 100%;
+    background-color: white;
+    z-index: 1;
+}
+.content {
+    width: 97.5%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+.spacer {
+    height: var(--breadcrump-height);
+} 

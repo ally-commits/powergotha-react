@@ -17,6 +17,7 @@
     --content: 14px;
 
     --nav-width: 300px;
+    --breadcrump-height: 45px;
 }
 
 body::-webkit-scrollbar {
@@ -55,6 +56,10 @@ body::-webkit-scrollbar-thumb {
 
 /* END GRPAH LINE COLORS */
 
+p {
+    font-size: 14px;
+    color: #333;
+}
 @media only screen and (max-width: 1450px) {
     :root {
         --nav-width: 220px;

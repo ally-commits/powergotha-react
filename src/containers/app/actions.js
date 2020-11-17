@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
+import {storage} from '../../App'
 
 export const showAlert = (msg) => dispatch => {
     dispatch({
@@ -35,3 +36,28 @@ export const setAuth = (data) => dispatch => {
         payload: data
     })
 }
+
+export const getAllImages = () => dispatch => {
+    var storageRef = storage.ref();
+    var listRef = storageRef.child('/product-images');
+
+    
+    listRef.listAll().then(async function(res) {
+        await res.items.forEach(async function(itemRef,index) {
+            await itemRef.getDownloadURL().then(url => {
+                dispatch(addImage(url))
+            })
+        });
+
+    }).catch(function(error) {
+        
+    });   
+}
+
+export const addImage = (url) => dispatch => {
+    dispatch({
+        type: actionTypes.ADD_IMAGE,
+        payload: url
+    })
+}
+

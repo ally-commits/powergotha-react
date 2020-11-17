@@ -1,0 +1,51 @@
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.buttons {
+    position: relative;
+}
+.buttons input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 100;
+}
+.buttons input:hover {
+    cursor: pointer;
+}
+.alignCenter {
+    display: flex;
+    align-items: center;
+}
+.alignCenter h4 {
+    font-size: 15px;
+    font-weight: 500;
+}
+.content {
+    width: 100%;
+}
+.loader {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+.imgContent {
+    width: 120px;
+    height: 120px;
+    border-radius: 4px;
+    margin: 20px;
+    border: 1px solid rgba(51, 51, 51, 0.2);
+}
+.imgContent:hover {
+    cursor: pointer;
+    border: 3px solid rgba(83, 83, 168, 0.5);
+}

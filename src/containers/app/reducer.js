@@ -3,10 +3,19 @@ import * as actionTypes from './actionTypes'
 const initialState = { 
   showAlert: false,
   users: false,
-  auth: false
+  auth: false,
+  images: false,
 } 
 const reducer =  (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.ADD_IMAGE:
+      let imgs = state.images;
+      if(imgs)
+        imgs.unshift(action.payload) 
+      else
+        imgs = [action.payload]
+  
+      return {...state,images: [...imgs]}
     case actionTypes.SET_AUTH:
       return {...state,auth: action.payload}
     case actionTypes.SET_USERS:

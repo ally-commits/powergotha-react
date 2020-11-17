@@ -6,7 +6,8 @@ export const theme = createMuiTheme({
       root : { 
         textTransform: 'capitalize',
         fontWeight: "400", 
-        padding: '6px 14px', 
+        padding: '8px 18px', 
+        borderRadius: '100px'
       },
       text: {  
         textTransform: 'capitalize',
