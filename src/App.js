@@ -9,25 +9,25 @@ import axios from 'axios'
 import firebase from 'firebase/app'
 import 'firebase/storage'
 
-import Login from './components/Login/Login';
-import NavBar from './components/Navbar/Navbar';
-import PrivateRoute from './routes/PrivateRoute';
-
 import { backendUrl } from './config/config';
 import {theme} from './theme/theme'
-
-import ShowAlert from './components/Alert/Alert';
-import BackDropLoader from './components/utils/BackDropLoader/BackDropLoader';
+import {firebaseConfig} from './config/config'
 
 import {setAuth,showAlert} from './containers/app/actions'
 import {connect} from 'react-redux' 
 
-import TopBar from './components/TopBar/TopBar';
-import Product from './containers/product/Product'
+import ShowAlert from './components/Alert/Alert';
+import BackDropLoader from './components/utils/BackDropLoader/BackDropLoader';
 
-import {firebaseConfig} from './config/config'
+import Login from './components/Login/Login';
+import NavBar from './components/Navbar/Navbar';
+import PrivateRoute from './routes/PrivateRoute';
+import TopBar from './components/TopBar/TopBar';
 import Category from './containers/category/Category';
- 
+import Warehouse from './containers/warehouse/Warehouse';
+import Product from './containers/product/Product'
+import Manager from './containers/manager/Manager'
+
 const hist = createBrowserHistory();
 
 firebase.initializeApp(firebaseConfig);
@@ -111,6 +111,9 @@ const App = (props) => {
                 <PrivateRoute exact path="/admin/product/:type" component={Product} />
                 <PrivateRoute exact path="/admin/category/:type" component={Category} />
                 <PrivateRoute exact path="/admin/users" component={Users} />
+
+                <PrivateRoute exact path="/admin/warehouse/:type" component={Warehouse} />
+                <PrivateRoute exact path="/admin/managers/:type" component={Manager} />
 
                 <Redirect from="/" to="/admin/home" />
               </Switch> 

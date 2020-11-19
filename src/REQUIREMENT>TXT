@@ -1,0 +1,12 @@
+users -app 
+d-boy - dashboard-appD
+store - appS-appD
+manager - dashboard
+admin - dashboard [Adding manager,All Delivery Boy]
+manager - [can add delivery boy]
+
+admin => add a manager and assing one or multiple warehouse
+admin => admin can add a warehouse
+manager => manager will add a product to the warehouse assigned to him [1 or more warehouse] 
+
+quantity - of a product need to discussed

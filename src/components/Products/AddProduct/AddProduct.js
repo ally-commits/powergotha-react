@@ -14,9 +14,25 @@ import Button from '@material-ui/core/Button'
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import Images from './Images/Images'
 
+import {connect} from 'react-redux'
+import {getAllCategory} from '../../../containers/category/actions'
 
-const AddProduct = () => {
+const AddProduct = (props) => {
     const [images,setImages] = React.useState([]);
+
+    const [formData,setFormData] = React.useState({
+        productName: "",
+        productPrice: 0,
+        categoryId: "",
+        active: true,
+        productImages: []
+    })
+
+    React.useEffect(() => {
+        if(!props.category) {
+            props.getAllCategory();
+        }
+    },[props.category]);
 
     return (
         <div className={styles.container}>
@@ -42,9 +58,11 @@ const AddProduct = () => {
                             value="" 
                             label="Category"
                         >
-                            <MenuItem>Category 1</MenuItem>
-                            <MenuItem>Category 2</MenuItem>
-                            <MenuItem>Category 3</MenuItem>
+                            {props.category && props.category.map(cat => {
+                                return (
+                                    <MenuItem value={cat._id}>{cat.categoryName}</MenuItem>
+                                )
+                            })} 
                         </Select>
                     </FormControl>
 
@@ -80,5 +98,7 @@ const AddProduct = () => {
         </div>
     )
 }
-
-export default AddProduct;
+const mapStateToProps = state => ({
+    category: state.category.category
+})
+export default connect(mapStateToProps,{getAllCategory})(AddProduct);

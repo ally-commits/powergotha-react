@@ -46,7 +46,7 @@
 .activeNavItem {
     display: flex;
     width: calc(90% - 50px);
-    padding: 15px 25px; 
+    padding: 12px 25px; 
     align-items: center;
     color: #333;
     margin: 6px 0px; 
@@ -66,7 +66,8 @@
 .activeNavItem {
     color: white;
 }
-.navItem:hover {
+.navItem:hover,
+.navItem:hover p {
     cursor: pointer;
     color: var(--primary-color);
     text-decoration: none; 
@@ -75,6 +76,9 @@
     cursor: pointer;
     color: white;
     text-decoration: none; 
+}
+.activeNavItem:hover p {
+    color: white;
 }
 .activeNavItem { 
     background-color: var(--primary-color);

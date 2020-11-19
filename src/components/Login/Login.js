@@ -9,11 +9,11 @@ import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
 
 const Login = (props) => {
     const [formData,setFormData] = React.useState({
-        email: '',
+        phoneNumber: '',
         password: "",
     });
     const [formError,setFormError] = React.useState({
-        email: false,
+        phoneNumber: false,
         password: false,
     });
     const [loading,setLoading] = React.useState(false);
@@ -26,11 +26,11 @@ const Login = (props) => {
     
     const validate = () => {
         let value = true;
-        let err = {email: false,password: false}
+        let err = {phoneNumber: false,password: false}
         setFormError({...err});
-        if(formData.email == "") {
+        if(formData.phoneNumber == "") {
             value = false;
-            err.email = "Enter valid Email"
+            err.phoneNumber = "Enter valid Phone Number"
         }
         if(formData.password == "") {
             value = false;
@@ -49,7 +49,7 @@ const Login = (props) => {
                 url: "/auth/login",
                 data: {
                     ...formData,
-                    emailId: formData.email
+                    phoneNumberId: formData.phoneNumber
                 }
             }).then(res => { 
                 if(res.data.user.userType != "ADMIN") {
@@ -85,12 +85,12 @@ const Login = (props) => {
                         <TextField
                             variant="standard"
                             fullWidth
-                            label="Email Address"
+                            label="PhoneNumber"
                             className={styles.textField}
-                            value={formData.email}
-                            onChange={(e) => setFormData({...formData,email: e.target.value})}
-                            error={formError.email}
-                            helperText={formError.email}
+                            value={formData.phoneNumber}
+                            onChange={(e) => setFormData({...formData,phoneNumber: e.target.value})}
+                            error={formError.phoneNumber}
+                            helperText={formError.phoneNumber}
                         /> 
 
                         <TextField

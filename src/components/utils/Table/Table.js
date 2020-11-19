@@ -19,7 +19,7 @@ const StyledTableCell = withStyles((theme) => ({
     fontSize: '13px',
   },
   root: {
-    padding: '4px 8px'
+    padding: '4px 16px'
   }
 }))(TableCell);
 
@@ -33,7 +33,7 @@ const StyledTableRow = withStyles((theme) => ({
  
 const useStyles = makeStyles({
   table: {
-    minWidth: 700,
+    minWidth: 700
   },
 });
 
@@ -41,28 +41,34 @@ export default function CustomizedTables(props) {
   const classes = useStyles();
 
   return (
-    <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="customized table">
-            <TableHead>
-                <TableRow>
-                    {props.columns.map(column => {
-                        return (
-                            <StyledTableCell>{column}</StyledTableCell>
-                        )
-                    })} 
-                </TableRow>
-            </TableHead>
-            <TableBody>
-                {props.rows.map((row,index) => (
-                    <StyledTableRow key={index}>
-                        {row.map(value => ( 
-                                <StyledTableCell>{value}</StyledTableCell>
-                            )
-                        )}
-                    </StyledTableRow>
-                ))} 
-            </TableBody>
-        </Table>
-    </TableContainer>
+    <React.Fragment>
+      <TableContainer stickyHeader={true}>
+          <Table className={classes.table} aria-label="customized table">
+              <TableHead>
+                  <TableRow>
+                      {props.columns.map(column => {
+                          return (
+                              <StyledTableCell>{column}</StyledTableCell>
+                          )
+                      })} 
+                  </TableRow>
+              </TableHead>
+              <TableBody>
+                  {props.rows.map((row,index) => (
+                      <StyledTableRow key={index}>
+                          {row.map(value => ( 
+                                  <StyledTableCell>{value}</StyledTableCell>
+                              )
+                          )}
+                      </StyledTableRow>
+                  ))} 
+              </TableBody>
+          </Table>
+      </TableContainer>
+      {props.rows.length == 0 &&
+      <div style={{display: 'flex',alignItems: 'center',justifyContent: "center",height: "100px",fontSize: 18}}>
+        <p>Empty Records</p>
+      </div>}
+    </React.Fragment>
   );
 }
