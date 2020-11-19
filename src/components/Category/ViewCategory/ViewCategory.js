@@ -12,13 +12,16 @@ import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import FilterListRoundedIcon from '@material-ui/icons/FilterListRounded';
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
+import CheckCircleOutlineRoundedIcon from '@material-ui/icons/CheckCircleOutlineRounded';
+import HighlightOffRoundedIcon from '@material-ui/icons/HighlightOffRounded';
 
 import TableComp from '../../utils/Table/Table';
 import AppLoader from '../../utils/AppLoader/AppLoader';
 
 import {connect} from 'react-redux'
-import {getAllCategory} from '../../../containers/category/actions'
+import {getAllCategory,onCategoryDelete} from '../../../containers/category/actions'
 import {withRouter} from 'react-router-dom'
+import ConfirmAlert from '../../utils/ConfirmAlert/ConfirmAlert';
 
 
 const ViewCategory = (props) => { 
@@ -43,23 +46,27 @@ const ViewCategory = (props) => {
                 index + 1,
                 category.categoryName, 
                 category.description,
-                <Switch
-                    checked={category.active}
-                    onChange={() => {}} 
-                    color="primary"
-                />,
+
+                category.active
+                    ?
+                <CheckCircleOutlineRoundedIcon style={{color: "green"}} />
+                    :
+                <HighlightOffRoundedIcon style={{color: "red"}}/>,
+
                 <React.Fragment>
                     <Tooltip title="Edit Category">
-                        <IconButton>
+                        <IconButton onClick={() => props.history.push("/admin/category/EDIT-CATEGORY?categoryId="+ category._id )}>
                             <EditRoundedIcon />
                         </IconButton>
                     </Tooltip>
 
-                    <Tooltip title="Delete Category">
-                        <IconButton>
-                            <DeleteRoundedIcon />
-                        </IconButton>
-                    </Tooltip>
+                    <ConfirmAlert msg={`Are you sure you want delete ${category.categoryName}`} onClickEvent={() => props.onCategoryDelete(category._id)}>
+                        <Tooltip title="Delete Product">
+                            <IconButton>
+                                <DeleteRoundedIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </ConfirmAlert>
                 </React.Fragment>
             ])
         }
@@ -100,4 +107,4 @@ const ViewCategory = (props) => {
 const mapStateToProps = state => ({
     category: state.category.category
 })
-export default withRouter(connect(mapStateToProps,{getAllCategory})(ViewCategory));
+export default withRouter(connect(mapStateToProps,{getAllCategory,onCategoryDelete})(ViewCategory));

@@ -1,6 +1,7 @@
 import React from 'react';
 import BreadCrump from '../../components/BreadCrump/BreadCrump'; 
 import AddCategory from '../../components/Category/AddCategory/AddCategory';
+import EditCategory from '../../components/Category/EditCategory/EditCategory';
 import ViewCategory from '../../components/Category/ViewCategory/ViewCategory';
 import TopBar from '../../components/TopBar/TopBar';
 import styles from './Category.module.css';
@@ -38,6 +39,7 @@ const Category = (props) => {
 
             {state == "VIEW-CATEGORY" && <ViewCategory />}
             {state == "ADD-CATEGORY" && <AddCategory />}
+            {state == "EDIT-CATEGORY" && <EditCategory />}
         </div>
     )
 }

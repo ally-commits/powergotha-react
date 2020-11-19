@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './AddProduct.module.css'
+import styles from './EditProduct.module.css'
 
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import FormHelperText from '@material-ui/core/FormHelperText'
 
-import AddRoundedIcon from '@material-ui/icons/AddRounded';
+import UpdateRoundedIcon from '@material-ui/icons/UpdateRounded';
 import Images from './Images/Images'
 
 import {connect} from 'react-redux'
@@ -22,16 +22,20 @@ import {getAllWarehouse} from '../../../containers/warehouse/actions'
 import {getAllProducts} from '../../../containers/product/actions'
 import {showAlert} from '../../../containers/app/actions'
 import axios from 'axios'
-import {withRouter} from 'react-router-dom'
+import {withRouter,useLocation} from 'react-router-dom'
 
-const AddProduct = (props) => {
+const EditProduct = (props) => {
+    let { search } = useLocation();
+    const query = new URLSearchParams(search);
+
     const [formData,setFormData] = React.useState({
         productName: "",
         productPrice: 0,
         categoryId: "",
         active: true,
         warehouseId: "",
-        productImages: []
+        productImages: [],
+        productId: ""
     })
 
     const [error,setError] = React.useState({
@@ -43,6 +47,23 @@ const AddProduct = (props) => {
     const [loading,setLoading] = React.useState(false);
 
     React.useEffect(() => {
+        if(props.products) {
+            if(query.get("productId")) {
+                props.products.forEach(product => {
+                    if(product._id == query.get("productId")) { 
+                        setFormData({...formData,...product,productId: product._id,categoryId: product.categoryId._id,warehouseId: product.warehouseId._id})
+                    }
+                })
+            } else {
+                props.showAlert("Data Not Found")
+                props.history.push("/admin/product/VIEW-PRODUCTS")
+            }
+        } else {
+            props.getAllProducts();
+        }
+    },[props.products]);
+
+    React.useEffect(() => {
         if(!props.category) {
             props.getAllCategory();
         }
@@ -50,6 +71,8 @@ const AddProduct = (props) => {
             props.getAllWarehouse();
         }
     },[props.category,props.warehouse]);
+
+
 
     const validate = () => {
         const err = {productName: false, productPrice: false, categoryId: false, warehouseId: false};
@@ -77,14 +100,14 @@ const AddProduct = (props) => {
             setLoading(true);
 
             axios({
-                method: "post",
-                url: "/dashboard/product/addProduct",
+                method: "put    ",
+                url: "/dashboard/product/editProduct",
                 data: {
                     ...formData
                 }
             }).then(res => {
                 setLoading(false);
-                props.showAlert("Product Added Succesfully");
+                props.showAlert("Product Updated Succesfully");
                 props.getAllProducts()
                 props.history.push("/admin/product/VIEW-PRODUCTS")
             }).catch(err => {
@@ -99,10 +122,11 @@ const AddProduct = (props) => {
         }
     }
 
+    console.log(formData)
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
-                <h1>Add Product</h1>
+                <h1>Edit Product</h1>
 
                 <div className={styles.row}>
                     <TextField 
@@ -161,7 +185,7 @@ const AddProduct = (props) => {
 
                     <FormControlLabel
                         className={styles.switch}
-                        control={<Switch value={formData.active} onChange={(e) => setFormData({...formData,active: !formData.active})} color="primary" />}
+                        control={<Switch checked={formData.active} onChange={(e) => setFormData({...formData,active: !formData.active})} color="primary" />}
                         label="Product Active"
                     /> 
                 </div>
@@ -189,7 +213,7 @@ const AddProduct = (props) => {
                         ?
                     <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>Loading ...</Button>
                         :
-                    <Button color="primary" variant="contained" startIcon={<AddRoundedIcon />} onClick={onSubmit}>Add Product</Button>}
+                    <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>Update Product</Button>}
                 </div>
             </Paper>
         </div>
@@ -197,6 +221,7 @@ const AddProduct = (props) => {
 }
 const mapStateToProps = state => ({
     category: state.category.category,
-    warehouse: state.warehouse.warehouse
+    warehouse: state.warehouse.warehouse,
+    products: state.product.products
 })
-export default withRouter(connect(mapStateToProps,{getAllCategory,getAllWarehouse,showAlert,getAllProducts})(AddProduct));
+export default withRouter(connect(mapStateToProps,{getAllCategory,getAllWarehouse,showAlert,getAllProducts})(EditProduct));

@@ -1,6 +1,7 @@
 import React from 'react';
 import BreadCrump from '../../components/BreadCrump/BreadCrump';
 import AddProduct from '../../components/Products/AddProduct/AddProduct';
+import EditProduct from '../../components/Products/EditProduct/EditProduct';
 import ViewProducts from '../../components/Products/ViewProducts/ViewProducts';
 import TopBar from '../../components/TopBar/TopBar';
 import styles from './Product.module.css';
@@ -38,6 +39,7 @@ const Product = (props) => {
 
             {state == "VIEW-PRODUCTS" && <ViewProducts />}
             {state == "ADD-PRODUCT" && <AddProduct />}
+            {state == "EDIT-PRODUCT" && <EditProduct />}
         </div>
     )
 }

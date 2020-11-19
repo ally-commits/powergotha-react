@@ -6,19 +6,21 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button' 
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton'
-import Switch from '@material-ui/core/Switch'
 
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import FilterListRoundedIcon from '@material-ui/icons/FilterListRounded';
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
+import CheckCircleOutlineRoundedIcon from '@material-ui/icons/CheckCircleOutlineRounded';
+import HighlightOffRoundedIcon from '@material-ui/icons/HighlightOffRounded';
 
 import TableComp from '../../utils/Table/Table';
 import AppLoader from '../../utils/AppLoader/AppLoader';
 
 import {connect} from 'react-redux'
-import {getAllProducts} from '../../../containers/product/actions'
+import {getAllProducts,onProductDelete} from '../../../containers/product/actions'
 import {withRouter} from 'react-router-dom'
+import ConfirmAlert from '../../utils/ConfirmAlert/ConfirmAlert';
 
 
 const ViewProducts = (props) => { 
@@ -44,23 +46,27 @@ const ViewProducts = (props) => {
                 product.productName,
                 product.productPrice,
                 product.categoryId && product.categoryId.categoryName,
-                <Switch
-                    checked={product.active}
-                    onChange={() => {}} 
-                    color="primary"
-                />,
+                
+                product.active
+                    ?
+                <CheckCircleOutlineRoundedIcon style={{color: "green"}} />
+                    :
+                <HighlightOffRoundedIcon style={{color: "red"}}/>,
+
                 <React.Fragment>
                     <Tooltip title="Edit Product">
-                        <IconButton>
+                        <IconButton onClick={() => props.history.push("/admin/product/EDIT-PRODUCT?productId="+ product._id )}>
                             <EditRoundedIcon />
                         </IconButton>
                     </Tooltip>
 
-                    <Tooltip title="Delete Product">
-                        <IconButton>
-                            <DeleteRoundedIcon />
-                        </IconButton>
-                    </Tooltip>
+                    <ConfirmAlert msg={`Are you sure you want delete ${product.productName}`} onClickEvent={() => props.onProductDelete(product._id)}>
+                        <Tooltip title="Delete Product">
+                            <IconButton>
+                                <DeleteRoundedIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </ConfirmAlert>
                 </React.Fragment>
             ])
         }
@@ -101,4 +107,4 @@ const ViewProducts = (props) => {
 const mapStateToProps = state => ({
     products: state.product.products
 })
-export default withRouter(connect(mapStateToProps,{getAllProducts})(ViewProducts));
+export default withRouter(connect(mapStateToProps,{getAllProducts,onProductDelete})(ViewProducts));

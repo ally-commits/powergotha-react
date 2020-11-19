@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './AddCategory.module.css'
+import styles from './EditCategory.module.css'
 
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField' 
@@ -8,20 +8,24 @@ import Button from '@material-ui/core/Button'
 import Switch from '@material-ui/core/Switch' 
 import CircularProgress from '@material-ui/core/CircularProgress'
 
-import AddRoundedIcon from '@material-ui/icons/AddRounded';
+import UpdateRoundedIcon from '@material-ui/icons/UpdateRounded';
 
 import {connect} from 'react-redux'
 import {getAllCategory} from '../../../containers/category/actions' 
 import {showAlert} from '../../../containers/app/actions'
 import axios from 'axios'
-import {withRouter} from 'react-router-dom'
+import {withRouter,useLocation} from 'react-router-dom'
 
 
-const AddCategory = (props) => { 
+const EditCategory = (props) => { 
+    let { search } = useLocation();
+    const query = new URLSearchParams(search);
+
     const [formData,setFormData] = React.useState({
         categoryName: "",
         description: "",
-        active: true
+        active: true,
+        categoryId: ""
     });
 
     const [error,setError] = React.useState({
@@ -30,6 +34,23 @@ const AddCategory = (props) => {
     });
 
     const [loading,setLoading] = React.useState(false);
+
+    React.useEffect(() => {
+        if(props.category) {
+            if(query.get("categoryId")) {
+                props.category.forEach(cat => {
+                    if(cat._id == query.get("categoryId")) { 
+                        setFormData({...formData,...cat,categoryId: cat._id})
+                    }
+                })
+            } else {
+                props.showAlert("Data Not Found")
+                props.history.push("/admin/category/VIEW-CATEGORY")
+            }
+        } else {
+            props.getAllCategory();
+        }
+    },[props.category]);
 
     const validate = () => {
         const err = {categoryName: false,description: false};
@@ -50,14 +71,14 @@ const AddCategory = (props) => {
             setLoading(true);
 
             axios({
-                method: "post",
-                url: "/dashboard/category/addCategory",
+                method: "put",
+                url: "/dashboard/category/editCategory",
                 data: {
                     ...formData
                 }
             }).then(res => {
                 setLoading(false);
-                props.showAlert("Category Added Succesfully");
+                props.showAlert("Category Updated Succesfully");
                 props.getAllCategory()
                 props.history.push("/admin/category/VIEW-CATEGORY")
             }).catch(err => {
@@ -74,7 +95,7 @@ const AddCategory = (props) => {
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
-                <h1>Add Category</h1>
+                <h1>Edit Category</h1>
 
                 <div className={styles.row}>
                     <TextField 
@@ -106,11 +127,14 @@ const AddCategory = (props) => {
                         ?
                     <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>Loading ...</Button>
                         :
-                    <Button color="primary" variant="contained" startIcon={<AddRoundedIcon />} onClick={onSubmit}>Add Category</Button>}
+                    <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>Update Category</Button>}
                 </div>
             </Paper>
         </div>
     )
 }
 
-export default withRouter(connect(null,{getAllCategory,showAlert})(AddCategory));
+const mapStateToProps = state => ({
+    category: state.category.category
+})
+export default withRouter(connect(mapStateToProps,{getAllCategory,showAlert})(EditCategory));

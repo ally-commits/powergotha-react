@@ -9,10 +9,10 @@ export const showAlert = (msg) => dispatch => {
     })
 
     setTimeout(() => {
-        dispatch({
-            type: actionTypes.SHOW_ALERT,
-            payload: false
-        });
+        // dispatch({
+        //     type: actionTypes.SHOW_ALERT,
+        //     payload: false
+        // });
     },5000)
 }
 
