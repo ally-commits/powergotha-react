@@ -27,6 +27,8 @@ import Category from './containers/category/Category';
 import Warehouse from './containers/warehouse/Warehouse';
 import Product from './containers/product/Product'
 import Manager from './containers/manager/Manager'
+import Delivery from './containers/delivery/Delivery';
+import AdminRoute from './routes/AdminRoute';
 
 const hist = createBrowserHistory();
 
@@ -62,7 +64,11 @@ const Users = () => {
 
 const App = (props) => {
   const [loaded,setLoaded] = React.useState(false);
+  const [auth,setAuth] = React.useState(props.auth);
 
+  React.useEffect(() => {
+    setAuth(props.auth)
+  },[props.auth])
   
   React.useEffect(() => {
     if(localStorage.token) { 
@@ -70,10 +76,11 @@ const App = (props) => {
         method: "get",
         url: "/user/getUserDetails",
       }).then(res => {
-        if(res.data.user.userType != "ADMIN") {
-          props.showAlert("401: You don't have enough access")
-        } else {
+        if(res.data.user.userType == "ADMIN" || res.data.user.userType == "MANAGER") {
           props.setAuth({...res.data.user}) 
+        } else {
+          localStorage.clear();
+          props.showAlert("401: You don't have enough access")
         }
         setLoaded(true);  
       })
@@ -110,10 +117,10 @@ const App = (props) => {
                 <PrivateRoute exact path="/admin/home" component={Dashbaord} />
                 <PrivateRoute exact path="/admin/product/:type" component={Product} />
                 <PrivateRoute exact path="/admin/category/:type" component={Category} />
-                <PrivateRoute exact path="/admin/users" component={Users} />
-
-                <PrivateRoute exact path="/admin/warehouse/:type" component={Warehouse} />
-                <PrivateRoute exact path="/admin/managers/:type" component={Manager} />
+                <PrivateRoute exact path="/admin/delivery/:type" component={Delivery} />
+ 
+                <AdminRoute exact path="/admin/warehouse/:type" component={Warehouse} />
+                <AdminRoute exact path="/admin/managers/:type" component={Manager} />
 
                 <Redirect from="/" to="/admin/home" />
               </Switch> 
@@ -124,5 +131,7 @@ const App = (props) => {
     </ThemeProvider>
   );
 }
-
+const mapStateToProps = state => ({
+  auth: state.app.auth
+})
 export default connect(null,{setAuth,showAlert})(App);

@@ -3,24 +3,24 @@ import Snackbar from '@material-ui/core/Snackbar';
 import {connect} from 'react-redux';
 import styles from './Alert.module.css'
 import MuiAlert from '@material-ui/lab/Alert';
+import { showAlert } from '../../containers/app/actions';
 
 const Alert = (props) => {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 const AlertComp = (props) => {
-    const [show,setShow] = React.useState(false);
+    const [show,setShow] = React.useState(props.alertMsg);
 
-    React.useEffect(() => {
-        if(props.showAlert) 
-            setShow(props.showAlert)
-    },[props.showAlert])
+    React.useEffect(() => { 
+        setShow(props.alertMsg)
+    },[props.alertMsg])
 
     return (
         <React.Fragment>
             {show && 
-            <Snackbar open={show} autoHideDuration={5000} onClose={() =>setShow(false)} anchorOrigin={{ vertical: "top", horizontal: "right" }}>
-                <Alert onClose={() => setShow(false)} severity="info">
+            <Snackbar open={show} onClose={() => props.showAlert(false)} anchorOrigin={{ vertical: "top", horizontal: "right" }}>
+                <Alert onClose={() =>  props.showAlert(false)} severity="info">
                     {show}
                 </Alert>
             </Snackbar>}
@@ -29,7 +29,7 @@ const AlertComp = (props) => {
 }
 
 const mapStateToProps = state => ({
-    showAlert: state.app.showAlert
+    alertMsg: state.app.showAlert
 })
 
-export default connect(mapStateToProps)(AlertComp);
+export default connect(mapStateToProps,{showAlert})(AlertComp);

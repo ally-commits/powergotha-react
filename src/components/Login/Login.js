@@ -52,12 +52,12 @@ const Login = (props) => {
                     phoneNumberId: formData.phoneNumber
                 }
             }).then(res => { 
-                if(res.data.user.userType != "ADMIN") {
-                    props.showAlert("401: You don't have enough access")
-                } else {
+                if(res.data.user.userType == "ADMIN" || res.data.user.userType == "MANAGER") {
                     props.setAuth({...res.data.user,token: res.data.token})
                     localStorage.setItem("token",res.data.token)
                     props.showAlert("Logged In Successfully")
+                } else {
+                    props.showAlert("401: You don't have enough access")
                 }
                 setLoading(false);
             }).catch(err => {

@@ -41,15 +41,22 @@ const AddProduct = (props) => {
         warehouseId: false
     });
     const [loading,setLoading] = React.useState(false);
+    const [warehouse,setWarehouse] = React.useState([])
 
     React.useEffect(() => {
         if(!props.category) {
             props.getAllCategory();
         }
-        if(!props.warehouse) {
-            props.getAllWarehouse();
+        if(props.auth && props.auth.userType == "ADMIN") {
+            if(!props.warehouse) {
+                props.getAllWarehouse();
+            } else {
+                setWarehouse(props.warehouse)
+            }
+        } else {
+            setWarehouse(props.auth.assignedWarehouse)
         }
-    },[props.category,props.warehouse]);
+    },[props.category,props.warehouse,props.auth]);
 
     const validate = () => {
         const err = {productName: false, productPrice: false, categoryId: false, warehouseId: false};
@@ -149,7 +156,7 @@ const AddProduct = (props) => {
                             onChange={(e) =>setFormData({...formData,warehouseId: e.target.value})} 
                             label="Warehouse"
                         >
-                            {props.warehouse && props.warehouse.map(warehouse => {
+                            {warehouse && warehouse.map(warehouse => {
                                 return (
                                     <MenuItem value={warehouse._id}>{warehouse.warehouseName}</MenuItem>
                                 )
@@ -197,6 +204,7 @@ const AddProduct = (props) => {
 }
 const mapStateToProps = state => ({
     category: state.category.category,
-    warehouse: state.warehouse.warehouse
+    warehouse: state.warehouse.warehouse,
+    auth: state.app.auth
 })
 export default withRouter(connect(mapStateToProps,{getAllCategory,getAllWarehouse,showAlert,getAllProducts})(AddProduct));

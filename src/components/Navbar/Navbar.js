@@ -2,11 +2,14 @@ import React from 'react'
 import styles from './navbar.module.css';
 import {NavLink} from 'react-router-dom';
 import logo from '../../assets/img/logo.png'
+
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import StorefrontRoundedIcon from '@material-ui/icons/StorefrontRounded';
 import GroupRoundedIcon from '@material-ui/icons/GroupRounded';
 import CategoryRoundedIcon from '@material-ui/icons/CategoryRounded';
 import LocalConvenienceStoreRoundedIcon from '@material-ui/icons/LocalConvenienceStoreRounded';
+import DirectionsBikeRoundedIcon from '@material-ui/icons/DirectionsBikeRounded';
+import {connect} from 'react-redux'
 
 const NavBar = (props) => {
     return (
@@ -33,19 +36,29 @@ const NavBar = (props) => {
                     <p>Category</p>
                 </NavLink>
 
-                <NavLink className={styles.navItem}  to="/admin/managers/VIEW-MANAGERS" activeClassName={styles.activeNavItem}>
-                    <GroupRoundedIcon />
-                    <p>Managers</p>
-                </NavLink> 
-                
-                <NavLink className={styles.navItem}  to="/admin/warehouse/VIEW-WAREHOUSE" activeClassName={styles.activeNavItem}>
-                    <LocalConvenienceStoreRoundedIcon />
-                    <p>Warehouse</p>
-                </NavLink> 
-                
+                <NavLink className={styles.navItem} to="/admin/delivery/VIEW-DELIVERY" activeClassName={styles.activeNavItem}>
+                    <DirectionsBikeRoundedIcon />
+                    <p>Delivery Boys</p>
+                </NavLink>
+
+                {props.auth && props.auth.userType == "ADMIN" &&
+                <React.Fragment>
+                    <NavLink className={styles.navItem}  to="/admin/managers/VIEW-MANAGERS" activeClassName={styles.activeNavItem}>
+                        <GroupRoundedIcon />
+                        <p>Managers</p>
+                    </NavLink> 
+                    
+                    <NavLink className={styles.navItem}  to="/admin/warehouse/VIEW-WAREHOUSE" activeClassName={styles.activeNavItem}>
+                        <LocalConvenienceStoreRoundedIcon />
+                        <p>Warehouse</p>
+                    </NavLink> 
+                </React.Fragment>}
             </div>
         </div>
     )
 }
 
-export default NavBar;
+const mapStateToProps = state => ({
+    auth: state.app.auth
+})
+export default connect(mapStateToProps)(NavBar);

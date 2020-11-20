@@ -71,14 +71,16 @@ const Profile = (props) => {
 
                         <TextField
                             className={styles.textField}
-                            label="Email"
-                            value={user.email}
+                            label="Phone Number"
+                            type="number"
+                            value={user.phoneNumber}
                             fullWidth
                         />
 
                         <TextField
                             className={styles.textField}
                             label="User Type"
+                            disabled
                             value={user.userType}
                             fullWidth
                         />

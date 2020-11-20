@@ -1,8 +1,7 @@
 import * as actionTypes from './actionTypes'
 
 const initialState = { 
-  showAlert: false,
-  users: false,
+  showAlert: false, 
   auth: false,
   images: false,
 } 
@@ -17,9 +16,7 @@ const reducer =  (state = initialState, action) => {
   
       return {...state,images: [...imgs]}
     case actionTypes.SET_AUTH:
-      return {...state,auth: action.payload}
-    case actionTypes.SET_USERS:
-      return {...state,users: action.payload}  
+      return {...state,auth: action.payload} 
     case actionTypes.SHOW_ALERT:
       return {...state,showAlert: action.payload}
     default:

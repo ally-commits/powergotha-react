@@ -19,4 +19,11 @@
 }
 .rightHeader button {
     margin-left: 10px !important;
-} 
+}
+.warehouseBlock {
+    width: 30%;
+    margin: 20px;
+}
+.select {
+    width: 100%;
+}

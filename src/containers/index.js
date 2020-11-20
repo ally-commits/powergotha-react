@@ -4,11 +4,13 @@ import productReducer from './product/reducer'
 import categoryReducer from './category/reducer'
 import warehouseReducer from './warehouse/reducer'
 import managerReducer from './manager/reducer'
+import deliveryReducer from './delivery/reducer'
 
 export default combineReducers({ 
   app: appReducer,
   product: productReducer,
   category: categoryReducer,
   warehouse: warehouseReducer,
-  manager: managerReducer
+  manager: managerReducer,
+  delivery: deliveryReducer
 });

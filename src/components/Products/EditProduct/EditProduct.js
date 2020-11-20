@@ -45,7 +45,8 @@ const EditProduct = (props) => {
         warehouseId: false
     });
     const [loading,setLoading] = React.useState(false);
-
+    const [warehouse,setWarehouse] = React.useState([])
+    
     React.useEffect(() => {
         if(props.products) {
             if(query.get("productId")) {
@@ -67,10 +68,16 @@ const EditProduct = (props) => {
         if(!props.category) {
             props.getAllCategory();
         }
-        if(!props.warehouse) {
-            props.getAllWarehouse();
+        if(props.auth && props.auth.userType == "ADMIN") {
+            if(!props.warehouse) {
+                props.getAllWarehouse();
+            } else {
+                setWarehouse(props.warehouse)
+            }
+        } else {
+            setWarehouse(props.auth.assignedWarehouse)
         }
-    },[props.category,props.warehouse]);
+    },[props.category,props.warehouse,props.auth]);
 
 
 
@@ -86,7 +93,6 @@ const EditProduct = (props) => {
         })
 
         if(formData.productImages.length == 0) {
-            console.log("showed error")
             props.showAlert("Upload Atleast one Image")
             validData = false;
         }
@@ -173,7 +179,7 @@ const EditProduct = (props) => {
                             onChange={(e) =>setFormData({...formData,warehouseId: e.target.value})} 
                             label="Warehouse"
                         >
-                            {props.warehouse && props.warehouse.map(warehouse => {
+                            {warehouse && warehouse.map(warehouse => {
                                 return (
                                     <MenuItem value={warehouse._id}>{warehouse.warehouseName}</MenuItem>
                                 )
