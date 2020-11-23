@@ -20,8 +20,8 @@
     --breadcrump-height: 45px;
 
     --user-stoke-color: #1F78B4;
-    --orders-stoke-color: #A6CEE3;
-    --ordersDelv-stoke-color: #B2DF8A;
+    --orders-stoke-color: #9c00aa;
+    --ordersDelv-stoke-color: #65ff57;
 }
 
 body::-webkit-scrollbar {
@@ -48,6 +48,9 @@ body::-webkit-scrollbar-thumb {
     stroke: var(--user-stoke-color);  
     stroke-width: 6px; 
 }
+.ct-series-a .ct-area {
+    fill: var(--user-stoke-color);  
+} 
 
 .ct-series-b .ct-line {
     stroke: var(--orders-stoke-color); 
@@ -57,6 +60,9 @@ body::-webkit-scrollbar-thumb {
     stroke: var(--orders-stoke-color);  
     stroke-width: 6px; 
 }
+.ct-series-b .ct-area {
+    fill: var(--orders-stoke-color);   
+}
 
 .ct-series-c .ct-line {
     stroke: var(--ordersDelv-stoke-color); 
@@ -65,6 +71,46 @@ body::-webkit-scrollbar-thumb {
 .ct-series-c .ct-point {
     stroke: var(--ordersDelv-stoke-color);
     stroke-width: 6px; 
+}
+.ct-series-c .ct-area {
+    fill: var(--ordersDelv-stoke-color);
+    stroke-width: 6px; 
+}
+
+.ct-chart-donut .ct-label {
+    color: rgb(22, 22, 22);
+    fill: rgb(56, 56, 56);
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
+
+.ct-series-a .ct-slice-donut {
+    stroke: #1f78b4a8;
+}
+.ct-series-b .ct-slice-donut {
+    stroke: #9c00aa54;
+}
+.ct-series-c .ct-slice-donut {
+    stroke: #0ddd8396;
+}
+.ct-series-d .ct-slice-donut {
+    stroke: #004fce67;
+}
+.ct-series-e .ct-slice-donut {
+    stroke: #e77b0056;
+}
+.ct-series-f .ct-slice-donut {
+    stroke: #ff87abab;
+}
+.ct-series-g .ct-slice-donut {
+    stroke: #316685;
+}
+.ct-series-h .ct-slice-donut {
+    stroke: #00afb9;
+}
+.ct-series-i .ct-slice-donut {
+    stroke: #800e13;
 }
 /* END GRPAH LINE COLORS */
 

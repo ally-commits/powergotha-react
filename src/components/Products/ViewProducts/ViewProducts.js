@@ -56,6 +56,7 @@ const ViewProducts = (props) => {
                 product.addedBy ? <p className={styles.addedBy}>{product.addedBy.userType} - {product.addedBy.name}</p> : "---",
 
                 product.stockLeft,
+                product.warehouseId.warehouseName,
 
                 <React.Fragment>
                     <Tooltip title="Edit Product">
@@ -101,7 +102,7 @@ const ViewProducts = (props) => {
 
             {showData &&
             <TableComp 
-                columns={["Sl No","Product Name","Price","Category","Active","Added By","Stock Left","Action"]}
+                columns={["Sl No","Product Name","Price","Category","Active","Added By","Stock Left","Warehouse Name","Action"]}
                 rows={rowData}
             />}
 

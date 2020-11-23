@@ -1,0 +1,21 @@
+.container {
+    flex: 2;
+    padding: 20px;
+    margin-left: 20px;
+}
+.container div {
+    width: 100%;
+    height: 90%; 
+}
+.container .ct-label {
+    color: white !important;
+}
+.header {
+    width: 100%;
+    height: 10% !important;
+}
+.header h1 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}

@@ -7,7 +7,7 @@ const MonthStat = (props) => {
     let date = new Date();
     let lastDate = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
     let monthLabel = Array.from({length: lastDate},(v,k)=>k+1);
-    console.log(monthLabel)
+  
 
     let orders = {};
     let users = {};
@@ -31,21 +31,20 @@ const MonthStat = (props) => {
     props.data.currentMonthData.ordersDelv.forEach(val => {
         ordersDelv[new Date(val.createdAt).getDate()] += 1
     }) 
-
-    console.log(users)
+ 
 
     var data = {
       labels: monthLabel,
       series: [ 
-        Object.values(orders),
         Object.values(users),
+        Object.values(orders),
         Object.values(ordersDelv),
       ]
     };
  
 
     var options = {
-      high: Math.max(...Object.values(users) ,...Object.values(orders),...Object.values(ordersDelv)) + 3,
+      high: Math.max(...Object.values(users) ,...Object.values(orders),...Object.values(ordersDelv)) + 1,
       low: 0,
       axisX: {
         labelInterpolationFnc: function(value, index) {
@@ -63,7 +62,15 @@ const MonthStat = (props) => {
  
     return ( 
         <Paper variant="outlined" className={styles.container}>
-            <ChartistGraph data={data} options={options} type={type} />
+          <div className={styles.header}>
+            <h1>Monthly Statics</h1>
+            <div className={styles.legend}>
+              <p>Users  <span style={{backgroundColor: 'var(--user-stoke-color)'}}>&nbsp;</span></p>
+              <p>Orders  <span style={{backgroundColor: 'var(--orders-stoke-color)'}}>&nbsp;</span></p>
+              <p>Delivery  <span style={{backgroundColor: 'var(--ordersDelv-stoke-color)'}}>&nbsp;</span></p>
+            </div>
+          </div>
+          <ChartistGraph data={data} options={options} type={type} />
         </Paper>
     )
 }

@@ -8,6 +8,8 @@ import {showAlert} from '../../containers/app/actions'
 import {getAllData} from '../../containers/home/actions'
 
 import MonthStat from './MonthStat/MonthStat'
+import AllStat from './AllStat/AllStat';
+import WarehouseStat from './WarehouseStat/WarehouseStat'
 
 const HomeComp = (props) => { 
     React.useEffect(() => {
@@ -25,6 +27,12 @@ const HomeComp = (props) => {
             {showData &&
             <React.Fragment>
                 <MonthStat data={props.data} />
+
+                <div className={styles.row}>
+                    <AllStat  data={props.data} />
+
+                    <WarehouseStat data={props.data.warehouse} />
+                </div>
             </React.Fragment>}
         </div>  
     )
