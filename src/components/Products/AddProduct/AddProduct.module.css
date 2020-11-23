@@ -17,11 +17,11 @@
     margin: 15px 0px;
 }
 .productName {
-    flex: 2;
+    flex: 3;
     margin: 10px !important;
 }
-.productPrice {
-    flex: 1;
+.typeNumber {
+    flex: 2;
     margin: 10px !important;
 }
 .category {

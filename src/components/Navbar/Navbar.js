@@ -7,8 +7,9 @@ import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import StorefrontRoundedIcon from '@material-ui/icons/StorefrontRounded';
 import GroupRoundedIcon from '@material-ui/icons/GroupRounded';
 import CategoryRoundedIcon from '@material-ui/icons/CategoryRounded';
-import LocalConvenienceStoreRoundedIcon from '@material-ui/icons/LocalConvenienceStoreRounded';
+import ShoppingBasketRoundedIcon from '@material-ui/icons/ShoppingBasketRounded';
 import DirectionsBikeRoundedIcon from '@material-ui/icons/DirectionsBikeRounded';
+import HomeWorkRoundedIcon from '@material-ui/icons/HomeWorkRounded';
 import {connect} from 'react-redux'
 
 const NavBar = (props) => {
@@ -41,6 +42,11 @@ const NavBar = (props) => {
                     <p>Delivery Boys</p>
                 </NavLink>
 
+                <NavLink className={styles.navItem} to="/admin/orders/VIEW-ORDERS" activeClassName={styles.activeNavItem}>
+                    <ShoppingBasketRoundedIcon />
+                    <p>Orders</p>
+                </NavLink>
+
                 {props.auth && props.auth.userType == "ADMIN" &&
                 <React.Fragment>
                     <NavLink className={styles.navItem}  to="/admin/managers/VIEW-MANAGERS" activeClassName={styles.activeNavItem}>
@@ -49,7 +55,7 @@ const NavBar = (props) => {
                     </NavLink> 
                     
                     <NavLink className={styles.navItem}  to="/admin/warehouse/VIEW-WAREHOUSE" activeClassName={styles.activeNavItem}>
-                        <LocalConvenienceStoreRoundedIcon />
+                        <HomeWorkRoundedIcon />
                         <p>Warehouse</p>
                     </NavLink> 
                 </React.Fragment>}

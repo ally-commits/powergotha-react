@@ -1,0 +1,30 @@
+.container {
+    width: 97%;
+    margin: 0 auto;
+}
+.header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    height: 50px;
+}
+.leftHeader {
+    display: flex;
+    align-items: center;
+}
+.leftHeader p {
+    font-size: 14px;
+    margin-right: 10px;
+}
+.rightHeader button {
+    margin-left: 10px !important;
+}
+.textRed {
+    color: red;
+    font-weight: 400;
+}
+.textGreen {
+    color: rgba(0, 180, 15, 0.973);
+    font-weight: 400;
+}

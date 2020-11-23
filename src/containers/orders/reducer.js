@@ -1,12 +1,12 @@
 import * as actionTypes from './actionTypes'
 
 const initialState = { 
-  category: false, 
+  orders: false, 
 } 
 const reducer =  (state = initialState, action) => {
     switch (action.type) { 
-        case actionTypes.SET_CATEGORY:
-            return {...state,category: action.payload}
+        case actionTypes.SET_ORDERS:
+            return {...state,orders: action.payload}
         default:
             return state
     }

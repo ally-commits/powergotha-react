@@ -29,6 +29,8 @@ import Product from './containers/product/Product'
 import Manager from './containers/manager/Manager'
 import Delivery from './containers/delivery/Delivery';
 import AdminRoute from './routes/AdminRoute';
+import Orders from './containers/orders/Orders';
+import Home from './containers/home/Home';
 
 const hist = createBrowserHistory();
 
@@ -46,6 +48,7 @@ axios.interceptors.request.use(async (config) => {
   }
   return config
 });
+ 
 
 const Dashbaord = () => {
   return (
@@ -114,10 +117,11 @@ const App = (props) => {
               <Switch>  
                 <Route exact path="/login" component={Login} />
 
-                <PrivateRoute exact path="/admin/home" component={Dashbaord} />
+                <PrivateRoute exact path="/admin/home" component={Home} />
                 <PrivateRoute exact path="/admin/product/:type" component={Product} />
                 <PrivateRoute exact path="/admin/category/:type" component={Category} />
                 <PrivateRoute exact path="/admin/delivery/:type" component={Delivery} />
+                <PrivateRoute exact path="/admin/orders/:type" component={Orders} />
  
                 <AdminRoute exact path="/admin/warehouse/:type" component={Warehouse} />
                 <AdminRoute exact path="/admin/managers/:type" component={Manager} />

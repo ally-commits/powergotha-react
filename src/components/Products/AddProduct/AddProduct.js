@@ -31,6 +31,7 @@ const AddProduct = (props) => {
         categoryId: "",
         active: true,
         warehouseId: "",
+        stockLeft: "",
         productImages: []
     })
 
@@ -38,7 +39,8 @@ const AddProduct = (props) => {
         productName: false,
         productPrice: false,
         categoryId: false, 
-        warehouseId: false
+        warehouseId: false,
+        stockLeft: false,
     });
     const [loading,setLoading] = React.useState(false);
     const [warehouse,setWarehouse] = React.useState([])
@@ -59,7 +61,7 @@ const AddProduct = (props) => {
     },[props.category,props.warehouse,props.auth]);
 
     const validate = () => {
-        const err = {productName: false, productPrice: false, categoryId: false, warehouseId: false};
+        const err = {productName: false, productPrice: false, categoryId: false, warehouseId: false,stockLeft: false};
         let validData = true;
         setError({...err});
         Object.keys(err).forEach(key => {
@@ -123,11 +125,19 @@ const AddProduct = (props) => {
 
                     <TextField 
                         label="Product Price"
-                        className={styles.productPrice}
+                        className={styles.typeNumber}
                         value={formData.productPrice}
                         onChange={e => setFormData({...formData,productPrice: e.target.value})}
                         error={error.productPrice}
                         helperText={error.productPrice}
+                    />
+                    <TextField 
+                        label="Stock"
+                        className={styles.typeNumber}
+                        value={formData.stockLeft}
+                        onChange={e => setFormData({...formData,stockLeft: e.target.value})}
+                        error={error.stockLeft}
+                        helperText={error.stockLeft}
                     />
                 </div>
 

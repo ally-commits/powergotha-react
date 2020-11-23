@@ -35,14 +35,16 @@ const EditProduct = (props) => {
         active: true,
         warehouseId: "",
         productImages: [],
-        productId: ""
+        productId: "",
+        stockLeft: "",
     })
 
     const [error,setError] = React.useState({
         productName: false,
         productPrice: false,
         categoryId: false, 
-        warehouseId: false
+        warehouseId: false,
+        stockLeft: false,
     });
     const [loading,setLoading] = React.useState(false);
     const [warehouse,setWarehouse] = React.useState([])
@@ -65,24 +67,26 @@ const EditProduct = (props) => {
     },[props.products]);
 
     React.useEffect(() => {
-        if(!props.category) {
-            props.getAllCategory();
-        }
-        if(props.auth && props.auth.userType == "ADMIN") {
-            if(!props.warehouse) {
-                props.getAllWarehouse();
-            } else {
-                setWarehouse(props.warehouse)
+        if(props.auth) {
+            if(!props.category) {
+                props.getAllCategory();
             }
-        } else {
-            setWarehouse(props.auth.assignedWarehouse)
+            if(props.auth && props.auth.userType == "ADMIN") {
+                if(!props.warehouse) {
+                    props.getAllWarehouse();
+                } else {
+                    setWarehouse(props.warehouse)
+                }
+            } else {
+                setWarehouse(props.auth.assignedWarehouse)
+            }
         }
     },[props.category,props.warehouse,props.auth]);
 
 
 
     const validate = () => {
-        const err = {productName: false, productPrice: false, categoryId: false, warehouseId: false};
+        const err = {productName: false, productPrice: false, categoryId: false, warehouseId: false,stockLeft: false,};
         let validData = true;
         setError({...err});
         Object.keys(err).forEach(key => {
@@ -104,9 +108,8 @@ const EditProduct = (props) => {
     const onSubmit = () => {
         if(validate()) {
             setLoading(true);
-
             axios({
-                method: "put    ",
+                method: "put",
                 url: "/dashboard/product/editProduct",
                 data: {
                     ...formData
@@ -146,11 +149,20 @@ const EditProduct = (props) => {
 
                     <TextField 
                         label="Product Price"
-                        className={styles.productPrice}
+                        className={styles.typeNumber}
                         value={formData.productPrice}
                         onChange={e => setFormData({...formData,productPrice: e.target.value})}
                         error={error.productPrice}
                         helperText={error.productPrice}
+                    />
+
+                <TextField 
+                        label="Stock"
+                        className={styles.typeNumber}
+                        value={formData.stockLeft}
+                        onChange={e => setFormData({...formData,stockLeft: e.target.value})}
+                        error={error.stockLeft}
+                        helperText={error.stockLeft}
                     />
                 </div>
 
@@ -228,6 +240,7 @@ const EditProduct = (props) => {
 const mapStateToProps = state => ({
     category: state.category.category,
     warehouse: state.warehouse.warehouse,
-    products: state.product.products
+    products: state.product.products,
+    auth: state.app.auth
 })
 export default withRouter(connect(mapStateToProps,{getAllCategory,getAllWarehouse,showAlert,getAllProducts})(EditProduct));

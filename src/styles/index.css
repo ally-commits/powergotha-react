@@ -18,6 +18,10 @@
 
     --nav-width: 300px;
     --breadcrump-height: 45px;
+
+    --user-stoke-color: #1F78B4;
+    --orders-stoke-color: #A6CEE3;
+    --ordersDelv-stoke-color: #B2DF8A;
 }
 
 body::-webkit-scrollbar {
@@ -37,23 +41,31 @@ body::-webkit-scrollbar-thumb {
 
 /* GRAPH COLORS */
 .ct-series-a .ct-line {
-    stroke: var(--professionals-color); 
+    stroke: var(--user-stoke-color); 
     stroke-width: 3px; 
 }
 .ct-series-a .ct-point {
-    stroke: var(--professionals-color);  
+    stroke: var(--user-stoke-color);  
     stroke-width: 6px; 
 }
 
 .ct-series-b .ct-line {
-    stroke: var(--passionists-color); 
+    stroke: var(--orders-stoke-color); 
     stroke-width: 3px; 
 }
 .ct-series-b .ct-point {
-    stroke: var(--passionists-color);  
+    stroke: var(--orders-stoke-color);  
     stroke-width: 6px; 
 }
 
+.ct-series-c .ct-line {
+    stroke: var(--ordersDelv-stoke-color); 
+    stroke-width: 3px; 
+}
+.ct-series-c .ct-point {
+    stroke: var(--ordersDelv-stoke-color);
+    stroke-width: 6px; 
+}
 /* END GRPAH LINE COLORS */
 
 p {

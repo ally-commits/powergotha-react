@@ -18,7 +18,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     poper: { 
-      top: '10px !important'
+      top: '10px !important',
+      zIndex: '100'
     }, 
     item: {
       fontSize: '14px',
