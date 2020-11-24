@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import {showAlert,setAuth} from '../../containers/app/actions'
 import TextField from '@material-ui/core/TextField'
 import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
+import PassTextField from '../utils/PassTextField/PassTextField'
 
 const Login = (props) => {
     const [formData,setFormData] = React.useState({
@@ -93,7 +94,7 @@ const Login = (props) => {
                             helperText={formError.phoneNumber}
                         /> 
 
-                        <TextField
+                        <PassTextField
                             variant="standard"
                             fullWidth
                             label="Password"

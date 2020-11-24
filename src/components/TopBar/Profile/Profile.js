@@ -4,6 +4,8 @@ import profileImg from '../../../assets/img/profile.png'
 
 import Dialog from '@material-ui/core/Dialog'
 import TextField from '@material-ui/core/TextField'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import Button from '@material-ui/core/Button'
 
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
@@ -11,11 +13,21 @@ import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import {connect} from 'react-redux';
 import axios from 'axios'
 import {showAlert} from '../../../containers/app/actions'
+import PassTextField from '../../utils/PassTextField/PassTextField'
  
+
 const Profile = (props) => {
     const [user,setUser] = React.useState({});
-    const [password,setPassword] = React.useState("");
-    const [error,setError] = React.useState(false);
+    const [formData,setFormData] = React.useState({
+        oldPassword: "",
+        newPassword: ""
+    })
+
+    const [error,setError] = React.useState({
+        oldPassword: false,
+        newPassword: false
+    })
+
     const [loading,setLoading] = React.useState(false);
 
     React.useEffect(() => {
@@ -24,31 +36,41 @@ const Profile = (props) => {
         }
     },[props.auth]); 
 
+    const validate = () => {
+        const err = {oldPassword: false,newPassword: false};
+        let validData = true;
+        setError({...err});
+        Object.keys(err).forEach(key => {
+            if(formData[key].length < 8) {
+                err[key] = `${key} should be mimimum 8 charactors`
+                validData = false;
+            } 
+        })
+
+        setError({...err});
+        return validData;
+    }
     const onSubmit = () => {
-        setError(false)
-        if(password.length < 8) {
-            setError("Password Length Should atleast 8 charactor")
-        } else {
+        if(validate()) {
             setLoading(true);
 
             axios({
-                method: "post",
-                url: "/updatePassword",
+                method: "put",
+                url: "/user/changePassword",
                 data: {
-                    contactNum: user.contactNum,
-                    password
+                    ...formData
                 }
             }).then(res => {
-                setLoading(false)
-                if(res.data.success) {
-                    props.showAlert("Password Updated")
-                    setPassword("")
-                } else {
-                    props.showAlert("Something went wrong,Try Again")
-                }
+                setLoading(false) 
+                props.showAlert("Password Updated Succesfully")
+                setFormData({oldPassword: "",newPassword: ""})
             }).catch(err => {
-                setLoading(false)
-                props.showAlert("Something went wrong,Try Again")
+                setLoading(false);
+                if(err && err.response && err.response.data && err.response.data.error) {
+                    props.showAlert(err.response.data.error)
+                } else {
+                    props.showAlert("Something went wrong ! Try Again")
+                }
             })
         }
     }
@@ -85,17 +107,30 @@ const Profile = (props) => {
                             fullWidth
                         />
 
-                        <TextField
+                        <PassTextField
+                            className={styles.textField}
+                            label="Enter Old Password"
+                            value={formData.oldPassword}
+                            error={error.oldPassword}
+                            helperText={error.oldPassword}
+                            onChange={(e) => setFormData({...formData,oldPassword: e.target.value})}
+                            fullWidth
+                        />
+                        <PassTextField
                             className={styles.textField}
                             label="Enter New Password"
-                            value={""}
+                            value={formData.newPassword}
+                            error={error.newPassword}
+                            helperText={error.newPassword}
+                            onChange={(e) => setFormData({...formData,newPassword: e.target.value})}
                             fullWidth
                         />
                         
-                        <button className={styles.updatePassword}>
-                            Update Password
-                            <EditRoundedIcon />
-                        </button>
+                        {loading
+                            ?
+                        <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>Loading ...</Button>
+                            :
+                        <Button color="primary" variant="contained" startIcon={<EditRoundedIcon />} onClick={onSubmit}>Change Password</Button>}
                     </div>
                      
                 </div>
