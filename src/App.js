@@ -31,6 +31,7 @@ import Delivery from './containers/delivery/Delivery';
 import AdminRoute from './routes/AdminRoute';
 import Orders from './containers/orders/Orders';
 import Home from './containers/home/Home';
+import Map from './containers/map/Map';
 
 const hist = createBrowserHistory();
 
@@ -49,21 +50,7 @@ axios.interceptors.request.use(async (config) => {
   return config
 });
  
-
-const Dashbaord = () => {
-  return (
-    <React.Fragment>
-      <TopBar head="Dashboard" />
-    </React.Fragment>
-  )
-} 
-const Users = () => {
-  return (
-    <React.Fragment>
-      <TopBar head="Users" />
-    </React.Fragment>
-  )
-}
+ 
 
 const App = (props) => {
   const [loaded,setLoaded] = React.useState(false);
@@ -125,6 +112,7 @@ const App = (props) => {
  
                 <AdminRoute exact path="/admin/warehouse/:type" component={Warehouse} />
                 <AdminRoute exact path="/admin/managers/:type" component={Manager} />
+                <AdminRoute exact path="/admin/view-map" component={Map} />
 
                 <Redirect from="/" to="/admin/home" />
               </Switch> 

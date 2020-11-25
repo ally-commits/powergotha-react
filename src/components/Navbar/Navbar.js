@@ -10,6 +10,7 @@ import CategoryRoundedIcon from '@material-ui/icons/CategoryRounded';
 import ShoppingBasketRoundedIcon from '@material-ui/icons/ShoppingBasketRounded';
 import DirectionsBikeRoundedIcon from '@material-ui/icons/DirectionsBikeRounded';
 import HomeWorkRoundedIcon from '@material-ui/icons/HomeWorkRounded';
+import MapRoundedIcon from '@material-ui/icons/MapRounded';
 import {connect} from 'react-redux'
 
 const NavBar = (props) => {
@@ -49,6 +50,11 @@ const NavBar = (props) => {
 
                 {props.auth && props.auth.userType == "ADMIN" &&
                 <React.Fragment>
+                    <NavLink className={styles.navItem}  to="/admin/view-map" activeClassName={styles.activeNavItem}>
+                        <MapRoundedIcon />
+                        <p>Map</p>
+                    </NavLink> 
+
                     <NavLink className={styles.navItem}  to="/admin/managers/VIEW-MANAGERS" activeClassName={styles.activeNavItem}>
                         <GroupRoundedIcon />
                         <p>Managers</p>
