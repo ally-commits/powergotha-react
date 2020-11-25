@@ -20,15 +20,15 @@ const Delivery = (props) => {
 
     const navData = {
         "VIEW-DELIVERY": {
-            name: "View Delivery",
+            name: "View Delivery Boy",
             path: "/admin/delivery/VIEW-DELIVERYS"
         },
         "ADD-DELIVERY": {
-            name: "Add Delivery",
+            name: "Add Delivery Boy",
             path: "/admin/delivery/ADD-DELIVERY"
         },
         "EDIT-DELIVERY": {
-            name: "Edit Delivery",
+            name: "Edit Delivery Boy",
             path: "/admin/delivery/EDIT-DELIVERY"
         },
     }

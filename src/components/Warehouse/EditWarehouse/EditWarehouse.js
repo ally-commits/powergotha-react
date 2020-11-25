@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField' 
 import Button from '@material-ui/core/Button' 
 
-import AddRoundedIcon from '@material-ui/icons/AddRounded';
+import UpdateRoundedIcon from '@material-ui/icons/UpdateRounded';
 
 import {connect} from 'react-redux'
 import {showAlert} from '../../../containers/app/actions'
@@ -146,7 +146,7 @@ const EditWarehouse = (props) => {
                         ?
                     <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>Loading ...</Button>
                         :
-                    <Button color="primary" variant="contained" startIcon={<AddRoundedIcon />} onClick={onSubmit}>Update Warehouse</Button>}
+                    <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>Update Warehouse</Button>}
                 </div>
             </Paper>
         </div>

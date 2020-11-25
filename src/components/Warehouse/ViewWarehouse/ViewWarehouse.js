@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button'
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton'
 import Switch from '@material-ui/core/Switch'
+import TextField from '@material-ui/core/TextField'
 
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
@@ -24,7 +25,7 @@ import ConfirmAlert from '../../utils/ConfirmAlert/ConfirmAlert'
 const ViewWarehouse = (props) => { 
     const [warehouse,setWarehouse] = React.useState(props.warehouse);
     const [showEntries,setShowEntries] = React.useState(10)
-
+    const [searchVal,setSearchVal] = React.useState("");
 
     React.useEffect(() => {
         if(!props.warehouse) {
@@ -39,27 +40,29 @@ const ViewWarehouse = (props) => {
 
     !isLoading && warehouse.forEach((warehouse,index) => {
         if(index+1 <= showEntries || showEntries == "All") {
-            rowData.push([
-                index + 1,
-                warehouse.warehouseName,
-                warehouse.coordinates.join("-"),
-                <React.Fragment>
-                    <Tooltip title="Edit Warehouse">
-                        <IconButton onClick={() => props.history.push("/admin/warehouse/EDIT-WAREHOUSE?warehouseId="+ warehouse._id )}>
-                            <EditRoundedIcon />
-                        </IconButton>
-                    </Tooltip>
-
-                    <ConfirmAlert msg={`Are you sure you want delete ${warehouse.warehouseName}`} onClickEvent={() => props.onWarehouseDelete(warehouse._id)}>
-                        <Tooltip title="Delete Warehouse">
-                            <IconButton>
-                                <DeleteRoundedIcon />
+            if(warehouse.warehouseName.toLowerCase().includes(searchVal.toLowerCase()) || warehouse.coordinates.join("").toLowerCase().includes(searchVal.toLowerCase())){
+                rowData.push([
+                    index + 1,
+                    warehouse.warehouseName,
+                    warehouse.coordinates.join("-"),
+                    <React.Fragment>
+                        <Tooltip title="Edit Warehouse">
+                            <IconButton onClick={() => props.history.push("/admin/warehouse/EDIT-WAREHOUSE?warehouseId="+ warehouse._id )}>
+                                <EditRoundedIcon />
                             </IconButton>
                         </Tooltip>
-                    </ConfirmAlert>
-                    
-                </React.Fragment>
-            ])
+        
+                        <ConfirmAlert msg={`Are you sure you want delete ${warehouse.warehouseName}`} onClickEvent={() => props.onWarehouseDelete(warehouse._id)}>
+                            <Tooltip title="Delete Warehouse">
+                                <IconButton>
+                                    <DeleteRoundedIcon />
+                                </IconButton>
+                            </Tooltip>
+                        </ConfirmAlert>
+                        
+                    </React.Fragment>
+                ])
+            }
         }
     });
  
@@ -78,9 +81,14 @@ const ViewWarehouse = (props) => {
                 </div>
 
                 <div className={styles.rightHeader}>
-                    <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/admin/warehouse/ADD-WAREHOUSE")}>Add Warehouse</Button>
+                    <TextField
+                        label="Search Here"
+                        className={styles.search}
+                        value={searchVal}
+                        onChange={e => setSearchVal(e.target.value)}
+                    />
 
-                    <Button color="primary" variant="contained" endIcon={<FilterListRoundedIcon />}>Filter</Button>
+                    <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/admin/warehouse/ADD-WAREHOUSE")}>Add Warehouse</Button>
                 </div>
             </div>
 

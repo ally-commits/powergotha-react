@@ -6,7 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button' 
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton'
-import Switch from '@material-ui/core/Switch'
+import TextField from '@material-ui/core/TextField'
 
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
@@ -24,7 +24,7 @@ import ConfirmAlert from '../../utils/ConfirmAlert/ConfirmAlert'
 const ViewManager = (props) => { 
     const [managers,setManagers] = React.useState(props.managers);
     const [showEntries,setShowEntries] = React.useState(10)
-
+    const [searchVal,setSearchVal] = React.useState("");
 
     React.useEffect(() => {
         if(!props.managers) {
@@ -39,29 +39,33 @@ const ViewManager = (props) => {
 
     !isLoading && managers.forEach((manager,index) => {
         if(index+1 <= showEntries || showEntries == "All") {
-            rowData.push([
-                index + 1,
-                manager.name,
-                manager.phoneNumber, 
-                manager.dob.substr(0,10),
-                manager.assignedWarehouse.length,
-                <React.Fragment>
-                    <Tooltip title="Edit Manager">
-                        <IconButton onClick={() => props.history.push("/admin/managers/EDIT-MANAGER?userId="+ manager._id )}>
-                            <EditRoundedIcon />
-                        </IconButton>
-                    </Tooltip>
+            if(manager.name.toLowerCase().includes(searchVal.toLowerCase()) || manager.phoneNumber.toLowerCase().includes(searchVal.toLowerCase()) 
+                || manager.dob.substr(0,10).toLowerCase().includes(searchVal.toLowerCase())) {
 
-                    <ConfirmAlert msg={`Are you sure you want delete ${manager.name}`} onClickEvent={() => props.onManagerDelete(manager._id)}>
-                        <Tooltip title="Delete Manager">
-                            <IconButton>
-                                <DeleteRoundedIcon />
+                rowData.push([
+                    index + 1,
+                    manager.name,
+                    manager.phoneNumber, 
+                    manager.dob.substr(0,10),
+                    manager.assignedWarehouse.length,
+                    <React.Fragment>
+                        <Tooltip title="Edit Manager">
+                            <IconButton onClick={() => props.history.push("/admin/managers/EDIT-MANAGER?userId="+ manager._id )}>
+                                <EditRoundedIcon />
                             </IconButton>
                         </Tooltip>
-                    </ConfirmAlert>
-                    
-                </React.Fragment>
-            ])
+
+                        <ConfirmAlert msg={`Are you sure you want delete ${manager.name}`} onClickEvent={() => props.onManagerDelete(manager._id)}>
+                            <Tooltip title="Delete Manager">
+                                <IconButton>
+                                    <DeleteRoundedIcon />
+                                </IconButton>
+                            </Tooltip>
+                        </ConfirmAlert>
+                        
+                    </React.Fragment>
+                ])
+            }
         }
     });
  
@@ -80,9 +84,13 @@ const ViewManager = (props) => {
                 </div>
 
                 <div className={styles.rightHeader}>
+                    <TextField
+                        label="Search Here"
+                        className={styles.search}
+                        value={searchVal}
+                        onChange={e => setSearchVal(e.target.value)}
+                    />
                     <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/admin/managers/ADD-MANAGER")}>Add Manager</Button>
-
-                    <Button color="primary" variant="contained" endIcon={<FilterListRoundedIcon />}>Filter</Button>
                 </div>
             </div>
 

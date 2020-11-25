@@ -131,7 +131,7 @@ const EditDelivery = (props) => {
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
-                <h1>Edit Delivery</h1>
+                <h1>Edit Delivery Boy</h1>
 
                 <div className={styles.row}>
                     <TextField 
@@ -209,7 +209,7 @@ const EditDelivery = (props) => {
                         ?
                     <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>Loading ...</Button>
                         :
-                    <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>Update Delivery</Button>}
+                    <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>Update Delivery Boy</Button>}
                 </div>
             </Paper>
         </div>

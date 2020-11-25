@@ -7,7 +7,7 @@
     align-items: center;
     width: 100%;
     justify-content: space-between;
-    height: 50px;
+    height: 60px;
 }
 .leftHeader {
     display: flex;
@@ -26,4 +26,14 @@
 }
 .select {
     width: 100%;
+}
+.rightHeader {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+.search {
+    width: 200px !important;
+    margin-bottom: 10px !important;
+    margin-left: 15px !important;
 }

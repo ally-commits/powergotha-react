@@ -3,7 +3,7 @@ import styles from './ViewOrders.module.css';
 
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-import Button from '@material-ui/core/Button' 
+import TextField from '@material-ui/core/TextField'
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton'
  
@@ -22,7 +22,7 @@ const ViewOrders = (props) => {
     const [orders,setOrders] = React.useState(props.orders);
     const [showEntries,setShowEntries] = React.useState(10);
     const [activeOrder,setActiveOrder] = React.useState(false);
-
+    const [searchVal,setSearchVal] = React.useState("");
 
     React.useEffect(() => {
         if(!props.orders) {
@@ -37,28 +37,32 @@ const ViewOrders = (props) => {
 
     !isLoading && orders.forEach((order,index) => {
         if(index+1 <= showEntries || showEntries == "All") {
-            rowData.push([
-                index + 1,
-                order.orderDate.substring(0,10),
-                order.orderStatus == "CANCELLED"
-                    ?
-                <span className={styles.textRed}>CANCELLED</span>
-                    :
-                <span className={styles.textGreen}>{order.orderStatus}</span>,
+            if(order.orderDate.substring(0,10).toLowerCase().includes(searchVal.toLowerCase()) || order.orderStatus.toLowerCase().includes(searchVal.toLowerCase()) 
+            || order.userId.name.toLowerCase().includes(searchVal.toLowerCase()) || order.userId.phoneNumber.toLowerCase().includes(searchVal.toLowerCase())){
 
-                order.orderItems.length,
+                rowData.push([
+                    index + 1,
+                    order.orderDate.substring(0,10),
+                    order.orderStatus == "CANCELLED"
+                        ?
+                    <span className={styles.textRed}>CANCELLED</span>
+                        :
+                    <span className={styles.textGreen}>{order.orderStatus}</span>,
 
-                order.userId.name,
-                order.userId.phoneNumber, 
+                    order.orderItems.length,
 
-                <React.Fragment>
-                    <Tooltip title="View Order">
-                        <IconButton onClick={() => setActiveOrder(order)}>
-                            <VisibilityRoundedIcon />
-                        </IconButton>
-                    </Tooltip> 
-                </React.Fragment>
-            ])
+                    order.userId.name,
+                    order.userId.phoneNumber, 
+
+                    <React.Fragment>
+                        <Tooltip title="View Order">
+                            <IconButton onClick={() => setActiveOrder(order)}>
+                                <VisibilityRoundedIcon />
+                            </IconButton>
+                        </Tooltip> 
+                    </React.Fragment>
+                ])
+            }
         }
     });
  
@@ -77,7 +81,12 @@ const ViewOrders = (props) => {
                 </div>
 
                 <div className={styles.rightHeader}>
-                    <Button color="primary" variant="contained" endIcon={<FilterListRoundedIcon />}>Filter</Button>
+                    <TextField
+                        label="Search Here"
+                        className={styles.search}
+                        value={searchVal}
+                        onChange={e => setSearchVal(e.target.value)}
+                    />
                 </div>
             </div>
 

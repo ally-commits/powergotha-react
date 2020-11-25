@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button'
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton'
 import Switch from '@material-ui/core/Switch'
+import TextField from '@material-ui/core/TextField'
 
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
@@ -27,7 +28,7 @@ import ConfirmAlert from '../../utils/ConfirmAlert/ConfirmAlert';
 const ViewCategory = (props) => { 
     const [category,setCategory] = React.useState(props.category);
     const [showEntries,setShowEntries] = React.useState(10)
-
+    const [searchVal,setSearchVal] = React.useState("");
 
     React.useEffect(() => {
         if(!props.category) {
@@ -42,33 +43,35 @@ const ViewCategory = (props) => {
 
     !isLoading && category.forEach((category,index) => {
         if(index+1 <= showEntries || showEntries == "All") {
-            rowData.push([
-                index + 1,
-                category.categoryName, 
-                category.description,
-
-                category.active
-                    ?
-                <CheckCircleOutlineRoundedIcon style={{color: "green"}} />
-                    :
-                <HighlightOffRoundedIcon style={{color: "red"}}/>,
-
-                <React.Fragment>
-                    <Tooltip title="Edit Category">
-                        <IconButton onClick={() => props.history.push("/admin/category/EDIT-CATEGORY?categoryId="+ category._id )}>
-                            <EditRoundedIcon />
-                        </IconButton>
-                    </Tooltip>
-
-                    <ConfirmAlert msg={`Are you sure you want delete ${category.categoryName}`} onClickEvent={() => props.onCategoryDelete(category._id)}>
-                        <Tooltip title="Delete Product">
-                            <IconButton>
-                                <DeleteRoundedIcon />
+            if(category.categoryName.substring(0,10).toLowerCase().includes(searchVal.toLowerCase()) || category.description.toLowerCase().includes(searchVal.toLowerCase()) ){
+                rowData.push([
+                    index + 1,
+                    category.categoryName, 
+                    category.description,
+    
+                    category.active
+                        ?
+                    <CheckCircleOutlineRoundedIcon style={{color: "green"}} />
+                        :
+                    <HighlightOffRoundedIcon style={{color: "red"}}/>,
+    
+                    <React.Fragment>
+                        <Tooltip title="Edit Category">
+                            <IconButton onClick={() => props.history.push("/admin/category/EDIT-CATEGORY?categoryId="+ category._id )}>
+                                <EditRoundedIcon />
                             </IconButton>
                         </Tooltip>
-                    </ConfirmAlert>
-                </React.Fragment>
-            ])
+    
+                        <ConfirmAlert msg={`Are you sure you want delete ${category.categoryName}`} onClickEvent={() => props.onCategoryDelete(category._id)}>
+                            <Tooltip title="Delete Product">
+                                <IconButton>
+                                    <DeleteRoundedIcon />
+                                </IconButton>
+                            </Tooltip>
+                        </ConfirmAlert>
+                    </React.Fragment>
+                ])
+            }
         }
     });
  
@@ -87,9 +90,13 @@ const ViewCategory = (props) => {
                 </div>
 
                 <div className={styles.rightHeader}>
+                    <TextField
+                        label="Search Here"
+                        className={styles.search}
+                        value={searchVal}
+                        onChange={e => setSearchVal(e.target.value)}
+                    />
                     <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/admin/category/ADD-CATEGORY")}>Add Category</Button>
-
-                    <Button color="primary" variant="contained" endIcon={<FilterListRoundedIcon />}>Filter</Button>
                 </div>
             </div>
 

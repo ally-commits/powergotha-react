@@ -110,7 +110,7 @@ const AddDelivery = (props) => {
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
-                <h1>Add Delivery</h1>
+                <h1>Add Delivery Boy</h1>
 
                 <div className={styles.row}>
                     <TextField 
@@ -187,7 +187,7 @@ const AddDelivery = (props) => {
                         ?
                     <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>Loading ...</Button>
                         :
-                    <Button color="primary" variant="contained" startIcon={<AddRoundedIcon />} onClick={onSubmit}>Add Delivery</Button>}
+                    <Button color="primary" variant="contained" startIcon={<AddRoundedIcon />} onClick={onSubmit}>Add Delivery Boy</Button>}
                 </div>
             </Paper>
         </div>
