@@ -86,16 +86,16 @@ body::-webkit-scrollbar-thumb {
 
 
 .ct-series-a .ct-slice-donut {
-    stroke: #1f78b4a8;
+    stroke: #855CF8;
 }
 .ct-series-b .ct-slice-donut {
-    stroke: #9c00aa54;
+    stroke: #ACB9FF;
 }
 .ct-series-c .ct-slice-donut {
-    stroke: #0ddd8396;
+    stroke: #7709CE;
 }
 .ct-series-d .ct-slice-donut {
-    stroke: #004fce67;
+    stroke: #E289F2;
 }
 .ct-series-e .ct-slice-donut {
     stroke: #e77b0056;
