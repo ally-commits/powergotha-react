@@ -1,6 +1,6 @@
 
-export const backendUrl = "https://yopaan-node.codedeployment.tk/api"   
-// export const backendUrl = "http://localhost:9000/api"   
+// export const backendUrl = "https://yopaan-node.codedeployment.tk/api"   
+export const backendUrl = "http://localhost:9000/api"   
 
 export const firebaseConfig = {
     apiKey: "AIzaSyAiGxPYOUrXinGDjSu4QjOi5X5Z9uVro5I",

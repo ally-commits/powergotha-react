@@ -40,7 +40,7 @@ const MapComp = (props) => {
                     <GoogleMapReact
                         bootstrapURLKeys={{ key: mapApiKey}}
                         defaultCenter={defaultCenter}
-                        defaultZoom={14}
+                        defaultZoom={12}
                     >
                         {props.warehouse && props.warehouse.map(val => {
                             return (

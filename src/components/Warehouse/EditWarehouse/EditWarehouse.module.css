@@ -17,10 +17,15 @@
     margin: 15px 0px;
 }
 .name {
-    flex: 4;
+    flex: 1;
     margin: 10px !important;
 }
 .coord {
     flex: 1;
     margin: 10px !important;
+}
+.searchOption {
+    flex: 1;
+    margin: 10px !important;
+    position: relative;
 }

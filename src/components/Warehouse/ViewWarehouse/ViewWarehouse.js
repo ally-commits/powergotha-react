@@ -44,6 +44,7 @@ const ViewWarehouse = (props) => {
                 rowData.push([
                     index + 1,
                     warehouse.warehouseName,
+                    warehouse.address.substr(0,30) + "...",
                     warehouse.coordinates.join("-"),
                     <React.Fragment>
                         <Tooltip title="Edit Warehouse">
@@ -96,7 +97,7 @@ const ViewWarehouse = (props) => {
 
             {showData &&
             <TableComp 
-                columns={["Sl No","Warehouse Name","Coordinates","Action"]}
+                columns={["Sl No","Warehouse Name","Address","Coordinates","Action"]}
                 rows={rowData}
             />}
 

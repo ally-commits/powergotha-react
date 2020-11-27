@@ -16,17 +16,20 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 
 
 import axios from 'axios'
+import SearchAddress from '../SearchAddress/SearchAddress'
 
 
 const AddWarehouse = (props) => { 
     const [formData,setFormData] = React.useState({
         warehouseName: "",
-        coordinates: [0,0]
+        coordinates: [0,0],
+        address: "",
     });
 
     const [error,setError] = React.useState({
         warehouseName: false,
-        coordinates: [false,false]
+        coordinates: [false,false],
+        address: false,
     });
 
     const [loading,setLoading] = React.useState(false)
@@ -46,6 +49,9 @@ const AddWarehouse = (props) => {
         if(formData.coordinates[1] == 0) {
             err.coordinates[1] = "Enter Valid Longitude"
             validData = false;
+        }
+        if(formData.address == "") {
+            props.showAlert("Enter valid address")
         }
 
         setError({...err});
@@ -92,8 +98,15 @@ const AddWarehouse = (props) => {
                         error={error.warehouseName}
                         helperText={error.warehouseName}
                     />
-
-                    <TextField 
+                    <div className={styles.searchOption}>
+                        <SearchAddress 
+                            setFormData={(key,val) => setFormData({...formData,[key]: val})}
+                            formData={formData}
+                        />   
+                    </div>
+                </div>  
+                <div className={styles.row}> 
+                      <TextField 
                         label="Latitude"
                         type="number"
                         className={styles.coord}
@@ -120,7 +133,7 @@ const AddWarehouse = (props) => {
                         error={error.coordinates[1]}
                         helperText={error.coordinates[1]}
                     />
-                </div>  
+                </div>
                 <div className={styles.row}>
                     {loading
                         ?

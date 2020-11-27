@@ -15,6 +15,7 @@ import {withRouter,useLocation} from 'react-router-dom'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import axios from 'axios'
 
+import SearchAddress from '../SearchAddress/SearchAddress'
 
 const EditWarehouse = (props) => { 
     let { search } = useLocation();
@@ -23,7 +24,8 @@ const EditWarehouse = (props) => {
     const [formData,setFormData] = React.useState({
         warehouseName: "",
         coordinates: [0,0],
-        warehouseId: ""
+        warehouseId: "",
+        address: ""
     });
 
     const [error,setError] = React.useState({
@@ -65,6 +67,9 @@ const EditWarehouse = (props) => {
         if(formData.coordinates[1] == 0) {
             err.coordinates[1] = "Enter Valid Longitude"
             validData = false;
+        }
+        if(formData.address == "") {
+            props.showAlert("Enter valid address")
         }
 
         setError({...err});
@@ -112,8 +117,15 @@ const EditWarehouse = (props) => {
                         error={error.warehouseName}
                         helperText={error.warehouseName}
                     />
-
-                    <TextField 
+                    <div className={styles.searchOption}>
+                        <SearchAddress 
+                            setFormData={(key,val) => setFormData({...formData,[key]: val})}
+                            formData={formData}
+                        />   
+                    </div>
+                </div>  
+                <div className={styles.row}> 
+                      <TextField 
                         label="Latitude"
                         type="number"
                         className={styles.coord}
@@ -140,7 +152,7 @@ const EditWarehouse = (props) => {
                         error={error.coordinates[1]}
                         helperText={error.coordinates[1]}
                     />
-                </div>  
+                </div>
                 <div className={styles.row}>
                     {loading
                         ?
