@@ -20,18 +20,13 @@ import ShowAlert from './components/Alert/Alert';
 import BackDropLoader from './components/utils/BackDropLoader/BackDropLoader';
 
 import Login from './components/Login/Login';
-import NavBar from './components/Navbar/Navbar';
-import PrivateRoute from './routes/PrivateRoute';
-import TopBar from './components/TopBar/TopBar';
-import Category from './containers/category/Category';
-import Warehouse from './containers/warehouse/Warehouse';
-import Product from './containers/product/Product'
-import Manager from './containers/manager/Manager'
-import Delivery from './containers/delivery/Delivery';
-import AdminRoute from './routes/AdminRoute';
-import Orders from './containers/orders/Orders';
-import Home from './containers/home/Home';
-import Map from './containers/map/Map';
+import NavBar from './components/Navbar/Navbar'; 
+import Category from './containers/category/Category'; 
+import EndUser from './containers/enduser/EndUser'; 
+import Farm from './containers/farm/Farm'
+
+import AdminRoute from './routes/AdminRoute'
+import Animal from './containers/animals/Animal';
 
 const hist = createBrowserHistory();
 
@@ -65,13 +60,8 @@ const App = (props) => {
       axios({
         method: "get",
         url: "/user/getUserDetails",
-      }).then(res => {
-        if(res.data.user.userType == "ADMIN" || res.data.user.userType == "MANAGER") {
-          props.setAuth({...res.data.user}) 
-        } else {
-          localStorage.clear();
-          props.showAlert("401: You don't have enough access")
-        }
+      }).then(res => { 
+        props.setAuth({...res.data.user}) 
         setLoaded(true);  
       })
       .catch(err => {
@@ -103,18 +93,13 @@ const App = (props) => {
             <div className={styles.mainContainer}>
               <Switch>  
                 <Route exact path="/login" component={Login} />
+                
+                <AdminRoute exact path="/admin/category/:type" component={Category} />
+                <AdminRoute exact path="/admin/end-users/:type" component={EndUser} />
+                <AdminRoute exact path="/admin/farms/:type" component={Farm} />
+                <AdminRoute exact path="/admin/animals/:type" component={Animal} />
 
-                <PrivateRoute exact path="/admin/home" component={Home} />
-                <PrivateRoute exact path="/admin/product/:type" component={Product} />
-                <PrivateRoute exact path="/admin/category/:type" component={Category} />
-                <PrivateRoute exact path="/admin/delivery/:type" component={Delivery} />
-                <PrivateRoute exact path="/admin/orders/:type" component={Orders} />
- 
-                <AdminRoute exact path="/admin/warehouse/:type" component={Warehouse} />
-                <AdminRoute exact path="/admin/managers/:type" component={Manager} />
-                <AdminRoute exact path="/admin/view-map" component={Map} />
-
-                <Redirect from="/" to="/admin/home" />
+                {/* <Redirect from="/" to="/admin/home" /> */}
               </Switch> 
             </div> 
           </React.Fragment>}
@@ -122,8 +107,6 @@ const App = (props) => {
       </div>
     </ThemeProvider>
   );
-}
-const mapStateToProps = state => ({
-  auth: state.app.auth
-})
+} 
+
 export default connect(null,{setAuth,showAlert})(App);

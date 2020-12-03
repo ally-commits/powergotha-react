@@ -1,67 +1,69 @@
 import React from 'react'
-import styles from './ViewCategory.module.css';
+import styles from './ViewUser.module.css';
 
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button' 
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton'
-import Switch from '@material-ui/core/Switch'
 import TextField from '@material-ui/core/TextField'
 
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import FilterListRoundedIcon from '@material-ui/icons/FilterListRounded';
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
-import CheckCircleOutlineRoundedIcon from '@material-ui/icons/CheckCircleOutlineRounded';
-import HighlightOffRoundedIcon from '@material-ui/icons/HighlightOffRounded';
 
 import TableComp from '../../utils/Table/Table';
 import AppLoader from '../../utils/AppLoader/AppLoader';
 
 import {connect} from 'react-redux'
-import {getAllCategory,onCategoryDelete} from '../../../containers/category/actions'
+import {getAllUsers,onUserDelete} from '../../../containers/enduser/actions'
 import {withRouter} from 'react-router-dom'
-import ConfirmAlert from '../../utils/ConfirmAlert/ConfirmAlert';
+import ConfirmAlert from '../../utils/ConfirmAlert/ConfirmAlert'
 
-
-const ViewCategory = (props) => { 
-    const [category,setCategory] = React.useState(props.category);
+const ViewUser = (props) => { 
+    const [data,setData] = React.useState(props.userData);
     const [showEntries,setShowEntries] = React.useState(10)
     const [searchVal,setSearchVal] = React.useState("");
 
     React.useEffect(() => {
-        if(!props.category) {
-            props.getAllCategory();
-        }
-        setCategory(props.category);
-    },[props.category]);
+        if(!props.userData) { 
+            props.getAllUsers();
+        } 
+        setData(props.userData);
+    },[props.userData]);
 
-    let isLoading = !category;
+
+    let isLoading = !data;
     let showData = !isLoading;
     let rowData = [];
 
-    !isLoading && category.forEach((category,index) => {
+    !isLoading && data.users.forEach((user,index) => {
         if(index+1 <= showEntries || showEntries == "All") {
-            if(category.categoryName.substring(0,10).toLowerCase().includes(searchVal.toLowerCase())){
+            if(user.name.toLowerCase().includes(searchVal.toLowerCase()) || user.phoneNumber.toLowerCase().includes(searchVal.toLowerCase()) || 
+                user.email.toLowerCase().includes(searchVal.toLowerCase()) ) {
                 rowData.push([
                     index + 1,
-                    category.categoryName,   
-    
+                    user.name,
+                    user.email,
+                    user.phoneNumber,  
+                    data.animalMap[user._id] ? data.animalMap[user._id] : 0 ,
+                    data.farmMap[user._id] ? data.farmMap[user._id] : 0 ,
                     <React.Fragment>
-                        <Tooltip title="Edit Category">
-                            <IconButton onClick={() => props.history.push("/admin/category/EDIT-CATEGORY?categoryId="+ category._id )}>
+                        <Tooltip title="Edit User">
+                            <IconButton onClick={() => props.history.push("/admin/end-users/EDIT-END-USER?userId="+ user._id )}>
                                 <EditRoundedIcon />
                             </IconButton>
                         </Tooltip>
-    
-                        <ConfirmAlert msg={`Are you sure you want delete ${category.categoryName}`} onClickEvent={() => props.onCategoryDelete(category._id)}>
-                            <Tooltip title="Delete Category">
+
+                        <ConfirmAlert msg={`Are you sure you want delete ${user.name}`} onClickEvent={() => props.onUserDelete(user._id)}>
+                            <Tooltip title="Delete User">
                                 <IconButton>
                                     <DeleteRoundedIcon />
                                 </IconButton>
                             </Tooltip>
                         </ConfirmAlert>
+                        
                     </React.Fragment>
                 ])
             }
@@ -89,7 +91,7 @@ const ViewCategory = (props) => {
                         value={searchVal}
                         onChange={e => setSearchVal(e.target.value)}
                     />
-                    <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/admin/category/ADD-CATEGORY")}>Add Animal Category</Button>
+                    <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/admin/end-users/ADD-END-USER")}>Add User</Button>
                 </div>
             </div>
 
@@ -97,7 +99,7 @@ const ViewCategory = (props) => {
 
             {showData &&
             <TableComp 
-                columns={["Sl No","Category Name","Action"]}
+                columns={["Sl No","Farmer Name","Email","Phone Number","Animal Count","Farm Count","Action"]}
                 rows={rowData}
             />}
 
@@ -105,6 +107,6 @@ const ViewCategory = (props) => {
     )
 }
 const mapStateToProps = state => ({
-    category: state.category.category
+    userData: state.user.userData
 })
-export default withRouter(connect(mapStateToProps,{getAllCategory,onCategoryDelete})(ViewCategory));
+export default withRouter(connect(mapStateToProps,{getAllUsers,onUserDelete})(ViewUser));

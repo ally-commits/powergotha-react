@@ -52,14 +52,10 @@ const Login = (props) => {
                     ...formData,
                     phoneNumberId: formData.phoneNumber
                 }
-            }).then(res => { 
-                if(res.data.user.userType == "ADMIN" || res.data.user.userType == "MANAGER") {
-                    props.setAuth({...res.data.user,token: res.data.token})
-                    localStorage.setItem("token",res.data.token)
-                    props.showAlert("Logged In Successfully")
-                } else {
-                    props.showAlert("401: You don't have enough access")
-                }
+            }).then(res => {  
+                props.setAuth({...res.data.user,token: res.data.token})
+                localStorage.setItem("token",res.data.token)
+                props.showAlert("Logged In Successfully") 
                 setLoading(false);
             }).catch(err => {
                 if(err && err.response) 
@@ -75,8 +71,8 @@ const Login = (props) => {
         <div className={styles.container}>
             <div className={styles.content}>
                 <div className={styles.header}>
-                    <img src={logo} alt="" className={logo} />
-                    <h1 className={styles.head}>YoPaan</h1>
+                    {/* <img src={logo} alt="" className={logo} /> */}
+                    <h1 className={styles.head}>Powergotha</h1>
                 </div>
 
                 <div className={styles.loginContainer}>

@@ -18,23 +18,23 @@ const Category = (props) => {
 
     const navData = {
         "VIEW-CATEGORY": {
-            name: "View Category",
+            name: "View Animal Category",
             path: "/admin/category/VIEW-CATEGORY"
         },
         "ADD-CATEGORY": {
-            name: "Add Category",
+            name: "Add Animal Category",
             path: "/admin/category/ADD-CATEGORY"
         },
         "EDIT-CATEGORY": {
-            name: "EDIT Category",
+            name: "Edit Animal Category",
             path: "/admin/category/EDIT-CATEGORY"
         },
     }
     return (
         <div className={styles.container}>
-            <TopBar head="Category" />
+            <TopBar head="Animal Category" />
             <BreadCrump 
-                navItems={[{name:"Category",path: "/admin/category/VIEW-CATEGORY"},navData[state]]}
+                navItems={[{name:"Animal Category",path: "/admin/category/VIEW-CATEGORY"},navData[state]]}
             />
 
             {state == "VIEW-CATEGORY" && <ViewCategory />}

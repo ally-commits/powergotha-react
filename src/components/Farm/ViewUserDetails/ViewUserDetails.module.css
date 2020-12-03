@@ -1,0 +1,75 @@
+.container {
+    width: 97%;
+    margin: 0 auto;
+}
+.header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    height: 60px;
+}
+.leftHeader {
+    display: flex;
+    align-items: center;
+}
+.leftHeader p {
+    font-size: 14px;
+    margin-right: 10px;
+}
+.rightHeader button {
+    margin-left: 10px !important;
+}
+.warehouseBlock {
+    width: 30%;
+    margin: 20px;
+}
+.select {
+    width: 100%;
+}
+.rightHeader {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+.search {
+    width: 200px !important;
+    margin-bottom: 10px !important;
+    margin-left: 15px !important;
+}
+.userData {
+    width: 100%;
+    display: flex;
+    padding: 10px 0px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+}
+.userContent {
+    display: flex;
+    flex: 3;
+}
+.userContent div {
+    margin-right: 50px;
+}
+.userContent div p{
+    font-size: 15px;
+    margin: 15px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+.userContent div p span {
+    opacity: 0.74;
+    margin-right: 15px;
+}
+.profileContent {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    border: 1px solid rgba(51, 51, 51, 0.1);
+}
+.profileImg {
+    width: 100px;
+    height: 100px;
+}

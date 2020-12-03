@@ -1,23 +1,23 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
  
-export const getAllCategory = () => dispatch => {
+export const getAllUsers = () => dispatch => {
     dispatch({
-        type: actionTypes.SET_CATEGORY,
+        type: actionTypes.SET_USER_DATA,
         payload: false
     })
-
+ 
     axios({
         method: "get",
-        url: "/animal-category/getAllCategory"
-    }).then(res => {
+        url: "/end-user/getAllUsers"
+    }).then(res => { 
         dispatch({
-            type: actionTypes.SET_CATEGORY,
-            payload: res.data.category
+            type: actionTypes.SET_USER_DATA,
+            payload: res.data
         })
     }).catch(err => {
         dispatch({
-            type: actionTypes.SET_CATEGORY,
+            type: actionTypes.SET_USER_DATA,
             payload: []
         })
 
@@ -28,18 +28,18 @@ export const getAllCategory = () => dispatch => {
     })
 }
 
-export const onCategoryDelete = (categoryId) => dispatch => {
+export const onUserDelete = (userId) => dispatch => {
     axios({
         method: "delete",
-        url: "/animal-category/deleteCategory",
+        url: "/end-user/deleteUser",
         data: {
-            categoryId
+            userId
         }
     }).then(res => {
-        dispatch(getAllCategory())
+        dispatch(getAllUsers())
         dispatch({
             type: "SHOW_ALERT",
-            payload: "Category Deleted Successfully"
+            payload: "User Deleted Successfully"
         })
     }).catch(err => {  
         dispatch({

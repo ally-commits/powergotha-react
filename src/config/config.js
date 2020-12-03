@@ -1,6 +1,6 @@
 
-export const backendUrl = "https://yopaan-node.codedeployment.tk/api"   
-// export const backendUrl = "http://localhost:9000/api"   
+// export const backendUrl = "https://yopaan-node.codedeployment.tk/api"   
+export const backendUrl = "http://localhost:8000/api/dashboard"   
 
 export const firebaseConfig = {
     apiKey: "AIzaSyAiGxPYOUrXinGDjSu4QjOi5X5Z9uVro5I",
@@ -17,3 +17,4 @@ export const defaultCenter = {
     lng: 77.3910
 }
 export const mapApiKey = "AIzaSyC3aTi1WI1ARhDgJCbSaf1L_UaAdzqsUBo"
+export const defaultProfilePicture = "https://www.eccourts.org/wp-content/uploads/2018/05/no-photo.png"

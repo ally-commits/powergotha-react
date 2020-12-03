@@ -22,15 +22,12 @@ const EditCategory = (props) => {
     const query = new URLSearchParams(search);
 
     const [formData,setFormData] = React.useState({
-        categoryName: "",
-        description: "",
-        active: true,
+        categoryName: "", 
         categoryId: ""
     });
 
     const [error,setError] = React.useState({
-        categoryName: false,
-        description: false
+        categoryName: false, 
     });
 
     const [loading,setLoading] = React.useState(false);
@@ -53,7 +50,7 @@ const EditCategory = (props) => {
     },[props.category]);
 
     const validate = () => {
-        const err = {categoryName: false,description: false};
+        const err = {categoryName: false};
         let validData = true;
         setError({...err});
         Object.keys(err).forEach(key => {
@@ -72,7 +69,7 @@ const EditCategory = (props) => {
 
             axios({
                 method: "put",
-                url: "/dashboard/category/editCategory",
+                url: "/animal-category/editCategory",
                 data: {
                     ...formData
                 }
@@ -95,7 +92,7 @@ const EditCategory = (props) => {
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
-                <h1>Edit Category</h1>
+                <h1>Edit Animal Category</h1>
 
                 <div className={styles.row}>
                     <TextField 
@@ -105,20 +102,6 @@ const EditCategory = (props) => {
                         onChange={e => setFormData({...formData,categoryName: e.target.value})}
                         error={error.categoryName}
                         helperText={error.categoryName}
-                    />
-                    <TextField 
-                        label="Category Description"
-                        className={styles.catName}
-                        value={formData.description}
-                        onChange={e => setFormData({...formData,description: e.target.value})}
-                        error={error.description}
-                        helperText={error.description}
-                    />
- 
-                    <FormControlLabel
-                        className={styles.switch}
-                        control={<Switch checked={formData.active} onChange={(e) => setFormData({...formData,active: !formData.active})}  color="primary" />}
-                        label="Category Active"
                     /> 
                 </div>
 
@@ -127,7 +110,7 @@ const EditCategory = (props) => {
                         ?
                     <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>Loading ...</Button>
                         :
-                    <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>Update Category</Button>}
+                    <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>Update Animal Category</Button>}
                 </div>
             </Paper>
         </div>

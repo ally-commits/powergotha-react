@@ -7,16 +7,18 @@ export const theme = createMuiTheme({
         textTransform: 'capitalize',
         fontWeight: "400", 
         padding: '8px 18px', 
+        color: "white",
         borderRadius: '100px'
       },
       text: {  
         textTransform: 'capitalize',
+        color: "white"
       },
     },
   },
   palette: {
     primary: {
-      main: "#2743FD",
+      main: "#20BE4D"
     },
     secondary: {
       main: "#00acc1",

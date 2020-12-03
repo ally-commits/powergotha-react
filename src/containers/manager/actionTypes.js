@@ -1,1 +1,0 @@
-export const SET_MANAGERS = "SET_MANAGERS"

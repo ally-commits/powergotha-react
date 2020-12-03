@@ -4,65 +4,48 @@ import {NavLink} from 'react-router-dom';
 import logo from '../../assets/img/logo.png'
 
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
-import StorefrontRoundedIcon from '@material-ui/icons/StorefrontRounded';
-import GroupRoundedIcon from '@material-ui/icons/GroupRounded';
-import CategoryRoundedIcon from '@material-ui/icons/CategoryRounded';
-import ShoppingBasketRoundedIcon from '@material-ui/icons/ShoppingBasketRounded';
-import DirectionsBikeRoundedIcon from '@material-ui/icons/DirectionsBikeRounded';
+import NaturePeopleRoundedIcon from '@material-ui/icons/NaturePeopleRounded';
+import GroupRoundedIcon from '@material-ui/icons/GroupRounded'; 
 import HomeWorkRoundedIcon from '@material-ui/icons/HomeWorkRounded';
-import MapRoundedIcon from '@material-ui/icons/MapRounded';
+import PetsRoundedIcon from '@material-ui/icons/PetsRounded';
+
 import {connect} from 'react-redux'
 
 const NavBar = (props) => {
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <img src={logo} alt=""/>
-                <h1>Yopaan</h1>
+                {/* <img src={logo} alt=""/> */}
+                <h1>Powergotha</h1>
             </div>
 
 
             <div className={styles.navItems}>
                 <NavLink className={styles.navItem} to="/admin/home" activeClassName={styles.activeNavItem}>
                     <HomeRoundedIcon />
-                    <p>Home</p>
-                </NavLink>
-
-                <NavLink className={styles.navItem} to="/admin/product/VIEW-PRODUCTS" activeClassName={styles.activeNavItem}>
-                    <StorefrontRoundedIcon />
-                    <p>Products</p>
-                </NavLink>
-
-                <NavLink className={styles.navItem} to="/admin/category/VIEW-CATEGORY" activeClassName={styles.activeNavItem}>
-                    <CategoryRoundedIcon />
-                    <p>Category</p>
-                </NavLink>
-
-                <NavLink className={styles.navItem} to="/admin/delivery/VIEW-DELIVERY" activeClassName={styles.activeNavItem}>
-                    <DirectionsBikeRoundedIcon />
-                    <p>Delivery Boys</p>
-                </NavLink>
-
-                <NavLink className={styles.navItem} to="/admin/orders/VIEW-ORDERS" activeClassName={styles.activeNavItem}>
-                    <ShoppingBasketRoundedIcon />
-                    <p>Orders</p>
-                </NavLink>
+                    <p>CSE</p>
+                </NavLink> 
 
                 {props.auth && props.auth.userType == "ADMIN" &&
-                <React.Fragment>
-                    <NavLink className={styles.navItem}  to="/admin/view-map" activeClassName={styles.activeNavItem}>
-                        <MapRoundedIcon />
-                        <p>Map</p>
+                <React.Fragment> 
+                    <NavLink className={styles.navItem}  to="/admin/category/VIEW-CATEGORY" activeClassName={styles.activeNavItem}>
+                        <HomeWorkRoundedIcon />
+                        <p>Animal Category</p>
                     </NavLink> 
 
-                    <NavLink className={styles.navItem}  to="/admin/managers/VIEW-MANAGERS" activeClassName={styles.activeNavItem}>
+                    <NavLink className={styles.navItem}  to="/admin/end-users/VIEW-END-USER" activeClassName={styles.activeNavItem}>
                         <GroupRoundedIcon />
-                        <p>Managers</p>
+                        <p>End Users</p>
                     </NavLink> 
-                    
-                    <NavLink className={styles.navItem}  to="/admin/warehouse/VIEW-WAREHOUSE" activeClassName={styles.activeNavItem}>
-                        <HomeWorkRoundedIcon />
-                        <p>Warehouse</p>
+
+                    <NavLink className={styles.navItem}  to="/admin/farms/VIEW-DETAILS" activeClassName={styles.activeNavItem}>
+                        <NaturePeopleRoundedIcon />
+                        <p>Farm</p>
+                    </NavLink> 
+
+                    <NavLink className={styles.navItem}  to="/admin/animals/VIEW-DETAILS" activeClassName={styles.activeNavItem}>
+                        <PetsRoundedIcon />
+                        <p>Animals</p>
                     </NavLink> 
                 </React.Fragment>}
             </div>

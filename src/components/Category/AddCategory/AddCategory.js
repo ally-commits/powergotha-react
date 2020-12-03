@@ -19,20 +19,17 @@ import {withRouter} from 'react-router-dom'
 
 const AddCategory = (props) => { 
     const [formData,setFormData] = React.useState({
-        categoryName: "",
-        description: "",
-        active: true
+        categoryName: "", 
     });
 
     const [error,setError] = React.useState({
-        categoryName: false,
-        description: false
+        categoryName: false, 
     });
 
     const [loading,setLoading] = React.useState(false);
 
     const validate = () => {
-        const err = {categoryName: false,description: false};
+        const err = {categoryName: false};
         let validData = true;
         setError({...err});
         Object.keys(err).forEach(key => {
@@ -51,7 +48,7 @@ const AddCategory = (props) => {
 
             axios({
                 method: "post",
-                url: "/dashboard/category/addCategory",
+                url: "/animal-category/addCategory",
                 data: {
                     ...formData
                 }
@@ -74,7 +71,7 @@ const AddCategory = (props) => {
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
-                <h1>Add Category</h1>
+                <h1>Add Animal Category</h1>
 
                 <div className={styles.row}>
                     <TextField 
@@ -84,20 +81,6 @@ const AddCategory = (props) => {
                         onChange={e => setFormData({...formData,categoryName: e.target.value})}
                         error={error.categoryName}
                         helperText={error.categoryName}
-                    />
-                    <TextField 
-                        label="Category Description"
-                        className={styles.catName}
-                        value={formData.description}
-                        onChange={e => setFormData({...formData,description: e.target.value})}
-                        error={error.description}
-                        helperText={error.description}
-                    />
- 
-                    <FormControlLabel
-                        className={styles.switch}
-                        control={<Switch checked={formData.active} onChange={(e) => setFormData({...formData,active: !formData.active})}  color="primary" />}
-                        label="Category Active"
                     /> 
                 </div>
 
@@ -106,7 +89,7 @@ const AddCategory = (props) => {
                         ?
                     <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>Loading ...</Button>
                         :
-                    <Button color="primary" variant="contained" startIcon={<AddRoundedIcon />} onClick={onSubmit}>Add Category</Button>}
+                    <Button color="primary" variant="contained" startIcon={<AddRoundedIcon />} onClick={onSubmit}>Add Animal Category</Button>}
                 </div>
             </Paper>
         </div>

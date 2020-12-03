@@ -5,12 +5,12 @@
     font-family: 'Poppins';
 }
 :root {
-    --primary-color: #2743FD;
+    --primary-color: #20BE4D;
     
-    --primary-color-light: rgba(39, 67, 253, 0.75);;
+    --primary-color-light: #20be4d8c;
     
     --background-color: white;
-    --text-color: #333;
+    --text-color: rgb(25, 26, 37);
     
     --heading: 18px;
     --sub-heading: 16px;
@@ -117,6 +117,10 @@ body::-webkit-scrollbar-thumb {
 p {
     font-size: 14px;
     color: #333;
+}
+
+.Button {
+    color: white;
 }
 @media only screen and (max-width: 1450px) {
     :root {
