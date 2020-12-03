@@ -1,4 +1,4 @@
-export const backendUrl = "https://powergotha-node.codedeployment.tk//api/dashboard"   
+export const backendUrl = "https://powergotha-node.codedeployment.tk/api/dashboard"   
 
 export const firebaseConfig = {
     apiKey: "AIzaSyAiGxPYOUrXinGDjSu4QjOi5X5Z9uVro5I",
