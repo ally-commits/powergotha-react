@@ -8,6 +8,7 @@ import NaturePeopleRoundedIcon from '@material-ui/icons/NaturePeopleRounded';
 import GroupRoundedIcon from '@material-ui/icons/GroupRounded'; 
 import HomeWorkRoundedIcon from '@material-ui/icons/HomeWorkRounded';
 import PetsRoundedIcon from '@material-ui/icons/PetsRounded';
+import EditLocationRoundedIcon from '@material-ui/icons/EditLocationRounded';
 
 import {connect} from 'react-redux'
 
@@ -21,9 +22,9 @@ const NavBar = (props) => {
 
 
             <div className={styles.navItems}>
-                <NavLink className={styles.navItem} to="/admin/home" activeClassName={styles.activeNavItem}>
-                    <HomeRoundedIcon />
-                    <p>CSE</p>
+                <NavLink className={styles.navItem} to="/user/blog-post/VIEW-BLOG" activeClassName={styles.activeNavItem}>
+                    <EditLocationRoundedIcon />
+                    <p>Blog Post</p>
                 </NavLink> 
 
                 {props.auth && props.auth.userType == "ADMIN" &&

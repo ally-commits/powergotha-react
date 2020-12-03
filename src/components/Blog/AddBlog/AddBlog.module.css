@@ -1,0 +1,56 @@
+.container {
+    width: 97%;
+    margin: 0 auto;
+}
+.paper {
+    padding: 0px 30px;
+}
+.paper h1 {
+    font-size: 20px;
+    padding-top: 20px;
+    margin: 10px;
+    font-weight: 500;
+}
+.row {
+    display: flex; 
+    align-items: center; 
+    margin: 15px 0px;
+}
+.catName {
+    flex: 1;  
+}  
+.textRed {
+    color: red;
+    font-size: 13px; 
+}
+.content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+.rowContent {
+    display: flex;
+    min-height: 150px;
+}
+.textEditor {
+    min-height: 170px;
+}
+.image {
+    width: 300px;
+    height: auto;
+    display: flex;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px 0px;
+    margin-left: 10px;
+}
+.image:hover {
+    cursor: pointer;
+}
+.img {
+    width: 80%;
+    height: auto;
+} 

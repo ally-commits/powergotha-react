@@ -1,6 +1,4 @@
-
-// export const backendUrl = "https://yopaan-node.codedeployment.tk/api"   
-export const backendUrl = "http://localhost:8000/api/dashboard"   
+export const backendUrl = "https://powergotha-node.codedeployment.tk//api/dashboard"   
 
 export const firebaseConfig = {
     apiKey: "AIzaSyAiGxPYOUrXinGDjSu4QjOi5X5Z9uVro5I",
@@ -18,3 +16,4 @@ export const defaultCenter = {
 }
 export const mapApiKey = "AIzaSyC3aTi1WI1ARhDgJCbSaf1L_UaAdzqsUBo"
 export const defaultProfilePicture = "https://www.eccourts.org/wp-content/uploads/2018/05/no-photo.png"
+export const defaultBlogImage = "https://truelife.church/wp-content/uploads/2017/12/dummy-thumbnail-1080x675.jpg"

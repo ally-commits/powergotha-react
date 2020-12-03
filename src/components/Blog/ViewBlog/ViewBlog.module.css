@@ -1,0 +1,32 @@
+.container {
+    width: 97%;
+    margin: 0 auto;
+}
+.header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    height: 60px;
+}
+.leftHeader {
+    display: flex;
+    align-items: center;
+}
+.leftHeader p {
+    font-size: 14px;
+    margin-right: 10px;
+}
+.rightHeader button {
+    margin-left: 10px !important;
+}
+.rightHeader {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+.search {
+    width: 200px !important;
+    margin-bottom: 10px !important;
+    margin-left: 15px !important;
+}

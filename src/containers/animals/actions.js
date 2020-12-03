@@ -37,7 +37,7 @@ export const getAnimalDetails = (userId) => dispatch => {
 
     axios({
         method: "get",
-        url: "/animal/getAnimalUserList?userId=" + userId
+        url: "/animal/getAllAnimalList?userId=" + userId
     }).then(res => {
         dispatch({
             type: actionTypes.SET_ANIMAL_DETAILS,

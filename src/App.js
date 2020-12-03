@@ -24,9 +24,13 @@ import NavBar from './components/Navbar/Navbar';
 import Category from './containers/category/Category'; 
 import EndUser from './containers/enduser/EndUser'; 
 import Farm from './containers/farm/Farm'
+import Animal from './containers/animals/Animal';
+import BlogPost from './containers/blogpost/BlogPost';
 
 import AdminRoute from './routes/AdminRoute'
-import Animal from './containers/animals/Animal';
+import PrivateRoute from './routes/PrivateRoute'
+
+
 
 const hist = createBrowserHistory();
 
@@ -99,7 +103,8 @@ const App = (props) => {
                 <AdminRoute exact path="/admin/farms/:type" component={Farm} />
                 <AdminRoute exact path="/admin/animals/:type" component={Animal} />
 
-                {/* <Redirect from="/" to="/admin/home" /> */}
+                <PrivateRoute exact path="/user/blog-post/:type" component={BlogPost} />
+
               </Switch> 
             </div> 
           </React.Fragment>}
