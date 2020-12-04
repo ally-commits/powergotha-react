@@ -7,6 +7,7 @@ import ViewFarm from '../../components/Farm/ViewFarm/ViewFarm';
 import ViewUserDetails from '../../components/Farm/ViewUserDetails/ViewUserDetails';
 
 import TopBar from '../../components/TopBar/TopBar';
+import LANG from '../../translator';
 import styles from './Farm.module.css';
 
 
@@ -39,7 +40,7 @@ const Farm = (props) => {
     }
     return (
         <div className={styles.container}>
-            <TopBar head="Farm" />
+            <TopBar head={LANG.FARM} />
             <BreadCrump 
                 navItems={[{name:"User List",path: "/admin/farms/VIEW-DETAILS"},navData[state]]}
             />

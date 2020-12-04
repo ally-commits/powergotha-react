@@ -7,6 +7,7 @@ import TopBar from '../../components/TopBar/TopBar';
 import AddUser from '../../components/EndUsers/AddUser/AddUser';
 import ViewUser from '../../components/EndUsers/ViewUser/ViewUser';
 import EditUser from '../../components/EndUsers/EditUser/EditUser';
+import LANG from '../../translator';
 
 
 const EndUser = (props) => {
@@ -34,7 +35,7 @@ const EndUser = (props) => {
     }
     return (
         <div className={styles.container}>
-            <TopBar head="End Users" />
+            <TopBar head={LANG.USERS} />
             <BreadCrump 
                 navItems={[{name:"End User",path: "/admin/users/VIEW-END-USER"},navData[state]]}
             />

@@ -15,6 +15,7 @@ import AppLoader from '../../utils/AppLoader/AppLoader';
 import {connect} from 'react-redux'
 import {getAnimalUserList} from '../../../containers/animals/actions'
 import {withRouter} from 'react-router-dom' 
+import LANG from '../../../translator';
 
 const ViewAnimal = (props) => { 
     const [data,setData] = React.useState(props.animalData);
@@ -73,7 +74,7 @@ const ViewAnimal = (props) => {
 
                 <div className={styles.rightHeader}>
                     <TextField
-                        label="Search Here"
+                        label={LANG.SERACH_HERE}
                         className={styles.search}
                         value={searchVal}
                         onChange={e => setSearchVal(e.target.value)}

@@ -9,44 +9,51 @@ import GroupRoundedIcon from '@material-ui/icons/GroupRounded';
 import HomeWorkRoundedIcon from '@material-ui/icons/HomeWorkRounded';
 import PetsRoundedIcon from '@material-ui/icons/PetsRounded';
 import EditLocationRoundedIcon from '@material-ui/icons/EditLocationRounded';
+import TocIcon from '@material-ui/icons/Toc';
 
 import {connect} from 'react-redux'
+
+import LANG from '../../translator/index'
 
 const NavBar = (props) => {
     return (
         <div className={styles.container}>
-            <div className={styles.header}>
-                {/* <img src={logo} alt=""/> */}
-                <h1>Powergotha</h1>
+            <div className={styles.header}> 
+                <h1>{LANG.APP_NAME}</h1>
             </div>
 
 
             <div className={styles.navItems}>
                 <NavLink className={styles.navItem} to="/user/blog-post/VIEW-BLOG" activeClassName={styles.activeNavItem}>
+                    <TocIcon />
+                    <p>{LANG.BLOG_POST}</p>
+                </NavLink> 
+
+                <NavLink className={styles.navItem} to="/user/feedback/VIEW-DETAILS" activeClassName={styles.activeNavItem}>
                     <EditLocationRoundedIcon />
-                    <p>Blog Post</p>
+                    <p>{LANG.FEEDBACK}</p>
                 </NavLink> 
 
                 {props.auth && props.auth.userType == "ADMIN" &&
                 <React.Fragment> 
                     <NavLink className={styles.navItem}  to="/admin/category/VIEW-CATEGORY" activeClassName={styles.activeNavItem}>
                         <HomeWorkRoundedIcon />
-                        <p>Animal Category</p>
+                        <p>{LANG.ANIMAL_CATEGORY}</p>
                     </NavLink> 
 
                     <NavLink className={styles.navItem}  to="/admin/end-users/VIEW-END-USER" activeClassName={styles.activeNavItem}>
                         <GroupRoundedIcon />
-                        <p>End Users</p>
+                        <p>{LANG.USERS}</p>
                     </NavLink> 
 
                     <NavLink className={styles.navItem}  to="/admin/farms/VIEW-DETAILS" activeClassName={styles.activeNavItem}>
                         <NaturePeopleRoundedIcon />
-                        <p>Farm</p>
+                        <p>{LANG.FARM}</p>
                     </NavLink> 
 
                     <NavLink className={styles.navItem}  to="/admin/animals/VIEW-DETAILS" activeClassName={styles.activeNavItem}>
                         <PetsRoundedIcon />
-                        <p>Animals</p>
+                        <p>{LANG.ANIMAL}</p>
                     </NavLink> 
                 </React.Fragment>}
             </div>

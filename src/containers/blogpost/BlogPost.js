@@ -5,6 +5,7 @@ import ViewBlog from '../../components/Blog/ViewBlog/ViewBlog';
 import ViewBlogPost from '../../components/Blog/ViewBlogPost/ViewBlogPost';
 import BreadCrump from '../../components/BreadCrump/BreadCrump';  
 import TopBar from '../../components/TopBar/TopBar';
+import LANG from '../../translator';
 import styles from './BlogPost.module.css';
 
 
@@ -37,7 +38,7 @@ const BlogPost = (props) => {
     }
     return (
         <div className={styles.container}>
-            <TopBar head="Blog Post" />
+            <TopBar head={LANG.BLOG_POST} />
             <BreadCrump 
                 navItems={[{name:"Blog Posts",path: "/admin/blog/VIEW-BLOG"},navData[state]]}
             />

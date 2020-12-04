@@ -6,6 +6,7 @@ import Profile from './Profile/Profile'
 import ArrowDropDownRoundedIcon from '@material-ui/icons/ArrowDropDownRounded';
 import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
 import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded'; 
+import LanguageRoundedIcon from '@material-ui/icons/LanguageRounded';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem'; 
@@ -14,6 +15,7 @@ import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper'; 
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 import { makeStyles } from '@material-ui/core/styles';
+import LANG from '../../translator';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -48,6 +50,10 @@ const TopBar = (props) => {
         localStorage.clear();
         window.location.replace("/login")
     }
+    let lang = "English";
+    if(localStorage.lang && localStorage.getItem("lang") == "English") {
+        lang = "मराठी"
+    }
     return (
         <React.Fragment>
                 <div className={styles.container}>
@@ -57,7 +63,7 @@ const TopBar = (props) => {
                         <ClickAwayListener onClickAway={() => setAnchorEl(null)}>
                             <div className={styles.profile} onClick={handlePopoverOpen} >
                                 <img src={profielImg} alt="Profile Image"/>
-                                <p>Profile</p>
+                                <p>{LANG.PROFILE}</p>
                                 <ArrowDropDownRoundedIcon />
                             </div>
                         </ClickAwayListener>
@@ -70,7 +76,15 @@ const TopBar = (props) => {
 
                                         <ListItem button className={classes.item} onClick={() => setModal(true)}>
                                             <PersonRoundedIcon style={{fontSize: '20px',color: 'var(--text-color)'}} />  
-                                            <p>My Account</p>
+                                            <p>{LANG.MY_ACCOUNT}</p>
+                                        </ListItem> 
+
+                                        <ListItem button className={classes.item} onClick={() => {
+                                            localStorage.setItem("lang",lang)
+                                            window.location.reload();
+                                        }}>
+                                            <LanguageRoundedIcon style={{fontSize: '20px',color: 'var(--text-color)'}} />  
+                                            <p>{lang}</p>
                                         </ListItem> 
 
                                         <ListItem button className={classes.item} onClick={logout}>
@@ -79,7 +93,7 @@ const TopBar = (props) => {
                                             <React.Fragment></React.Fragment>
                                             :
                                             <ExitToAppRoundedIcon style={{fontSize: '20px',color: 'var(--text-color)'}} />  }
-                                            <p>Logout</p>
+                                            <p>{LANG.LOGOUT}</p>
                                         </ListItem>
 
                                     </List>

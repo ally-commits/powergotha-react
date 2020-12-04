@@ -20,6 +20,7 @@ import {getAnimalUserList,getAnimalDetails,onAnimalDelete} from '../../../contai
 import {withRouter,useLocation} from 'react-router-dom'
 
 import ConfirmAlert from '../../utils/ConfirmAlert/ConfirmAlert'
+import LANG from '../../../translator';
 
 const ViewUserDetails = (props) => { 
     let { search } = useLocation();
@@ -138,7 +139,7 @@ const ViewUserDetails = (props) => {
 
                 <div className={styles.rightHeader}>
                     <TextField
-                        label="Search Here"
+                        label={LANG.SERACH_HERE}
                         className={styles.search}
                         value={searchVal}
                         onChange={e => setSearchVal(e.target.value)}

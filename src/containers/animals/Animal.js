@@ -8,6 +8,7 @@ import ViewUserDetails from '../../components/Animal/ViewUserDetails/ViewUserDet
 
 import TopBar from '../../components/TopBar/TopBar';
 import styles from './Animal.module.css';
+import LANG from '../../translator';
 
 
 const Animal = (props) => {
@@ -39,7 +40,7 @@ const Animal = (props) => {
     }
     return (
         <div className={styles.container}>
-            <TopBar head="Animal" />
+            <TopBar head={LANG.ANIMAL} />
             <BreadCrump 
                 navItems={[{name:"User List",path: "/admin/animals/VIEW-DETAILS"},navData[state]]}
             />

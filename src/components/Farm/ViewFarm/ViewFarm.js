@@ -15,6 +15,7 @@ import AppLoader from '../../utils/AppLoader/AppLoader';
 import {connect} from 'react-redux'
 import {getFarmUserList,onFarmDelete} from '../../../containers/farm/actions'
 import {withRouter} from 'react-router-dom' 
+import LANG from '../../../translator';
 
 const ViewFarm = (props) => { 
     const [data,setData] = React.useState(props.farmData);
@@ -73,7 +74,7 @@ const ViewFarm = (props) => {
 
                 <div className={styles.rightHeader}>
                     <TextField
-                        label="Search Here"
+                        label={LANG.SERACH_HERE}
                         className={styles.search}
                         value={searchVal}
                         onChange={e => setSearchVal(e.target.value)}

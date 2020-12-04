@@ -6,6 +6,8 @@ import userReducer from './enduser/reducer'
 import farmReducer from './farm/reducer'
 import animalReducer from './animals/reducer'
 import blogReducer from './blogpost/reducer'
+import feedbackReducer from './feedback/reducer'
+
 
 export default combineReducers({  
   category: categoryReducer, 
@@ -13,5 +15,6 @@ export default combineReducers({
   user: userReducer,
   farm: farmReducer,
   animal: animalReducer,
-  blog: blogReducer
+  blog: blogReducer,
+  feedback: feedbackReducer
 });

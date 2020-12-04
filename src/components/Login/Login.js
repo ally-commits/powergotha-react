@@ -7,6 +7,7 @@ import {showAlert,setAuth} from '../../containers/app/actions'
 import TextField from '@material-ui/core/TextField'
 import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
 import PassTextField from '../utils/PassTextField/PassTextField'
+import LANG from '../../translator'
 
 const Login = (props) => {
     const [formData,setFormData] = React.useState({
@@ -70,19 +71,18 @@ const Login = (props) => {
     return (
         <div className={styles.container}>
             <div className={styles.content}>
-                <div className={styles.header}>
-                    {/* <img src={logo} alt="" className={logo} /> */}
-                    <h1 className={styles.head}>Powergotha</h1>
+                <div className={styles.header}> 
+                    <h1 className={styles.head}>{LANG.APP_NAME}</h1>
                 </div>
 
                 <div className={styles.loginContainer}>
                     <div className={styles.loginContent}>
-                        <h1 className={styles.loginHead}>Sign In</h1>
+                        <h1 className={styles.loginHead}>{LANG.LOGIN}</h1>
 
                         <TextField
                             variant="standard"
                             fullWidth
-                            label="PhoneNumber"
+                            label={LANG.PHONE_NUMEBR}
                             className={styles.textField}
                             value={formData.phoneNumber}
                             onChange={(e) => setFormData({...formData,phoneNumber: e.target.value})}
@@ -93,7 +93,7 @@ const Login = (props) => {
                         <PassTextField
                             variant="standard"
                             fullWidth
-                            label="Password"
+                            label={LANG.PASSWORD}
                             className={styles.textField}
                             value={formData.password}
                             onChange={(e) => setFormData({...formData,password: e.target.value})}
@@ -104,12 +104,12 @@ const Login = (props) => {
                         {loading
                             ?
                         <button className={styles.signIn}>
-                            Loading...
+                            {LANG.LOADING}
                             <ArrowForwardRoundedIcon />
                         </button>
                             :
                         <button className={styles.signIn} onClick={onSubmit}>
-                            Sign In
+                            {LANG.LOGIN}
                             <ArrowForwardRoundedIcon />
                         </button>}
                     </div>

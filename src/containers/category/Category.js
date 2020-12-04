@@ -4,6 +4,7 @@ import AddCategory from '../../components/Category/AddCategory/AddCategory';
 import EditCategory from '../../components/Category/EditCategory/EditCategory';
 import ViewCategory from '../../components/Category/ViewCategory/ViewCategory';
 import TopBar from '../../components/TopBar/TopBar';
+import LANG from '../../translator';
 import styles from './Category.module.css';
 
 
@@ -32,7 +33,7 @@ const Category = (props) => {
     }
     return (
         <div className={styles.container}>
-            <TopBar head="Animal Category" />
+            <TopBar head={LANG.ANIMAL_CATEGORY} />
             <BreadCrump 
                 navItems={[{name:"Animal Category",path: "/admin/category/VIEW-CATEGORY"},navData[state]]}
             />
