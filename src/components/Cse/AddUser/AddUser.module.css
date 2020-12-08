@@ -1,0 +1,47 @@
+.container {
+    width: 97%;
+    margin: 0 auto;
+}  
+.paper {
+    padding: 0px 30px;
+}
+.paper h1 {
+    font-size: 20px;
+    padding-top: 20px;
+    margin: 10px;
+    font-weight: 500;
+}
+.row {
+    display: flex;
+    align-items: center;
+    margin: 15px 0px;
+}
+.halfWidth {
+    flex: 1;
+    margin: 20px !important;
+    margin-left: 10px !important;
+}
+.rowWarehouse {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.selectBlock {
+    width: 30%;
+    margin: 15px 10px;
+    display: flex;
+    align-items: center;
+}
+.select {
+    width: 100% !important;
+}
+.info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px;
+}
+.info p {
+    font-size: 16px;
+}

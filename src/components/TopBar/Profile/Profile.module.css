@@ -40,7 +40,7 @@
 .formContent {
     width: 90%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
 }
 .updatePassword {

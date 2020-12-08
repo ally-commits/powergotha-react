@@ -42,7 +42,7 @@ const ViewBlogPost = (props) => {
                         <h1>{data.title}</h1>
                         <img src={data.image} alt=""/>
 
-                        {/* {renderHTML(data.content)} */}
+                        {renderHTML(data.postContent)}
                     </div>
                 }
             </div>

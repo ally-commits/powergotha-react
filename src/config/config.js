@@ -8,8 +8,8 @@ export const firebaseConfig = {
     projectId: "fireapp-7cada",
     storageBucket: "fireapp-7cada.appspot.com",
     messagingSenderId: "405101290869",
-    appId: "1:405101290869:web:ef1db981033039c46b9f3c"
-}
+    appId: "1:405101290869:web:841f273cc79697dc6b9f3c"
+  };
 
 export const defaultCenter = {
     lat: 28.5355,

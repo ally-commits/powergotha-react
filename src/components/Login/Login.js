@@ -73,50 +73,50 @@ const Login = (props) => {
             <div className={styles.content}>
                 <div className={styles.header}> 
                     <img src={logo} alt=""/>
-                    <h1 className={styles.head}>{LANG.APP_NAME}</h1>
+                    <h1 className={styles.head}>Agrowon Animal Care</h1>
+                </div> 
+            
+                <div className={styles.loginContent}>
+                    <h1 className={styles.loginHead}>Login</h1>
+
+                    <TextField
+                        variant="standard"
+                        fullWidth
+                        label={"Phone Number"}
+                        className={styles.textField}
+                        value={formData.phoneNumber}
+                        onChange={(e) => setFormData({...formData,phoneNumber: e.target.value})}
+                        error={formError.phoneNumber}
+                        helperText={formError.phoneNumber}
+                    /> 
+
+                    <PassTextField
+                        variant="standard"
+                        fullWidth
+                        label={"Password"}
+                        className={styles.textField}
+                        value={formData.password}
+                        onChange={(e) => setFormData({...formData,password: e.target.value})}
+                        error={formError.password}
+                        helperText={formError.password}
+                    />
+
+                    {loading
+                        ?
+                    <button className={styles.signIn}>
+                        Loading ... 
+                    </button>
+                        :
+                    <button className={styles.signIn} onClick={onSubmit}>
+                        Login 
+                    </button>}
+
+                    <p>2019 © Agrowon Agrotech Industries Pvt. Ltd</p>
                 </div>
 
-                <div className={styles.loginContainer}>
-                    <div className={styles.loginContent}>
-                        <h1 className={styles.loginHead}>{LANG.LOGIN}</h1>
-
-                        <TextField
-                            variant="standard"
-                            fullWidth
-                            label={LANG.PHONE_NUMEBR}
-                            className={styles.textField}
-                            value={formData.phoneNumber}
-                            onChange={(e) => setFormData({...formData,phoneNumber: e.target.value})}
-                            error={formError.phoneNumber}
-                            helperText={formError.phoneNumber}
-                        /> 
-
-                        <PassTextField
-                            variant="standard"
-                            fullWidth
-                            label={LANG.PASSWORD}
-                            className={styles.textField}
-                            value={formData.password}
-                            onChange={(e) => setFormData({...formData,password: e.target.value})}
-                            error={formError.password}
-                            helperText={formError.password}
-                        />
-
-                        {loading
-                            ?
-                        <button className={styles.signIn}>
-                            {LANG.LOADING}
-                            <ArrowForwardRoundedIcon />
-                        </button>
-                            :
-                        <button className={styles.signIn} onClick={onSubmit}>
-                            {LANG.LOGIN}
-                            <ArrowForwardRoundedIcon />
-                        </button>}
-                    </div>
+                <div className={styles.loginFooter}>
+                    &nbsp;
                 </div>
-
-                <div className={styles.loginFooter}>&nbsp;</div>
             </div>
         </div>
     )

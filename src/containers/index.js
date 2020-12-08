@@ -7,7 +7,7 @@ import farmReducer from './farm/reducer'
 import animalReducer from './animals/reducer'
 import blogReducer from './blogpost/reducer'
 import feedbackReducer from './feedback/reducer'
-
+import cseReducer from './cse/reducer'
 
 export default combineReducers({  
   category: categoryReducer, 
@@ -16,5 +16,6 @@ export default combineReducers({
   farm: farmReducer,
   animal: animalReducer,
   blog: blogReducer,
+  cse: cseReducer,
   feedback: feedbackReducer
 });

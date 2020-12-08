@@ -122,6 +122,15 @@ p {
 .Button {
     color: white;
 }
+
+button:hover {
+    cursor: pointer;
+    transform: translateY(-1.5px);
+}
+button:active {
+    cursor: pointer;
+    transform: translateY(0.5px);
+}
 @media only screen and (max-width: 1450px) {
     :root {
         --nav-width: 220px;

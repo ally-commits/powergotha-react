@@ -10,6 +10,8 @@ import HomeWorkRoundedIcon from '@material-ui/icons/HomeWorkRounded';
 import PetsRoundedIcon from '@material-ui/icons/PetsRounded';
 import EditLocationRoundedIcon from '@material-ui/icons/EditLocationRounded';
 import TocIcon from '@material-ui/icons/Toc';
+import ContactPhoneRoundedIcon from '@material-ui/icons/ContactPhoneRounded';
+import ForumRoundedIcon from '@material-ui/icons/ForumRounded';
 
 import {connect} from 'react-redux'
 
@@ -33,6 +35,10 @@ const NavBar = (props) => {
                     <EditLocationRoundedIcon />
                     <p>{LANG.FEEDBACK}</p>
                 </NavLink> 
+                <NavLink className={styles.navItem} to="/user/chat" activeClassName={styles.activeNavItem}>
+                    <ForumRoundedIcon />
+                    <p>{LANG.REPLIES}</p>
+                </NavLink> 
 
                 {props.auth && props.auth.userType == "ADMIN" &&
                 <React.Fragment> 
@@ -54,6 +60,11 @@ const NavBar = (props) => {
                     <NavLink className={styles.navItem}  to="/admin/animals/VIEW-DETAILS" activeClassName={styles.activeNavItem}>
                         <PetsRoundedIcon />
                         <p>{LANG.ANIMAL}</p>
+                    </NavLink> 
+
+                    <NavLink className={styles.navItem}  to="/admin/cse/VIEW-CSE" activeClassName={styles.activeNavItem}>
+                        <ContactPhoneRoundedIcon />
+                        <p>{LANG.CSE}</p>
                     </NavLink> 
                 </React.Fragment>}
             </div>

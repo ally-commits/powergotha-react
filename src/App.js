@@ -30,6 +30,8 @@ import Feedback from './containers/feedback/Feedback';
 
 import AdminRoute from './routes/AdminRoute'
 import PrivateRoute from './routes/PrivateRoute'
+import Cse from './containers/cse/Cse';
+import Chat from './containers/chat/Chat';
 
 
 const hist = createBrowserHistory();
@@ -102,9 +104,11 @@ const App = (props) => {
                 <AdminRoute exact path="/admin/end-users/:type" component={EndUser} />
                 <AdminRoute exact path="/admin/farms/:type" component={Farm} />
                 <AdminRoute exact path="/admin/animals/:type" component={Animal} />
+                <AdminRoute exact path="/admin/cse/:type" component={Cse} />
 
                 <PrivateRoute exact path="/user/blog-post/:type" component={BlogPost} />
                 <PrivateRoute exact path="/user/feedback/:type" component={Feedback} />
+                <PrivateRoute exact path="/user/chat" component={Chat} />
 
               </Switch> 
             </div> 

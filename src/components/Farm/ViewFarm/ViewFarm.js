@@ -74,7 +74,7 @@ const ViewFarm = (props) => {
 
                 <div className={styles.rightHeader}>
                     <TextField
-                        label={LANG.SERACH_HERE}
+                        label={LANG.SEARCH_HERE}
                         className={styles.search}
                         value={searchVal}
                         onChange={e => setSearchVal(e.target.value)}
