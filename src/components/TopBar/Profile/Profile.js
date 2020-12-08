@@ -14,10 +14,12 @@ import {connect} from 'react-redux';
 import axios from 'axios'
 import {showAlert} from '../../../containers/app/actions'
 import PassTextField from '../../utils/PassTextField/PassTextField'
+import { Divider } from '@material-ui/core'
  
 
 const Profile = (props) => {
     const [user,setUser] = React.useState({});
+
     const [formData,setFormData] = React.useState({
         oldPassword: "",
         newPassword: ""
@@ -26,6 +28,11 @@ const Profile = (props) => {
     const [error,setError] = React.useState({
         oldPassword: false,
         newPassword: false
+    });
+
+    const [userError,setUserError] = React.useState({
+        name: false,
+        phoneNumber: false
     })
 
     const [loading,setLoading] = React.useState(false);
@@ -36,7 +43,7 @@ const Profile = (props) => {
         }
     },[props.auth]); 
 
-    const validate = () => {
+    const validatePassword = () => {
         const err = {oldPassword: false,newPassword: false};
         let validData = true;
         setError({...err});
@@ -50,12 +57,12 @@ const Profile = (props) => {
         setError({...err});
         return validData;
     }
-    const onSubmit = () => {
-        if(validate()) {
-            setLoading(true);
+    const onSubmitPassword = () => {
+        if(validatePassword()) {
+            setLoading("PASSWORD");
 
             axios({
-                method: "put",
+                method: "post",
                 url: "/user/changePassword",
                 data: {
                     ...formData
@@ -64,6 +71,47 @@ const Profile = (props) => {
                 setLoading(false) 
                 props.showAlert("Password Updated Succesfully")
                 setFormData({oldPassword: "",newPassword: ""})
+            }).catch(err => {
+                setLoading(false);
+                if(err && err.response && err.response.data && err.response.data.error) {
+                    props.showAlert(err.response.data.error)
+                } else {
+                    props.showAlert("Something went wrong ! Try Again")
+                }
+            })
+        }
+    }
+
+    const validateProfile = () => {
+        const err = {name: false,phoneNumber: false};
+        let validData = true;
+        setError({...err});
+
+        if(user.name == "") {
+            err.name = "Name Feild cannot be empty"
+        }
+
+        if(user.phoneNumber.length != 10) {
+            err.phoneNumber = "Enter valid Phone Number"
+        }
+
+        setError({...err});
+        return validData;
+    }
+
+    const onSubmitProfile = () => {
+        if(validateProfile()) {
+            setLoading("PROFILE");
+
+            axios({
+                method: "post",
+                url: "/user/updateUserDetails",
+                data: {
+                    ...user
+                }
+            }).then(res => {
+                setLoading(false) 
+                props.showAlert("Profile Updated Succesfully") 
             }).catch(err => {
                 setLoading(false);
                 if(err && err.response && err.response.data && err.response.data.error) {
@@ -88,7 +136,10 @@ const Profile = (props) => {
                             className={styles.textField}
                             label="Name"
                             value={user.name}
+                            onChange={e => setUser({...user,name: e.target.value})}
                             fullWidth
+                            helperText={userError.name}
+                            error={userError.name}
                         />
 
                         <TextField
@@ -96,16 +147,19 @@ const Profile = (props) => {
                             label="Phone Number"
                             type="number"
                             value={user.phoneNumber}
+                            onChange={e => setUser({...user,phoneNumber: e.target.value})}
                             fullWidth
+                            helperText={userError.phoneNumber}
+                            error={userError.phoneNumber}
                         />
 
-                        <TextField
-                            className={styles.textField}
-                            label="User Type"
-                            disabled
-                            value={user.userType}
-                            fullWidth
-                        />
+                        {loading == "PROFILE"
+                            ?
+                        <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>Loading ...</Button>
+                            :
+                        <Button color="primary" variant="contained" onClick={onSubmitProfile}>Update Profile</Button>}
+
+                        <Divider />
 
                         <PassTextField
                             className={styles.textField}
@@ -126,11 +180,11 @@ const Profile = (props) => {
                             fullWidth
                         />
                         
-                        {loading
+                        {loading == "PASSWORD"
                             ?
                         <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>Loading ...</Button>
                             :
-                        <Button color="primary" variant="contained" startIcon={<EditRoundedIcon />} onClick={onSubmit}>Change Password</Button>}
+                        <Button color="primary" variant="contained" onClick={onSubmitPassword}>Change Password</Button>}
                     </div>
                      
                 </div>

@@ -8,7 +8,7 @@ export const theme = createMuiTheme({
         fontWeight: "400", 
         padding: '8px 18px', 
         color: "white",
-        borderRadius: '100px'
+        borderRadius: '4px'
       },
       text: {  
         textTransform: 'capitalize',

@@ -29,27 +29,18 @@
     font-size: 24px;
     font-weight: 900;
     letter-spacing: 1px;
-    color: #333;
-}
-.loginContainer {
+    color: var(--primary-color);
+} 
+.loginContent {
     width: 35vw;
     max-width: 550px;
-    border-radius: 12px;
-    padding: 40px 50px;
-    height: auto;
-    background-color: var(--primary-color);
-    display: flex;
-    justify-content: center;
-    box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
-    align-items: center;
-}
-.loginContent {
     padding: 30px 40px;
     width: 100%;
     border-radius: 15px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 1px 4px 30px rgba(0, 0, 0, 0.25);
     background-color: white;
     display: flex;
+    align-items: center;
     flex-direction: column; 
 } 
 .loginHead {
@@ -65,18 +56,15 @@
 }
 .signIn {
     margin: 10px 0px;
-    margin-top: 15px;
-    display: flex;
-    align-items: center;
+    margin-top: 15px; 
     padding: 14px 18px;
     padding-right: 25px;
     font-size: 16px;
-    width: 240px;
-    justify-content: space-between;
+    width: 240px; 
     font-weight: 400;
     border: none;
     letter-spacing: 0.2px;
-    border-radius: 20px;
+    border-radius: 4px;
     outline: none;
     overflow: hidden;
     color: white;
@@ -84,35 +72,11 @@
     position: relative;
     transition: .3s all;
 }
-.signIn:hover {
-    cursor: pointer;
-    transform: translateY(-1.5px);
+.loginContent p {
+    margin-top: 25px;
+    font-size: 13px;
 }
-.signIn:active {
-    cursor: pointer;
-    transform: translateY(0.5px);
-}
-.signIn::after {
-    content: "";
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    border-radius: 100%;
-    background-color: rgba(255, 255, 255, 0.6);
-    top: -50px;
-    right: -70px;
-}
-.signIn::before {
-    content: "";
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    border-radius: 100%;
-    background-color: rgba(255, 255, 255, 0.6);
-    top: -85px;
-    right: -10px;
-}
-
+ 
 @media only screen and (max-width: 1400px) {
     .container::after {
         right: -100px;

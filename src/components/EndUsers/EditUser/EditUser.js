@@ -17,6 +17,7 @@ import {withRouter, useLocation} from 'react-router-dom'
 import axios from 'axios'  
 import MediaHandler from '../../Media/MediaHandler'
 import { Tooltip } from '@material-ui/core'
+import PassTextField from '../../utils/PassTextField/PassTextField'
 
 const EditUser = (props) => {
     let { search } = useLocation();
@@ -26,6 +27,7 @@ const EditUser = (props) => {
         name: "",
         phoneNumber: "",
         email: "", 
+        password: "",
         profilePicture: defaultProfilePicture
     });
 
@@ -33,6 +35,7 @@ const EditUser = (props) => {
         name: false,
         phoneNumber: false,
         email: false, 
+        password: false,
         profilePicture: false
     });
 
@@ -58,7 +61,7 @@ const EditUser = (props) => {
     const [modal,setModal] = React.useState(false)
 
     const validate = () => {
-        const err = {name: false,phoneNumber: false,email: false};
+        const err = {name: false,phoneNumber: false,email: false,password: false};
         let validData = true;
         setError({...err});
         Object.keys(err).forEach(key => {
@@ -147,6 +150,15 @@ const EditUser = (props) => {
                         onChange={e => setFormData({...formData,phoneNumber: e.target.value})}
                         error={error.phoneNumber}
                         helperText={error.phoneNumber}
+                    /> 
+                    <PassTextField
+                        label="Password"
+                        className={styles.halfWidth}
+                        disabled
+                        value={formData.password}
+                        onChange={e => setFormData({...formData,password: e.target.value})}
+                        error={error.password}
+                        helperText={error.password}
                     /> 
                 </div> 
 

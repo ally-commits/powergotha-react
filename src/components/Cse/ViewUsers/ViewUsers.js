@@ -1,59 +1,69 @@
 import React from 'react'
-import styles from './ViewAnimal.module.css';
+import styles from './ViewUsers.module.css';
 
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
+import Button from '@material-ui/core/Button' 
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton'
 import TextField from '@material-ui/core/TextField'
- 
-import VisibilityRoundedIcon from '@material-ui/icons/VisibilityRounded';
+
+import EditRoundedIcon from '@material-ui/icons/EditRounded';
+import AddRoundedIcon from '@material-ui/icons/AddRounded'; 
+import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 
 import TableComp from '../../utils/Table/Table';
 import AppLoader from '../../utils/AppLoader/AppLoader';
 
 import {connect} from 'react-redux'
-import {getAnimalUserList} from '../../../containers/animals/actions'
-import {withRouter} from 'react-router-dom' 
+import {getAllUsers,onUserDelete} from '../../../containers/cse/actions'
+import {withRouter} from 'react-router-dom'
+import ConfirmAlert from '../../utils/ConfirmAlert/ConfirmAlert'
 import LANG from '../../../translator';
 
-const ViewAnimal = (props) => { 
-    const [data,setData] = React.useState(props.animalData);
+const ViewUsers = (props) => { 
+    const [users,setUsers] = React.useState(props.users);
     const [showEntries,setShowEntries] = React.useState(10)
     const [searchVal,setSearchVal] = React.useState("");
 
     React.useEffect(() => {
-        if(!props.animalData) { 
-            props.getAnimalUserList();
-        }  
-        setData(props.animalData);
-    },[props.animalData]);
+        if(!props.users) {
+            props.getAllUsers();
+        }
+        setUsers(props.users);
+    },[props.users]);
 
-
-    let isLoading = !data;
+    let isLoading = !users;
     let showData = !isLoading;
     let rowData = [];
- 
-    !isLoading && data.users.forEach((user,index) => {
+
+    !isLoading && users.forEach((user,index) => {
         if(index+1 <= showEntries || showEntries == "All") {
-            if(user.name.toLowerCase().includes(searchVal.toLowerCase()) || user.phoneNumber.toLowerCase().includes(searchVal.toLowerCase()) || 
-                user.email.toLowerCase().includes(searchVal.toLowerCase()) ) {
+            if(user.name.toLowerCase().includes(searchVal.toLowerCase()) || user.phoneNumber.toLowerCase().includes(searchVal.toLowerCase())) {
+                
                 rowData.push([
                     index + 1,
                     user.name,
-                    user.email,
                     user.phoneNumber, 
-                    data.animalMap[user._id] && data.animalMap[user._id].animalCount ? data.animalMap[user._id].animalCount : 0 ,
-                    data.animalMap[user._id] && data.animalMap[user._id].animalTypeCount ? data.animalMap[user._id].animalTypeCount : 0 ,
+                    user.userType,
+                    user.createdAt.substr(0,10), 
                     <React.Fragment>
-                        <Tooltip title="View User Details">
-                            <IconButton onClick={() => props.history.push("/admin/animals/VIEW-USER-DETAILS?userId="+ user._id )}>
-                                <VisibilityRoundedIcon />
+                        <Tooltip title="Edit User">
+                            <IconButton onClick={() => props.history.push("/admin/cse/EDIT-CSE?userId="+ user._id )}>
+                                <EditRoundedIcon />
                             </IconButton>
-                        </Tooltip> 
+                        </Tooltip>
+    
+                        <ConfirmAlert msg={`Are you sure you want delete ${user.name}`} onClickEvent={() => props.onUserDelete(user._id)}>
+                            <Tooltip title="Delete User">
+                                <IconButton>
+                                    <DeleteRoundedIcon />
+                                </IconButton>
+                            </Tooltip>
+                        </ConfirmAlert>
                         
                     </React.Fragment>
-                ])
+                ]);
             }
         }
     });
@@ -78,7 +88,9 @@ const ViewAnimal = (props) => {
                         className={styles.search}
                         value={searchVal}
                         onChange={e => setSearchVal(e.target.value)}
-                    /> 
+                    />
+
+                    <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/admin/cse/ADD-CSE")}>Add CSE</Button>
                 </div>
             </div>
 
@@ -86,7 +98,7 @@ const ViewAnimal = (props) => {
 
             {showData &&
             <TableComp 
-                columns={["Sl No","Farmer Name","Email","Phone Number","Animal Count","Animal Types","Action"]}
+                columns={["Sl No","Name","Phone Number","User Type","Created At","Action"]}
                 rows={rowData}
             />}
 
@@ -94,6 +106,6 @@ const ViewAnimal = (props) => {
     )
 }
 const mapStateToProps = state => ({
-    animalData: state.animal.animalData,
+    users: state.cse.users
 })
-export default withRouter(connect(mapStateToProps,{getAnimalUserList})(ViewAnimal));
+export default withRouter(connect(mapStateToProps,{getAllUsers,onUserDelete})(ViewUsers));

@@ -5,19 +5,23 @@ if(localStorage.lang) {
 }
 
 const LANG = {
-    APP_NAME: lang == "English" ? "Agrowngotha" : "अ‍ॅग्रोगोथा",
+    APP_NAME: lang == "English" ? "Agrowon Animal Care" : "अ‍ॅग्रोगोथा",
     BLOG_POST: lang == "English" ? "News and feeds" : "बातम्या आणि फीड",
-    FEEDBACK: lang == "English" ? "Replies" : "प्रत्युत्तरे",
+    FEEDBACK: lang == "English" ? "Feeback " : "अभिप्राय",
+    REPLIES: lang == "English" ? "Replies" : "प्रत्युत्तरे",
     ANIMAL: lang == "English" ? "Animal Manager" : "प्राणी व्यवस्थापक",
-    FARM: lang == "English" ? "News and feeds" : "बातम्या आणि फीड",
+    FARM: lang == "English" ? "Farm Manager" : "बातम्या आणि फीड",
     USERS: lang == "English" ? "User Management" : "वापरकर्ता व्यवस्थापक",
     ANIMAL_CATEGORY: lang == "English" ? "Animal Types" : "प्राण्यांचा प्रकार",
 
+    CSE: lang == "English" ? "Customer Service Executive" : "ग्राहक सेवा कार्यकारी",
+    ADMIN: lang == "English" ? "ADMIN" : "प्रशासन",
+
     PROFILE: lang == "English" ? "Profile" : "प्रोफाइल",
-    MY_ACCOUNT: lang == "English" ? "My Account" : "माझे खाते",
+    MY_ACCOUNT: lang == "English" ? "Profile" : "माझे खाते",
     LOGOUT: lang == "English" ? "Logout" : "बाहेर पडणे",
 
-    SERACH_HERE: lang == "English" ? "Search Here" : "येथे शोधा",
+    SEARCH_HERE: lang == "English" ? "Search Here" : "येथे शोधा",
 
     LOGIN: lang == "English" ? "Login" : "लॉगिन",
     PHONE_NUMEBR: lang == "English" ? "Phone Number" : "फोन नंबर",

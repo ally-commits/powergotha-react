@@ -6,54 +6,48 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button' 
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
-import Divider from '@material-ui/core/Divider'
-import IconButton from '@material-ui/core/IconButton'
+import MenuItem from '@material-ui/core/MenuItem' 
+import FormControl from '@material-ui/core/FormControl'
+import InputLabel from '@material-ui/core/InputLabel'
+import FormHelperText from '@material-ui/core/FormHelperText'
 
-import AddRoundedIcon from '@material-ui/icons/AddRounded';
-import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
+import AddRoundedIcon from '@material-ui/icons/AddRounded'; 
 
-import {defaultProfilePicture} from '../../../config/config'
 import {connect} from 'react-redux'
 import {showAlert} from '../../../containers/app/actions' 
-
-import {getAllUsers} from '../../../containers/enduser/actions'
+import {getAllUsers} from '../../../containers/cse/actions'
 import {withRouter} from 'react-router-dom'
 import axios from 'axios'  
-import MediaHandler from '../../Media/MediaHandler'
-import { Tooltip } from '@material-ui/core'
-import PassTextField from '../../utils/PassTextField/PassTextField'
+
+import LANG from '../../../translator'
 
 const AddUser = (props) => { 
     const [formData,setFormData] = React.useState({
         name: "",
         phoneNumber: "",
-        email: "", 
-        profilePicture: defaultProfilePicture,
-        password: ""
+        userType: "CSE",
+        password: "", 
     });
 
     const [error,setError] = React.useState({
         name: false,
         phoneNumber: false,
-        email: false, 
-        profilePicture: false,
-        password: false
+        userType: false,
+        password: false,  
     });
 
-    const [loading,setLoading] = React.useState(false);
-    const [modal,setModal] = React.useState(false)
+    const [loading,setLoading] = React.useState(false);  
 
     const validate = () => {
-        const err = {name: false,phoneNumber: false,email: false,profilePicture: false,password: false};
+        const err = {name: false,phoneNumber: false,userType: false,password: false};
         let validData = true;
         setError({...err});
         Object.keys(formData).forEach(key => {
             if(formData[key] == "") {
                 err[key] = `${key} field cannot be empty`
                 validData = false;
-            }  
-        })
+            } 
+        }); 
 
         setError({...err});
         return validData;
@@ -65,7 +59,7 @@ const AddUser = (props) => {
 
             axios({
                 method: "post",
-                url: "/end-user/addUser",
+                url: "/cse/addUser",
                 data: {
                     ...formData
                 }
@@ -73,7 +67,7 @@ const AddUser = (props) => {
                 setLoading(false);
                 props.showAlert("User Added Succesfully");
                 props.getAllUsers()
-                props.history.push("/admin/end-users/VIEW-END-USER")
+                props.history.push("/admin/cse/VIEW-CSE")
             }).catch(err => {
                 setLoading(false);
                 if(err && err.response && err.response.data && err.response.data.error) {
@@ -88,7 +82,7 @@ const AddUser = (props) => {
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
-                <h1>Add User</h1>
+                <h1>Add {LANG.CSE}</h1>
 
                 <div className={styles.row}>
                     <TextField 
@@ -99,33 +93,6 @@ const AddUser = (props) => {
                         error={error.name}
                         helperText={error.name}
                     /> 
-
-                    <div className={styles.profile}>
-                        <MediaHandler 
-                            open={modal}
-                            onClose={() => setModal(false)}
-                            onSelectImage={url => {
-                                setFormData({...formData,profilePicture: url})
-                                setModal(false)
-                            }}
-                        />
-                        <p>Profile Picture</p>
-                        <Tooltip title="Change Profile">
-                            <img src={formData.profilePicture} alt="" className={styles.profilePicture} onClick={() => setModal(true)}/>
-                        </Tooltip>
-                    </div>
-                </div> 
-                <div className={styles.row}> 
-                    <TextField 
-                        label="Email"
-                        type="email"
-                        className={styles.halfWidth}
-                        value={formData.email}
-                        onChange={e => setFormData({...formData,email: e.target.value})}
-                        error={error.email}
-                        helperText={error.email}
-                    /> 
-                    
                     <TextField 
                         label="Phone Number"
                         type="number"
@@ -135,9 +102,29 @@ const AddUser = (props) => {
                         error={error.phoneNumber}
                         helperText={error.phoneNumber}
                     /> 
+                </div>
 
-                    <PassTextField 
+                <div className={styles.row}>
+                    <FormControl className={styles.halfWidth} error={error.category}>
+                        <InputLabel id="demo-simple-select-label">User Type</InputLabel> 
+                        <Select 
+                            label="Select User Type"
+                            value={formData.userType}
+                            onChange={e => setFormData({...formData,userType: e.target.value})}
+                        > 
+                            <MenuItem value="CSE">{LANG.CSE}</MenuItem>    
+                            <MenuItem value="ADMIN">{LANG.ADMIN}</MenuItem>    
+                        </Select>
+
+                        {error.category &&
+                        <FormHelperText>{error.category}</FormHelperText>}
+
+                    </FormControl>
+
+
+                    <TextField 
                         label="Password"
+                        type="password"
                         className={styles.halfWidth}
                         value={formData.password}
                         onChange={e => setFormData({...formData,password: e.target.value})}
@@ -145,6 +132,7 @@ const AddUser = (props) => {
                         helperText={error.password}
                     /> 
                 </div> 
+ 
 
                 <div className={styles.row}>
                     {loading

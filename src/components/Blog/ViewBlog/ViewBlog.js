@@ -45,7 +45,8 @@ const ViewBlog = (props) => {
                 rowData.push([
                     index + 1,
                     blog.title,
-                    blog.postContent.substring(0,40),   
+                    blog.createdAt.substring(0,10),
+                    blog.addedBy.name,   
                     <React.Fragment>
                         <Tooltip title="View Blog Post">
                             <IconButton onClick={() => props.history.push("/user/blog-post/VIEW-BLOG-POST?blogId="+ blog._id )}>
@@ -88,7 +89,7 @@ const ViewBlog = (props) => {
 
                 <div className={styles.rightHeader}>
                     <TextField
-                        label={LANG.SERACH_HERE}
+                        label={LANG.SEARCH_HERE}
                         className={styles.search}
                         value={searchVal}
                         onChange={e => setSearchVal(e.target.value)}
@@ -101,7 +102,7 @@ const ViewBlog = (props) => {
 
             {showData &&
             <TableComp 
-                columns={["Sl No","Title","Content","Action"]}
+                columns={["Sl No","Title","Created At","Added By","Action"]}
                 rows={rowData}
             />}
 

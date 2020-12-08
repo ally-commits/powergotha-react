@@ -105,6 +105,17 @@ const AddBlog = (props) => {
                             onChange={e => setFormData({...formData,postContent: e})} 
                         />
                         {error.content && <span className={styles.textRed}>{error.content}</span>}
+                        {/* <TextField 
+                            label="Blog Content"
+                            variant="outlined"
+                            className={styles.catName}
+                            value={formData.postContent}
+                            multiline
+                            rows={10}
+                            onChange={e => setFormData({...formData,postContent: e.target.value})}
+                            error={error.postContent}
+                            helperText={error.postContent}
+                        />  */}
                     </div>
 
 
