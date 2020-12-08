@@ -72,6 +72,7 @@ const Login = (props) => {
         <div className={styles.container}>
             <div className={styles.content}>
                 <div className={styles.header}> 
+                    <img src={logo} alt=""/>
                     <h1 className={styles.head}>{LANG.APP_NAME}</h1>
                 </div>
 
