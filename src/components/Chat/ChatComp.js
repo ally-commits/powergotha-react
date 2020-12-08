@@ -8,6 +8,7 @@ import Paper from '@material-ui/core/Paper'
 
 import {connect} from 'react-redux'
 import {getAllUsers} from '../../containers/enduser/actions'
+import LANG from '../../translator'
 
 const ChatComp = (props) => {    
     const [chats,setChats] = React.useState([]);
@@ -35,7 +36,7 @@ const ChatComp = (props) => {
     return (
         <Paper className={styles.container} variant="outlined"> 
             <div className={styles.leftContent}>
-                <h1>Chats</h1>
+                <h1>{LANG.REPLIES}</h1>
                 {chats.map(userId => {
                     return (
                         <div 

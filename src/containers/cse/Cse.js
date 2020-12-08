@@ -35,9 +35,9 @@ const Cse = (props) => {
     return (
         <div className={styles.container}>
             <TopBar head={LANG.CSE} />
-            <BreadCrump 
+            {/* <BreadCrump 
                 navItems={[{name: LANG.CSE,path: "/admin/cse/VIEW-CSE"},navData[state]]}
-            />
+            /> */}
 
             {state == "VIEW-CSE" && <ViewUsers />}
             {state == "ADD-CSE" && <AddUser />} 

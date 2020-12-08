@@ -21,27 +21,27 @@ const BlogPost = (props) => {
     const navData = {
         "VIEW-BLOG": {
             name: "View Blog",
-            path: "/admin/blogs/VIEW-BLOG"
+            path: "/user/blogs/VIEW-BLOG"
         },
         "ADD-BLOG": {
             name: "Add Blog",
-            path: "/admin/blogs/ADD-BLOG"
+            path: "/user/blogs/ADD-BLOG"
         },
         "EDIT-BLOG": {
             name: "Edit Blog",
-            path: "/admin/blogs/EDIT-BLOG"
+            path: "/user/blogs/EDIT-BLOG"
         },
         "VIEW-BLOG-POST": {
             name: "View Blog Post",
-            path: "/admin/blogs/VIEW-BLOG-POST"
+            path: "/user/blogs/VIEW-BLOG-POST"
         },
     }
     return (
         <div className={styles.container}>
             <TopBar head={LANG.BLOG_POST} />
-            <BreadCrump 
-                navItems={[{name:"Blog Posts",path: "/admin/blog/VIEW-BLOG"},navData[state]]}
-            />
+            {/* <BreadCrump 
+                navItems={[{name:"Blog Posts",path: "/user/blog-post/VIEW-BLOG"},navData[state]]}
+            /> */}
 
             {state == "VIEW-BLOG" && <ViewBlog />}
             {state == "ADD-BLOG" && <AddBlog/>}
