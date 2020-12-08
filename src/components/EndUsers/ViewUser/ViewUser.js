@@ -41,8 +41,8 @@ const ViewUser = (props) => {
 
     !isLoading && data.users.forEach((user,index) => {
         if(index+1 <= showEntries || showEntries == "All") {
-            if(user.name.toLowerCase().includes(searchVal.toLowerCase()) || user.phoneNumber.toLowerCase().includes(searchVal.toLowerCase()) || 
-                user.email.toLowerCase().includes(searchVal.toLowerCase()) ) {
+            if((user.name && user.name.toLowerCase().includes(searchVal.toLowerCase()))|| (user.phoneNumber && user.phoneNumber.toLowerCase().includes(searchVal.toLowerCase())) || 
+                (user.email && user.email.toLowerCase().includes(searchVal.toLowerCase())) ) {
                 rowData.push([
                     index + 1,
                     user.name,
