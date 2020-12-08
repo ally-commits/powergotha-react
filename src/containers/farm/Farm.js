@@ -41,9 +41,9 @@ const Farm = (props) => {
     return (
         <div className={styles.container}>
             <TopBar head={LANG.FARM} />
-            <BreadCrump 
+            {/* <BreadCrump 
                 navItems={[{name:"User List",path: "/admin/farms/VIEW-DETAILS"},navData[state]]}
-            />
+            /> */}
 
             {state == "VIEW-DETAILS" && <ViewFarm />}
             {state == "VIEW-USER-DETAILS" && <ViewUserDetails />}

@@ -22,7 +22,7 @@ const Login = (props) => {
 
     React.useEffect(() => {
         if(props.auth) {
-            props.history.push("/admin/home")
+            props.history.push("/user/blog-post/VIEW-BLOG")
         }
     },[props.auth]);
     

@@ -36,9 +36,9 @@ const EndUser = (props) => {
     return (
         <div className={styles.container}>
             <TopBar head={LANG.USERS} />
-            <BreadCrump 
+            {/* <BreadCrump 
                 navItems={[{name:"End User",path: "/admin/users/VIEW-END-USER"},navData[state]]}
-            />
+            /> */}
 
             {state == "VIEW-END-USER" && <ViewUser />}
             {state == "ADD-END-USER" && <AddUser />}

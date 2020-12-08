@@ -26,9 +26,9 @@ const Feedback = (props) => {
     return (
         <div className={styles.container}>
             <TopBar head={LANG.FEEDBACK} />
-            <BreadCrump 
+            {/* <BreadCrump 
                 navItems={[{name:"User Feedback",path: "/user/feedback/VIEW-DETAILS"},navData[state]]}
-            />
+            /> */}
 
             {state == "VIEW-DETAILS" && <ViewFeedback />} 
         </div>
