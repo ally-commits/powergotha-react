@@ -41,7 +41,7 @@ const TopBar = (props) => {
     const [loading,setLoading] = React.useState(false);
     
     const handlePopoverOpen = (event) => {
-        setAnchorEl(event.currentTarget);
+        anchorEl ? setAnchorEl(null) : setAnchorEl(event.currentTarget);
     };
 
     const open = Boolean(anchorEl);
