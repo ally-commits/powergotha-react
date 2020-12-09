@@ -9,9 +9,12 @@ import ViewUserDetails from '../../components/Farm/ViewUserDetails/ViewUserDetai
 import TopBar from '../../components/TopBar/TopBar';
 import LANG from '../../translator';
 import styles from './Farm.module.css';
-
+import {useLocation} from 'react-router-dom'
 
 const Farm = (props) => {
+    let { search } = useLocation();
+    const query = new URLSearchParams(search);
+
     const [state,setState] = React.useState("VIEW-DETAILS");   
 
     React.useEffect(() => {
@@ -22,28 +25,32 @@ const Farm = (props) => {
 
     const navData = {
         "VIEW-DETAILS": {
-            name: "View Details",
+            name: LANG.FARMER_LIST,
             path: "/admin/farms/VIEW-DETAILS"
         },
         "VIEW-USER-DETAILS": {
-            name: "View User Details",
-            path: "/admin/farms/VIEW-USER-DETAILS"
+            name: LANG.FARMER_DETAILS, 
+            path: "/admin/farms/VIEW-USER-DETAILS?userId=" + query.get("userId"),
         },
         "ADD-FARM": {
-            name: "Add Farm",
-            path: "/admin/farms/ADD-FARM"
+            name: LANG.ADD + " " + LANG.FARM,
+            path: "/admin/farms/ADD-FARM",
         },
         "EDIT-FARM": {
-            name: "Edit Farm",
+            name: LANG.EDIT + " " + LANG.FARM,
             path: "/admin/farms/EDIT-FARM"
         },
     }
     return (
         <div className={styles.container}>
             <TopBar head={LANG.FARM} />
-            {/* <BreadCrump 
-                navItems={[{name:"User List",path: "/admin/farms/VIEW-DETAILS"},navData[state]]}
-            /> */}
+            <BreadCrump 
+                navItems={[
+                    {name: LANG.FARM,path: "/admin/farms/VIEW-DETAILS"},
+                    state == "ADD-FARM" || state == "EDIT-FARM" ? navData["VIEW-USER-DETAILS"] : false,
+                    navData[state],
+                ]}
+            />
 
             {state == "VIEW-DETAILS" && <ViewFarm />}
             {state == "VIEW-USER-DETAILS" && <ViewUserDetails />}

@@ -19,24 +19,24 @@ const Category = (props) => {
 
     const navData = {
         "VIEW-CATEGORY": {
-            name: "View Animal Category",
+            name: LANG.ANIMAL_TYPE_LIST,
             path: "/admin/category/VIEW-CATEGORY"
         },
         "ADD-CATEGORY": {
-            name: "Add Animal Category",
+            name: LANG.ADD + " " + LANG.ANIMAL_TYPE,
             path: "/admin/category/ADD-CATEGORY"
         },
         "EDIT-CATEGORY": {
-            name: "Edit Animal Category",
+            name: LANG.EDIT + " " + LANG.ANIMAL_TYPE,
             path: "/admin/category/EDIT-CATEGORY"
         },
     }
     return (
         <div className={styles.container}>
             <TopBar head={LANG.ANIMAL_CATEGORY} />
-            {/* <BreadCrump 
-                navItems={[{name:"Animal Category",path: "/admin/category/VIEW-CATEGORY"},navData[state]]}
-            /> */}
+            <BreadCrump 
+                navItems={[{name:LANG.ANIMAL_TYPE,path: "/admin/category/VIEW-CATEGORY"},navData[state]]}
+            />
 
             {state == "VIEW-CATEGORY" && <ViewCategory />}
             {state == "ADD-CATEGORY" && <AddCategory />}

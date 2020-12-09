@@ -21,24 +21,24 @@ const EndUser = (props) => {
 
     const navData = {
         "VIEW-END-USER": {
-            name: "View User",
+            name: LANG.FARMER_LIST,
             path: "/admin/end-users/VIEW-END-USER"
         },
         "ADD-END-USER": {
-            name: "Add User",
+            name: LANG.ADD + " " + LANG.FARMER,
             path: "/admin/end-users/ADD-END-USER"
         },
         "EDIT-END-USER": {
-            name: "Edit User",
+            name: LANG.ADD + " " + LANG.FARMER,
             path: "/admin/end-users/EDIT-END-USER"
         },
     }
     return (
         <div className={styles.container}>
             <TopBar head={LANG.USERS} />
-            {/* <BreadCrump 
-                navItems={[{name:"End User",path: "/admin/users/VIEW-END-USER"},navData[state]]}
-            /> */}
+            <BreadCrump 
+                navItems={[{name: LANG.USERS,path: "/admin/end-users/VIEW-END-USER"},navData[state]]}
+            />
 
             {state == "VIEW-END-USER" && <ViewUser />}
             {state == "ADD-END-USER" && <AddUser />}

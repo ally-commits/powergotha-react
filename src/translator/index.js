@@ -11,7 +11,7 @@ const LANG = {
     REPLIES: lang == "English" ? "Replies" : "प्रत्युत्तरे",
     ANIMAL: lang == "English" ? "Animal" : "प्राणी व्यवस्थापक",
     FARM: lang == "English" ? "Farm" : "बातम्या आणि फीड",
-    USERS: lang == "English" ? "User Management" : "वापरकर्ता व्यवस्थापक",
+    USERS: lang == "English" ? "Farmer Management" : "वापरकर्ता व्यवस्थापक",
     ANIMAL_CATEGORY: lang == "English" ? "Animal Types" : "प्राण्यांचा प्रकार",
     DASHBOARD: lang == "English" ? "Dashboard" : "मुख्यपृष्ठ",
     CSE: lang == "English" ? "Customer Service Executive" : "ग्राहक सेवा कार्यकारी",
@@ -47,10 +47,7 @@ const LANG = {
     PICTURE: lang == "English" ? "Picture" : "चित्र", 
     UPDATE: lang == "English" ? "Update" : "अद्ययावत",
     REPLY: lang == "English" ? "Reply" : "उत्तर द्या", 
-
     ANIMAL_TYPE: lang == "English" ? "Animal Type" : "मूळ प्रकार", 
-
-
     FARMER: lang == "English" ? "Farmer" : "फार्म", 
     EMAIL: lang == "English" ? "Email" : "ईमेल", 
     NAME: lang == "English" ? "Name" : "नाव", 
@@ -60,7 +57,6 @@ const LANG = {
     ADDRESS: lang == "English" ? "Address" : "पत्ता", 
     TOTAL_AREA: lang == "English" ? "Total Area" : "एकूण क्षेत्र", 
     TYPE: lang == "English" ? "Type" : "प्रकार", 
-
     ANIMAL_BREED: lang == "English" ? "Animal Breed" : "पशु नस्ल", 
     TAG_NUMBER: lang == "English" ? "Tag Number" : "टॅग क्रमांक", 
     DOB: lang == "English" ? "DOB" : "जन्म तारीख", 
@@ -71,5 +67,10 @@ const LANG = {
     PRICE: lang == "English" ? "Purchasing Price" : "किंमत खरेदी", 
     YES: lang == "English" ? "YES" : "होय", 
     NO: lang == "English" ? "NO" : "नाही", 
+    FARMER_LIST: lang == "English" ? "Farmer List" : "शेतकरी यादी", 
+    FARMER_DETAILS: lang == "English" ? "Farmer Details" : "शेतकरी तपशील", 
+    BLOG_LIST: lang == "English" ? "News and feeds List" : "बातम्या आणि फीडची यादी", 
+    ANIMAL_TYPE_LIST: lang == "English" ? "Animal Type List" : "प्राचिन प्रकार यादी", 
+    LIST: lang == "English" ? "List" : "यादी", 
 }
 export default LANG;
