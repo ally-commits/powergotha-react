@@ -30,7 +30,8 @@ const EditBlog = (props) => {
     const [formData,setFormData] = React.useState({
         title: "",
         postContent: "",
-        image: defaultBlogImage
+        image: defaultBlogImage,
+        blogId: ""
     });
 
     const [error,setError] = React.useState({
@@ -46,7 +47,8 @@ const EditBlog = (props) => {
             if(query.get("blogId")) {
                 props.blogs.forEach(blog => {
                     if(blog._id == query.get("blogId")) { 
-                        setFormData({...formData,...blog,blogId: blog._id})
+                        setFormData({...formData,title: blog.title,image: blog.image,blogId: blog._id});
+                        setTimeout(() => {setFormData({...formData,postContent: blog.postContent})},500)
                     }
                 })
             } else {
@@ -84,7 +86,7 @@ const EditBlog = (props) => {
                 }
             }).then(res => {
                 setLoading(false);
-                props.showAlert("Blog Added Succesfully");
+                props.showAlert("Blog Updated Succesfully");
                 props.getAllBlogPost()
                 props.history.push("/user/blog-post/VIEW-BLOG")
             }).catch(err => {
@@ -98,6 +100,8 @@ const EditBlog = (props) => {
             })
         }
     }  
+
+    console.log(formData)
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
