@@ -20,24 +20,24 @@ const Cse = (props) => {
 
     const navData = {
         "VIEW-CSE": {
-            name: "View CSE",
+            name: LANG.CSE + " " + LANG.LIST,
             path: "/admin/cse/VIEW-CSE"
         },
         "ADD-CSE": {
-            name: "Add CSE",
+            name: LANG.ADD + " " + LANG.CSE,
             path: "/admin/cse/ADD-CSE"
         },
         "EDIT-CSE": {
-            name: "Edit CSE",
+            name: LANG.EDIT + " " + LANG.CSE,
             path: "/admin/cse/EDIT-CSE"
         },
     }
     return (
         <div className={styles.container}>
             <TopBar head={LANG.CSE} />
-            {/* <BreadCrump 
+            <BreadCrump 
                 navItems={[{name: LANG.CSE,path: "/admin/cse/VIEW-CSE"},navData[state]]}
-            /> */}
+            />
 
             {state == "VIEW-CSE" && <ViewUsers />}
             {state == "ADD-CSE" && <AddUser />} 

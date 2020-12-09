@@ -73,6 +73,9 @@ button:active {
     cursor: pointer;
     transform: translateY(0.5px);
 }
+.MuiButton-containedPrimary {
+    color: white !important;
+}
 @media only screen and (max-width: 1450px) {
     :root {
         --nav-width: 220px;

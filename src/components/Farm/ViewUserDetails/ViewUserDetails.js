@@ -136,7 +136,7 @@ const ViewUserDetails = (props) => {
                         value={searchVal}
                         onChange={e => setSearchVal(e.target.value)}
                     />
-                    <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/admin/farms/ADD-FARM?userId=" + query.get("userId"))}>{LANG.ALL} {LANG.FARM}</Button>
+                    <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/admin/farms/ADD-FARM?userId=" + query.get("userId"))}>{LANG.ADD} {LANG.FARM}</Button>
                 </div>
             </div>
 

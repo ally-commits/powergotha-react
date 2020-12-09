@@ -30,24 +30,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 const BreadCrump = (props) => {
     const classes = useStyles();
-
+    console.log(props)
     return (
         <React.Fragment>
             <div className={styles.container}>
                 <div className={styles.content}>
                     <Breadcrumbs separator={<KeyboardArrowRightRoundedIcon fontSize="small" />} aria-label="breadcrumb">
                         {props.navItems.map((nav,index) => {
-                            if(index+1 != props.navItems.length) {
-                                return (
-                                    <Typography color="inherit" className={classes.link} onClick={() => props.history.push(nav.path)}>
-                                        {nav.name}
-                                    </Typography>
-                                )
-                            } else {
-                                return (
-                                    <Typography color="textPrimary" className={classes.text}>{nav.name}</Typography>
-                                )
-                            }
+                            if(nav) {
+                                if(index+1 != props.navItems.length) {
+                                    return (
+                                        <Typography color="inherit" className={classes.link} onClick={() => props.history.push(nav.path)}>
+                                            {nav.name}
+                                        </Typography>
+                                    )
+                                } else {
+                                    return (
+                                        <Typography color="textPrimary" className={classes.text}>{nav.name}</Typography>
+                                    )
+                                } 
+                            } else return;
                         })} 
                     </Breadcrumbs>
                 </div>
