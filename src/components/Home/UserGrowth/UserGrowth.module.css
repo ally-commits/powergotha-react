@@ -1,0 +1,33 @@
+.container {
+    width: 75%;
+}
+.header {
+    margin: 15px;
+    width: calc(100% - 30px) !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header h1 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    flex: 1;
+}
+.legend {
+    width: auto !important;
+    display: flex;
+    align-items: center;
+}
+.legend p {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+.legend span {
+    width: 10px;
+    height: 10px;
+    margin-left: 4px;
+    border-radius: 200%;
+    display: inline-block;
+}

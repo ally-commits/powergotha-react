@@ -16,6 +16,7 @@ import UpdateRoundedIcon from '@material-ui/icons/UpdateRounded';
 import {connect} from 'react-redux'
 import {showAlert} from '../../../containers/app/actions'
 import axios from 'axios'
+import LANG from '../../../translator';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -90,7 +91,7 @@ const Content = (props) => {
                         </div>
 
                         <div className={styles.footer}>
-                            <Button variant="contained" color="primary" endIcon={<ReplyRoundedIcon />}>Reply</Button>
+                            <Button variant="contained" color="primary" endIcon={<ReplyRoundedIcon />}>{LANG.REPLY}</Button>
                         </div> 
                     </div>
                 </div>
@@ -100,7 +101,7 @@ const Content = (props) => {
                     <TextField
                         value={reply}
                         onChange={e => setReply(e.target.value)}
-                        label="Reply"
+                        label={LANG.REPLY}
                         multiline
                         rows={4}
                         fullWidth 
@@ -112,9 +113,9 @@ const Content = (props) => {
                     <div className={styles.row}>
                         {loading
                             ?
-                        <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>Loading ...</Button>
+                        <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>{LANG.LOADING}</Button>
                             :
-                        <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>Update Reply</Button>}
+                        <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>{LANG.UPDATE + " " + LANG.REPLY}</Button>}
                     </div>
                 </div>
             </AccordionDetails>

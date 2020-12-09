@@ -8,6 +8,7 @@ import animalReducer from './animals/reducer'
 import blogReducer from './blogpost/reducer'
 import feedbackReducer from './feedback/reducer'
 import cseReducer from './cse/reducer'
+import homeReducer from './home/reducer'
 
 export default combineReducers({  
   category: categoryReducer, 
@@ -17,5 +18,6 @@ export default combineReducers({
   animal: animalReducer,
   blog: blogReducer,
   cse: cseReducer,
-  feedback: feedbackReducer
+  feedback: feedbackReducer,
+  home: homeReducer
 });

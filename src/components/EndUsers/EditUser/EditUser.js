@@ -18,6 +18,7 @@ import axios from 'axios'
 import MediaHandler from '../../Media/MediaHandler'
 import { Tooltip } from '@material-ui/core'
 import PassTextField from '../../utils/PassTextField/PassTextField'
+import LANG from '../../../translator'
 
 const EditUser = (props) => {
     let { search } = useLocation();
@@ -104,11 +105,11 @@ const EditUser = (props) => {
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
-                <h1>Update User</h1>
+                <h1>{LANG.UPDATE} {LANG.FARMER}</h1>
 
                 <div className={styles.row}>
                     <TextField 
-                        label="Name"
+                        label={LANG.NAME}
                         className={styles.halfWidth}
                         value={formData.name}
                         onChange={e => setFormData({...formData,name: e.target.value})}
@@ -125,15 +126,15 @@ const EditUser = (props) => {
                                 setModal(false)
                             }}
                         />
-                        <p>Profile Picture</p>
-                        <Tooltip title="Change Profile">
+                        <p>{LANG.PICTURE}</p>
+                        <Tooltip title={LANG.EDIT + " " + LANG.PICTURE}>
                             <img src={formData.profilePicture} alt="" className={styles.profilePicture} onClick={() => setModal(true)}/>
                         </Tooltip>
                     </div>
                 </div> 
                 <div className={styles.row}> 
                     <TextField 
-                        label="Email"
+                        label={LANG.EMAIL}
                         type="email"
                         className={styles.halfWidth}
                         value={formData.email}
@@ -143,7 +144,7 @@ const EditUser = (props) => {
                     /> 
                     
                     <TextField 
-                        label="Phone Number"
+                        label={LANG.PHONE_NUMEBR}
                         type="number"
                         className={styles.halfWidth}
                         value={formData.phoneNumber}
@@ -152,7 +153,7 @@ const EditUser = (props) => {
                         helperText={error.phoneNumber}
                     /> 
                     <PassTextField
-                        label="Password"
+                        label={LANG.PASSWORD}
                         className={styles.halfWidth}
                         disabled
                         value={formData.password}
@@ -165,9 +166,9 @@ const EditUser = (props) => {
                 <div className={styles.row}>
                     {loading
                         ?
-                    <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>Loading ...</Button>
+                    <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>{LANG.LOADING}</Button>
                         :
-                    <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>Update User</Button>}
+                    <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>{LANG.UPDATE} {LANG.FARMER}</Button>}
                 </div>
             </Paper>
         </div>

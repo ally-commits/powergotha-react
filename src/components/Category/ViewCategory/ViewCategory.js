@@ -43,21 +43,21 @@ const ViewCategory = (props) => {
     let rowData = [];
 
     !isLoading && category.forEach((category,index) => {
-        if(index+1 <= showEntries || showEntries == "All") {
+        if(index+1 <= showEntries || showEntries == LANG.ALL) {
             if(category.categoryName.substring(0,10).toLowerCase().includes(searchVal.toLowerCase())){
                 rowData.push([
                     index + 1,
                     category.categoryName,   
     
                     <React.Fragment>
-                        <Tooltip title="Edit Category">
+                        <Tooltip title={LANG.EDIT + " " + LANG.ANIMAL_CATEGORY}>
                             <IconButton onClick={() => props.history.push("/admin/category/EDIT-CATEGORY?categoryId="+ category._id )}>
                                 <EditRoundedIcon />
                             </IconButton>
                         </Tooltip>
     
                         <ConfirmAlert msg={`Are you sure you want delete ${category.categoryName}`} onClickEvent={() => props.onCategoryDelete(category._id)}>
-                            <Tooltip title="Delete Category">
+                            <Tooltip title={LANG.DELETE + " " + LANG.ANIMAL_CATEGORY}>
                                 <IconButton>
                                     <DeleteRoundedIcon />
                                 </IconButton>
@@ -73,13 +73,13 @@ const ViewCategory = (props) => {
         <div className={styles.container}>
             <div className={styles.header}>
                 <div className={styles.leftHeader}>
-                    <p>Show Entires</p>
+                    <p>{LANG.SHOWENTRIES}</p>
                     <Select value={showEntries} onChange={e => setShowEntries(e.target.value)}>
                         <MenuItem value={10}>10</MenuItem>
                         <MenuItem value={20}>20</MenuItem>
                         <MenuItem value={30}>30</MenuItem>
                         <MenuItem value={30}>50</MenuItem>
-                        <MenuItem value={"All"}>All</MenuItem>
+                        <MenuItem value={LANG.ALL}>{LANG.ALL}</MenuItem>
                     </Select>
                 </div>
 
@@ -90,7 +90,7 @@ const ViewCategory = (props) => {
                         value={searchVal}
                         onChange={e => setSearchVal(e.target.value)}
                     />
-                    <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/admin/category/ADD-CATEGORY")}>Add Animal Category</Button>
+                    <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/admin/category/ADD-CATEGORY")}>{LANG.ADD + " " + LANG.ANIMAL_CATEGORY}</Button>
                 </div>
             </div>
 
@@ -98,7 +98,7 @@ const ViewCategory = (props) => {
 
             {showData &&
             <TableComp 
-                columns={["Sl No","Category Name","Action"]}
+                columns={[LANG.SLNO,LANG.ANIMAL_TYPE,LANG.ACTION]}
                 rows={rowData}
             />}
 

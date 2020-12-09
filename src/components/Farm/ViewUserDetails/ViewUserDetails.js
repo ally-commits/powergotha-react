@@ -66,7 +66,7 @@ const ViewUserDetails = (props) => {
     let rowData = [];
  
     !isLoading && farms.forEach((farm,index) => {
-        if(index+1 <= showEntries || showEntries == "All") {
+        if(index+1 <= showEntries || showEntries == LANG.ALL) {
             if(farm.farmName.toLowerCase().includes(searchVal.toLowerCase()) || farm.address.toLowerCase().includes(searchVal.toLowerCase())) {
                 rowData.push([
                     index + 1,
@@ -75,14 +75,14 @@ const ViewUserDetails = (props) => {
                     farm.totalArea,
                     farm.address, 
                     <React.Fragment>
-                        <Tooltip title="Edit Farm">
+                        <Tooltip title={LANG.EDIT + " " + LANG.FARM}>
                             <IconButton onClick={() => props.history.push("/admin/farms/EDIT-FARM?userId=" + query.get("userId") + "&farmId=" + farm._id )}>
                                 <EditRoundedIcon />
                             </IconButton>
                         </Tooltip>
 
                         <ConfirmAlert msg={`Are you sure you want delete ${farm.farmName}`} onClickEvent={() => props.onFarmDelete(farm._id,query.get("userId"))}>
-                            <Tooltip title="Delete Farm">
+                            <Tooltip title={LANG.DELETE + " " + LANG.FARM}>
                                 <IconButton>
                                     <DeleteRoundedIcon />
                                 </IconButton>
@@ -102,13 +102,13 @@ const ViewUserDetails = (props) => {
             <div className={styles.userData}>
                 <div className={styles.userContent}>
                     <div>
-                        <p><span>Name: </span>{data.name}</p>
-                        <p><span>Email: </span>{data.email}</p>
-                        <p><span>Phone Number: </span>{data.phoneNumber}</p>
+                        <p><span>{LANG.NAME}: </span>{data.name}</p>
+                        <p><span>{LANG.EMAIL}: </span>{data.email}</p>
+                        <p><span>{LANG.PHONE_NUMEBR}: </span>{data.phoneNumber}</p>
                     </div>
                     <div>
-                        <p><span>Farm Count: </span>{props.farmData.countMap[data._id] && props.farmData.countMap[data._id].farmCount ? props.farmData.countMap[data._id].farmCount : 0}</p>
-                        <p><span>Animal Count: </span>{props.farmData.countMap[data._id] && props.farmData.countMap[data._id].animalCount ? props.farmData.countMap[data._id].animalCount : 0}</p>
+                        <p><span>{LANG.FARM} {LANG.COUNT}: </span>{props.farmData.countMap[data._id] && props.farmData.countMap[data._id].farmCount ? props.farmData.countMap[data._id].farmCount : 0}</p>
+                        <p><span>{LANG.ANIMAL} {LANG.COUNT}: </span>{props.farmData.countMap[data._id] && props.farmData.countMap[data._id].animalCount ? props.farmData.countMap[data._id].animalCount : 0}</p>
                     </div>
                 </div>
 
@@ -119,13 +119,13 @@ const ViewUserDetails = (props) => {
 
             <div className={styles.header}>
                 <div className={styles.leftHeader}>
-                    <p>Show Entires</p>
+                    <p>{LANG.SHOWENTRIES}</p>
                     <Select value={showEntries} onChange={e => setShowEntries(e.target.value)}>
                         <MenuItem value={10}>10</MenuItem>
                         <MenuItem value={20}>20</MenuItem>
                         <MenuItem value={30}>30</MenuItem>
                         <MenuItem value={30}>50</MenuItem>
-                        <MenuItem value={"All"}>All</MenuItem>
+                        <MenuItem value={LANG.ALL}>{LANG.ALL}</MenuItem>
                     </Select>
                 </div>
 
@@ -136,7 +136,7 @@ const ViewUserDetails = (props) => {
                         value={searchVal}
                         onChange={e => setSearchVal(e.target.value)}
                     />
-                    <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/admin/farms/ADD-FARM?userId=" + query.get("userId"))}>Add Farm</Button>
+                    <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/admin/farms/ADD-FARM?userId=" + query.get("userId"))}>{LANG.ALL} {LANG.FARM}</Button>
                 </div>
             </div>
 
@@ -144,7 +144,7 @@ const ViewUserDetails = (props) => {
 
             {showData &&
             <TableComp 
-                columns={["Sl No","Farm Name","Pincode","Total Area","Address","Action"]}
+                columns={[LANG.SLNO,LANG.FARM + " " + LANG.NAME,LANG.PINCODE,LANG.TOTAL_AREA,LANG.ADDRESS,LANG.ACTION]}
                 rows={rowData}
             />}
 

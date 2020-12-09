@@ -40,7 +40,7 @@ const ViewBlog = (props) => {
     let rowData = [];
 
     !isLoading && blogs.forEach((blog,index) => {
-        if(index+1 <= showEntries || showEntries == "All") {
+        if(index+1 <= showEntries || showEntries == LANG.ALL) {
             if(blog.title.substring(0,10).toLowerCase().includes(searchVal.toLowerCase())){
                 rowData.push([
                     index + 1,
@@ -48,20 +48,20 @@ const ViewBlog = (props) => {
                     blog.createdAt.substring(0,10),
                     blog.addedBy.name,   
                     <React.Fragment>
-                        <Tooltip title="View Blog Post">
+                        <Tooltip title={LANG.VIEW + " " + LANG.BLOG_POST}>
                             <IconButton onClick={() => props.history.push("/user/blog-post/VIEW-BLOG-POST?blogId="+ blog._id )}>
                                 <VisibilityRoundedIcon />
                             </IconButton>
                         </Tooltip>
 
-                        <Tooltip title="Edit blog">
+                        <Tooltip title={LANG.EDIT + " " + LANG.BLOG_POST}>
                             <IconButton onClick={() => props.history.push("/user/blog-post/EDIT-BLOG?blogId="+ blog._id )}>
                                 <EditRoundedIcon />
                             </IconButton>
                         </Tooltip>
     
                         <ConfirmAlert msg={`Are you sure you want delete this blog`} onClickEvent={() => props.onBlogDelete(blog._id)}>
-                            <Tooltip title="Delete blog">
+                            <Tooltip title={LANG.DELETE + " " + LANG.BLOG_POST}>
                                 <IconButton>
                                     <DeleteRoundedIcon />
                                 </IconButton>
@@ -77,13 +77,13 @@ const ViewBlog = (props) => {
         <div className={styles.container}>
             <div className={styles.header}>
                 <div className={styles.leftHeader}>
-                    <p>Show Entires</p>
+                    <p>{LANG.SHOWENTRIES}</p>
                     <Select value={showEntries} onChange={e => setShowEntries(e.target.value)}>
                         <MenuItem value={10}>10</MenuItem>
                         <MenuItem value={20}>20</MenuItem>
                         <MenuItem value={30}>30</MenuItem>
                         <MenuItem value={30}>50</MenuItem>
-                        <MenuItem value={"All"}>All</MenuItem>
+                        <MenuItem value={LANG.ALL}>{LANG.ALL}</MenuItem>
                     </Select>
                 </div>
 
@@ -94,7 +94,7 @@ const ViewBlog = (props) => {
                         value={searchVal}
                         onChange={e => setSearchVal(e.target.value)}
                     />
-                    <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/user/blog-post/ADD-BLOG")}>Add blog</Button>
+                    <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/user/blog-post/ADD-BLOG")}>{LANG.ADD}  {LANG.BLOG_POST}</Button>
                 </div>
             </div>
 
@@ -102,7 +102,7 @@ const ViewBlog = (props) => {
 
             {showData &&
             <TableComp 
-                columns={["Sl No","Title","Created At","Added By","Action"]}
+                columns={[LANG.SLNO,LANG.TITLE,LANG.CREATEDAT,LANG.ADDEDBY,LANG.ACTION]}
                 rows={rowData}
             />}
 

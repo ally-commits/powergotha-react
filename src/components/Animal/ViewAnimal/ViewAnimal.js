@@ -46,7 +46,7 @@ const ViewAnimal = (props) => {
                     data.animalMap[user._id] && data.animalMap[user._id].animalCount ? data.animalMap[user._id].animalCount : 0 ,
                     data.animalMap[user._id] && data.animalMap[user._id].animalTypeCount ? data.animalMap[user._id].animalTypeCount : 0 ,
                     <React.Fragment>
-                        <Tooltip title="View User Details">
+                        <Tooltip title={LANG.VIEW + " " + LANG.FARMER}>
                             <IconButton onClick={() => props.history.push("/admin/animals/VIEW-USER-DETAILS?userId="+ user._id )}>
                                 <VisibilityRoundedIcon />
                             </IconButton>
@@ -62,13 +62,13 @@ const ViewAnimal = (props) => {
         <div className={styles.container}>
             <div className={styles.header}>
                 <div className={styles.leftHeader}>
-                    <p>Show Entires</p>
+                    <p>{LANG.SHOWENTRIES}</p>
                     <Select value={showEntries} onChange={e => setShowEntries(e.target.value)}>
                         <MenuItem value={10}>10</MenuItem>
                         <MenuItem value={20}>20</MenuItem>
                         <MenuItem value={30}>30</MenuItem>
                         <MenuItem value={30}>50</MenuItem>
-                        <MenuItem value={"All"}>All</MenuItem>
+                        <MenuItem value={LANG.ALL}>{LANG.ALL}</MenuItem>
                     </Select>
                 </div>
 
@@ -86,7 +86,7 @@ const ViewAnimal = (props) => {
 
             {showData &&
             <TableComp 
-                columns={["Sl No","Farmer Name","Email","Phone Number","Animal Count","Animal Types","Action"]}
+                columns={[LANG.SLNO,LANG.FARMER + " " + LANG.NAME,LANG.EMAIL,LANG.PHONE_NUMEBR,LANG.ANIMAL + " " + LANG.COUNT,LANG.ANIMAL_TYPE,LANG.ACTION]}
                 rows={rowData}
             />}
 

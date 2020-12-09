@@ -14,6 +14,7 @@ import {showAlert} from '../../../containers/app/actions'
 import {getFarmDetails} from '../../../containers/farm/actions'
 import {withRouter,useLocation} from 'react-router-dom'
 import axios from 'axios'  
+import LANG from '../../../translator'
  
 
 const EditFarm = (props) => { 
@@ -99,11 +100,11 @@ const EditFarm = (props) => {
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
-                <h1>Edit Farm</h1>
+                <h1>{LANG.EDIT} {LANG.FARM}</h1>
 
                 <div className={styles.row}>
                     <TextField 
-                        label="Farm Name"
+                        label={LANG.NAME}
                         className={styles.halfWidth}
                         value={formData.farmName}
                         onChange={e => setFormData({...formData,farmName: e.target.value})}
@@ -112,7 +113,7 @@ const EditFarm = (props) => {
                     /> 
  
                     <TextField 
-                        label="Pincode"
+                        label={LANG.PINCODE}
                         type="number"
                         className={styles.halfWidth}
                         value={formData.pincode}
@@ -124,7 +125,7 @@ const EditFarm = (props) => {
 
                 <div className={styles.row}> 
                     <TextField 
-                        label="Total Area" 
+                        label={LANG.TOTAL_AREA} 
                         type="number"
                         className={styles.halfWidth}
                         value={formData.totalArea}
@@ -134,7 +135,7 @@ const EditFarm = (props) => {
                     /> 
                     
                     <TextField 
-                        label="Address" 
+                        label={LANG.ADDRESS} 
                         className={styles.halfWidth}
                         value={formData.address}
                         onChange={e => setFormData({...formData,address: e.target.value})}
@@ -146,9 +147,9 @@ const EditFarm = (props) => {
                 <div className={styles.row}>
                     {loading
                         ?
-                    <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>Loading ...</Button>
+                    <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>{LANG.LOADING}</Button>
                         :
-                    <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>Update Farm</Button>}
+                    <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>{LANG.UPDATE} {LANG.FARM}</Button>}
                 </div>
             </Paper>
         </div>
