@@ -22,6 +22,7 @@ import {withRouter} from 'react-router-dom'
 
 import ReactQuill from 'react-quill';
 import { defaultBlogImage } from '../../../config/config';
+import LANG from '../../../translator';
 
 
 
@@ -83,11 +84,11 @@ const AddBlog = (props) => {
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
-                <h1>Add Blog Post</h1>
+                <h1>{LANG.ADD + " " + LANG.BLOG_POST}</h1>
 
                 <div className={styles.row}>
                     <TextField 
-                        label="Blog Title"
+                        label={LANG.TITLE}
                         className={styles.catName}
                         value={formData.title}
                         onChange={e => setFormData({...formData,title: e.target.value})}
@@ -105,17 +106,6 @@ const AddBlog = (props) => {
                             onChange={e => setFormData({...formData,postContent: e})} 
                         />
                         {error.content && <span className={styles.textRed}>{error.content}</span>}
-                        {/* <TextField 
-                            label="Blog Content"
-                            variant="outlined"
-                            className={styles.catName}
-                            value={formData.postContent}
-                            multiline
-                            rows={10}
-                            onChange={e => setFormData({...formData,postContent: e.target.value})}
-                            error={error.postContent}
-                            helperText={error.postContent}
-                        />  */}
                     </div>
 
 
@@ -128,8 +118,8 @@ const AddBlog = (props) => {
                                 setModal(false)
                             }}
                         />
-                        <p>Blog Picture</p>
-                        <Tooltip title="Change Picture">
+                        <p>{LANG.PICTURE}</p>
+                        <Tooltip title={LANG.EDIT + " " + LANG.PICTURE}>
                             <img src={formData.image} alt="" className={styles.img} onClick={() => setModal(true)}/>
                         </Tooltip>
                     </div>
@@ -138,9 +128,9 @@ const AddBlog = (props) => {
                 <div className={styles.row}>
                     {loading
                         ?
-                    <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>Loading ...</Button>
+                    <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>{LANG.LOADING}</Button>
                         :
-                    <Button color="primary" variant="contained" startIcon={<AddRoundedIcon />} onClick={onSubmit}>Add Blog Post</Button>}
+                    <Button color="primary" variant="contained" startIcon={<AddRoundedIcon />} onClick={onSubmit}>{LANG.ADD + " " + LANG.BLOG_POST}</Button>}
                 </div>
             </Paper>
         </div>

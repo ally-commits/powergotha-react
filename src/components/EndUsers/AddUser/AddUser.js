@@ -23,6 +23,7 @@ import axios from 'axios'
 import MediaHandler from '../../Media/MediaHandler'
 import { Tooltip } from '@material-ui/core'
 import PassTextField from '../../utils/PassTextField/PassTextField'
+import LANG from '../../../translator'
 
 const AddUser = (props) => { 
     const [formData,setFormData] = React.useState({
@@ -88,11 +89,11 @@ const AddUser = (props) => {
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
-                <h1>Add User</h1>
+                <h1>{LANG.ADD} {LANG.FARMER}</h1>
 
                 <div className={styles.row}>
                     <TextField 
-                        label="Name"
+                        label={LANG.NAME}
                         className={styles.halfWidth}
                         value={formData.name}
                         onChange={e => setFormData({...formData,name: e.target.value})}
@@ -109,15 +110,15 @@ const AddUser = (props) => {
                                 setModal(false)
                             }}
                         />
-                        <p>Profile Picture</p>
-                        <Tooltip title="Change Profile">
+                        <p>{LANG.PICTURE}</p>
+                        <Tooltip title={LANG.EDIT + " " + LANG.PICTURE}>
                             <img src={formData.profilePicture} alt="" className={styles.profilePicture} onClick={() => setModal(true)}/>
                         </Tooltip>
                     </div>
                 </div> 
                 <div className={styles.row}> 
                     <TextField 
-                        label="Email"
+                        label={LANG.EMAIL}
                         type="email"
                         className={styles.halfWidth}
                         value={formData.email}
@@ -127,7 +128,7 @@ const AddUser = (props) => {
                     /> 
                     
                     <TextField 
-                        label="Phone Number"
+                        label={LANG.PHONE_NUMEBR}
                         type="number"
                         className={styles.halfWidth}
                         value={formData.phoneNumber}
@@ -137,7 +138,7 @@ const AddUser = (props) => {
                     /> 
 
                     <PassTextField 
-                        label="Password"
+                        label={LANG.PASSWORD}
                         className={styles.halfWidth}
                         value={formData.password}
                         onChange={e => setFormData({...formData,password: e.target.value})}
@@ -149,9 +150,9 @@ const AddUser = (props) => {
                 <div className={styles.row}>
                     {loading
                         ?
-                    <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>Loading ...</Button>
+                    <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>{LANG.LOADING}</Button>
                         :
-                    <Button color="primary" variant="contained" startIcon={<AddRoundedIcon />} onClick={onSubmit}>Add User</Button>}
+                    <Button color="primary" variant="contained" startIcon={<AddRoundedIcon />} onClick={onSubmit}>{LANG.ADD} {LANG.FARMER}</Button>}
                 </div>
             </Paper>
         </div>

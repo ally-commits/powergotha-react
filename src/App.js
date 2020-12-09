@@ -27,12 +27,12 @@ import Farm from './containers/farm/Farm'
 import Animal from './containers/animals/Animal';
 import BlogPost from './containers/blogpost/BlogPost';
 import Feedback from './containers/feedback/Feedback';
+import Cse from './containers/cse/Cse';
+import Chat from './containers/chat/Chat';
+import Home from './containers/home/Home';
 
 import AdminRoute from './routes/AdminRoute'
 import PrivateRoute from './routes/PrivateRoute'
-import Cse from './containers/cse/Cse';
-import Chat from './containers/chat/Chat';
-
 
 const hist = createBrowserHistory();
 
@@ -109,6 +109,7 @@ const App = (props) => {
                 <PrivateRoute exact path="/user/blog-post/:type" component={BlogPost} />
                 <PrivateRoute exact path="/user/feedback/:type" component={Feedback} />
                 <PrivateRoute exact path="/user/chat" component={Chat} />
+                <PrivateRoute exact path="/user/home" component={Home} />
 
               </Switch> 
             </div> 

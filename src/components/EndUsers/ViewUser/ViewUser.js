@@ -40,7 +40,7 @@ const ViewUser = (props) => {
     let rowData = [];
 
     !isLoading && data.users.forEach((user,index) => {
-        if(index+1 <= showEntries || showEntries == "All") {
+        if(index+1 <= showEntries || showEntries == LANG.ALL) {
             if((user.name && user.name.toLowerCase().includes(searchVal.toLowerCase()))|| (user.phoneNumber && user.phoneNumber.toLowerCase().includes(searchVal.toLowerCase())) || 
                 (user.email && user.email.toLowerCase().includes(searchVal.toLowerCase())) ) {
                 rowData.push([
@@ -51,14 +51,14 @@ const ViewUser = (props) => {
                     data.animalMap[user._id] ? data.animalMap[user._id] : 0 ,
                     data.farmMap[user._id] ? data.farmMap[user._id] : 0 ,
                     <React.Fragment>
-                        <Tooltip title="Edit User">
+                        <Tooltip title={LANG.EDIT + " " + LANG.FARMER}>
                             <IconButton onClick={() => props.history.push("/admin/end-users/EDIT-END-USER?userId="+ user._id )}>
                                 <EditRoundedIcon />
                             </IconButton>
                         </Tooltip>
 
                         <ConfirmAlert msg={`Are you sure you want delete ${user.name}`} onClickEvent={() => props.onUserDelete(user._id)}>
-                            <Tooltip title="Delete User">
+                            <Tooltip title={LANG.DELETE + " " + LANG.FARMER}>
                                 <IconButton>
                                     <DeleteRoundedIcon />
                                 </IconButton>
@@ -75,13 +75,13 @@ const ViewUser = (props) => {
         <div className={styles.container}>
             <div className={styles.header}>
                 <div className={styles.leftHeader}>
-                    <p>Show Entires</p>
+                    <p>{LANG.SHOWENTRIES}</p>
                     <Select value={showEntries} onChange={e => setShowEntries(e.target.value)}>
                         <MenuItem value={10}>10</MenuItem>
                         <MenuItem value={20}>20</MenuItem>
                         <MenuItem value={30}>30</MenuItem>
                         <MenuItem value={30}>50</MenuItem>
-                        <MenuItem value={"All"}>All</MenuItem>
+                        <MenuItem value={LANG.ALL}>{LANG.ALL}</MenuItem>
                     </Select>
                 </div>
 
@@ -92,7 +92,7 @@ const ViewUser = (props) => {
                         value={searchVal}
                         onChange={e => setSearchVal(e.target.value)}
                     />
-                    <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/admin/end-users/ADD-END-USER")}>Add User</Button>
+                    <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/admin/end-users/ADD-END-USER")}>{LANG.ADD} {LANG.FARMER}</Button>
                 </div>
             </div>
 
@@ -100,7 +100,7 @@ const ViewUser = (props) => {
 
             {showData &&
             <TableComp 
-                columns={["Sl No","Farmer Name","Email","Phone Number","Animal Count","Farm Count","Action"]}
+                columns={[LANG.SLNO,LANG.FARMER + " " + LANG.NAME,LANG.EMAIL,LANG.PHONE_NUMEBR,LANG.ANIMAL + " " + LANG.COUNT ,LANG.FARM + " " + LANG.COUNT, LANG.ACTION]}
                 rows={rowData}
             />}
 

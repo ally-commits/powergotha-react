@@ -21,6 +21,7 @@ import {withRouter,useLocation} from 'react-router-dom'
 
 import ReactQuill from 'react-quill';
 import { defaultBlogImage } from '../../../config/config';
+import LANG from '../../../translator';
 
 const EditBlog = (props) => { 
     let { search } = useLocation();
@@ -100,11 +101,11 @@ const EditBlog = (props) => {
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
-                <h1>Update Blog Post</h1>
+                <h1>{LANG.EDIT + " " + LANG.BLOG_POST}</h1>
 
                 <div className={styles.row}>
                     <TextField 
-                        label="Blog Title"
+                        label={LANG.TITLE}
                         className={styles.catName}
                         value={formData.title}
                         onChange={e => setFormData({...formData,title: e.target.value})}
@@ -134,8 +135,8 @@ const EditBlog = (props) => {
                                 setModal(false)
                             }}
                         />
-                        <p>Blog Picture</p>
-                        <Tooltip title="Change Picture">
+                        <p>{LANG.PICTURE}</p>
+                        <Tooltip title={LANG.EDIT + " " + LANG.PICTURE}>
                             <img src={formData.image} alt="" className={styles.img} onClick={() => setModal(true)}/>
                         </Tooltip>
                     </div>
@@ -144,9 +145,9 @@ const EditBlog = (props) => {
                 <div className={styles.row}>
                     {loading
                         ?
-                    <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>Loading ...</Button>
+                    <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>{LANG.LOADING}</Button>
                         :
-                    <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>Update Blog Post</Button>}
+                    <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>{LANG.EDIT + LANG.BLOG_POST}</Button>}
                 </div>
             </Paper>
         </div>

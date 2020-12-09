@@ -102,11 +102,11 @@ const EditUser = (props) => {
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
-                <h1>Update {LANG.CSE}</h1>
+                <h1>{LANG.UPDATE} {LANG.CSE}</h1>
 
                 <div className={styles.row}>
                     <TextField 
-                        label="Name"
+                        label={LANG.NAME}
                         className={styles.halfWidth}
                         value={formData.name}
                         onChange={e => setFormData({...formData,name: e.target.value})}
@@ -114,7 +114,7 @@ const EditUser = (props) => {
                         helperText={error.name}
                     /> 
                     <TextField 
-                        label="Phone Number"
+                        label={LANG.PHONE_NUMEBR}
                         type="number"
                         className={styles.halfWidth}
                         value={formData.phoneNumber}
@@ -126,7 +126,7 @@ const EditUser = (props) => {
 
                 <div className={styles.row}>
                     <FormControl className={styles.halfWidth} error={error.category}>
-                        <InputLabel id="demo-simple-select-label">User Type</InputLabel> 
+                        <InputLabel id="demo-simple-select-label">{LANG.TYPE}</InputLabel> 
                         <Select 
                             label="Select User Type"
                             value={formData.userType}
@@ -143,7 +143,7 @@ const EditUser = (props) => {
 
 
                     <TextField 
-                        label="Password"
+                        label={LANG.PASSWORD}
                         type="password"
                         disabled
                         className={styles.halfWidth}
@@ -158,9 +158,9 @@ const EditUser = (props) => {
                 <div className={styles.row}>
                     {loading
                         ?
-                    <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>Loading ...</Button>
+                    <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>{LANG.LOADING}</Button>
                         :
-                    <Button color="primary" variant="contained" startIcon={<AddRoundedIcon />} onClick={onSubmit}>Update User</Button>}
+                    <Button color="primary" variant="contained" startIcon={<AddRoundedIcon />} onClick={onSubmit}>{LANG.UPDATE} {LANG.CSE}</Button>}
                 </div>
             </Paper>
         </div>

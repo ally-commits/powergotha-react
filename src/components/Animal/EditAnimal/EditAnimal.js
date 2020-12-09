@@ -23,6 +23,7 @@ import {getAllCategory} from '../../../containers/category/actions'
 import {withRouter,useLocation} from 'react-router-dom'
 import axios from 'axios'  
 import { Switch } from '@material-ui/core'
+import LANG from '../../../translator'
 
  
 
@@ -123,12 +124,12 @@ const EditAnimal = (props) => {
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
-                <h1>Edit Animal</h1>
+                <h1>{LANG.EDIT} {LANG.ANIMAL}</h1>
 
                 <div className={styles.row}>
 
                     <FormControl className={styles.halfWidth} error={error.category}>
-                        <InputLabel id="demo-simple-select-label">Category</InputLabel> 
+                        <InputLabel id="demo-simple-select-label">{LANG.ANIMAL_CATEGORY}</InputLabel> 
                         <Select 
                             label="Select Animal Type"
                             value={formData.category}
@@ -148,7 +149,7 @@ const EditAnimal = (props) => {
 
 
                     <FormControl className={styles.halfWidth} error={error.category}>
-                        <InputLabel id="demo-simple-select-label">Farm</InputLabel> 
+                        <InputLabel id="demo-simple-select-label">{LANG.FARM}</InputLabel> 
                         <Select  
                             label="Select Farm"
                             value={formData.farm}
@@ -166,7 +167,7 @@ const EditAnimal = (props) => {
                     </FormControl>
 
                     <TextField 
-                        label="Animal Breed"
+                        label={LANG.ANIMAL_BREED}
                         className={styles.halfWidth}
                         value={formData.animalBreed}
                         onChange={e => setFormData({...formData,animalBreed: e.target.value})}
@@ -176,7 +177,7 @@ const EditAnimal = (props) => {
                 </div>
                 <div className={styles.row}>
                     <TextField 
-                        label="Animal Type" 
+                        label={LANG.ANIMAL_BREED} 
                         type="text"
                         className={styles.halfWidth}
                         value={formData.animalType}
@@ -186,7 +187,7 @@ const EditAnimal = (props) => {
                     /> 
  
                     <TextField 
-                        label="Date of birth"
+                        label={LANG.DOB}
                         type="date"
                         className={styles.halfWidth}
                         InputLabelProps={{ shrink: true, required: true }}
@@ -197,7 +198,7 @@ const EditAnimal = (props) => {
                     /> 
 
                     <TextField 
-                        label="Weight"
+                        label={LANG.WEIGHT}
                         type="number"
                         className={styles.halfWidth}
                         value={formData.weight}
@@ -209,7 +210,7 @@ const EditAnimal = (props) => {
 
                 <div className={styles.row}> 
                     <TextField 
-                        label="Tag Number" 
+                        label={LANG.TAG_NUMBER} 
                         type="number"
                         className={styles.halfWidth}
                         value={formData.tagNumber}
@@ -219,7 +220,7 @@ const EditAnimal = (props) => {
                     /> 
                     
                     <div className={styles.switchWidth}>
-                        <p>Pregnant</p>
+                        <p>{LANG.PREGNANT}</p>
                         <Switch 
                             checked={formData.pregnnant}
                             onChange={e => setFormData({...formData,pregnant: e.target.checked})}
@@ -227,7 +228,7 @@ const EditAnimal = (props) => {
                     </div>
 
                     <div className={styles.switchWidth}>
-                        <p>Loctating</p>
+                        <p>{LANG.LOCATING}</p>
                         <Switch 
                             checked={formData.loctating}
                             onChange={e => setFormData({...formData,loctating: e.target.checked})}
@@ -235,7 +236,7 @@ const EditAnimal = (props) => {
                     </div>
 
                     <div className={styles.switchWidth}>
-                        <p>Born In Dairy</p>
+                        <p>{LANG.BORN_IN_DAIRY}</p>
                         <Switch 
                             checked={formData.bornInDairyFarm}
                             onChange={e => setFormData({...formData,bornInDairyFarm: e.target.checked})}
@@ -243,7 +244,7 @@ const EditAnimal = (props) => {
                     </div> 
 
                     <TextField 
-                        label="Purchasing Price" 
+                        label={LANG.PRICE} 
                         type="number"
                         className={styles.halfWidth}
                         value={formData.purchasingPrice}
@@ -256,9 +257,9 @@ const EditAnimal = (props) => {
                 <div className={styles.row}>
                     {loading
                         ?
-                    <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>Loading ...</Button>
+                    <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>{LANG.LOADING}</Button>
                         :
-                    <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>Update Animal</Button>}
+                    <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>{LANG.UPDATE} {LANG.ANIMAL} </Button>}
                 </div>
             </Paper>
         </div>

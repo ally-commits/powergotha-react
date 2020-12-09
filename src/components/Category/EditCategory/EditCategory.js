@@ -15,6 +15,7 @@ import {getAllCategory} from '../../../containers/category/actions'
 import {showAlert} from '../../../containers/app/actions'
 import axios from 'axios'
 import {withRouter,useLocation} from 'react-router-dom'
+import LANG from '../../../translator'
 
 
 const EditCategory = (props) => { 
@@ -92,11 +93,11 @@ const EditCategory = (props) => {
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
-                <h1>Edit Animal Category</h1>
+                <h1>{LANG.EDIT} {LANG.ANIMAL_CATEGORY}</h1>
 
                 <div className={styles.row}>
                     <TextField 
-                        label="Category Name"
+                        label={LANG.ANIMAL_TYPE}
                         className={styles.catName}
                         value={formData.categoryName}
                         onChange={e => setFormData({...formData,categoryName: e.target.value})}
@@ -108,9 +109,9 @@ const EditCategory = (props) => {
                 <div className={styles.row}>
                     {loading
                         ?
-                    <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>Loading ...</Button>
+                    <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>{LANG.LOADING}</Button>
                         :
-                    <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>Update Animal Category</Button>}
+                    <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>{LANG.UPDATE} {LANG.ANIMAL_CATEGORY}</Button>}
                 </div>
             </Paper>
         </div>

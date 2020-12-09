@@ -82,11 +82,11 @@ const AddUser = (props) => {
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
-                <h1>Add {LANG.CSE}</h1>
+                <h1>{LANG.ADD} {LANG.CSE}</h1>
 
                 <div className={styles.row}>
                     <TextField 
-                        label="Name"
+                        label={LANG.NAME}
                         className={styles.halfWidth}
                         value={formData.name}
                         onChange={e => setFormData({...formData,name: e.target.value})}
@@ -94,7 +94,7 @@ const AddUser = (props) => {
                         helperText={error.name}
                     /> 
                     <TextField 
-                        label="Phone Number"
+                        label={LANG.PHONE_NUMEBR}
                         type="number"
                         className={styles.halfWidth}
                         value={formData.phoneNumber}
@@ -106,7 +106,7 @@ const AddUser = (props) => {
 
                 <div className={styles.row}>
                     <FormControl className={styles.halfWidth} error={error.category}>
-                        <InputLabel id="demo-simple-select-label">User Type</InputLabel> 
+                        <InputLabel id="demo-simple-select-label">{LANG.TYPE}</InputLabel> 
                         <Select 
                             label="Select User Type"
                             value={formData.userType}
@@ -123,7 +123,7 @@ const AddUser = (props) => {
 
 
                     <TextField 
-                        label="Password"
+                        label={LANG.PASSWORD}
                         type="password"
                         className={styles.halfWidth}
                         value={formData.password}
@@ -137,9 +137,9 @@ const AddUser = (props) => {
                 <div className={styles.row}>
                     {loading
                         ?
-                    <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>Loading ...</Button>
+                    <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>{LANG.LOADING}</Button>
                         :
-                    <Button color="primary" variant="contained" startIcon={<AddRoundedIcon />} onClick={onSubmit}>Add User</Button>}
+                    <Button color="primary" variant="contained" startIcon={<AddRoundedIcon />} onClick={onSubmit}>{LANG.ADD} {LANG.CSE}</Button>}
                 </div>
             </Paper>
         </div>

@@ -41,9 +41,9 @@ const Animal = (props) => {
     return (
         <div className={styles.container}>
             <TopBar head={LANG.ANIMAL} />
-            <BreadCrump 
+            {/* <BreadCrump 
                 navItems={[{name:"User List",path: "/admin/animals/VIEW-DETAILS"},navData[state]]}
-            />
+            /> */}
 
             {state == "VIEW-DETAILS" && <ViewAnimal />}
             {state == "VIEW-USER-DETAILS" && <ViewUserDetails />}

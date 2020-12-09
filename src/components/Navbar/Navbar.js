@@ -26,6 +26,10 @@ const NavBar = (props) => {
 
 
             <div className={styles.navItems}>
+                <NavLink className={styles.navItem} to="/user/home" activeClassName={styles.activeNavItem}>
+                    <HomeRoundedIcon />
+                    <p>{LANG.DASHBOARD}</p>
+                </NavLink> 
                 <NavLink className={styles.navItem} to="/user/blog-post/VIEW-BLOG" activeClassName={styles.activeNavItem}>
                     <TocIcon />
                     <p>{LANG.BLOG_POST}</p>

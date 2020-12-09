@@ -38,7 +38,7 @@ const ViewUsers = (props) => {
     let rowData = [];
 
     !isLoading && users.forEach((user,index) => {
-        if(index+1 <= showEntries || showEntries == "All") {
+        if(index+1 <= showEntries || showEntries == LANG.ALL) {
             if(user.name.toLowerCase().includes(searchVal.toLowerCase()) || user.phoneNumber.toLowerCase().includes(searchVal.toLowerCase())) {
                 
                 rowData.push([
@@ -48,14 +48,14 @@ const ViewUsers = (props) => {
                     user.userType,
                     user.createdAt.substr(0,10), 
                     <React.Fragment>
-                        <Tooltip title="Edit User">
+                        <Tooltip title={LANG.EDIT + " " + LANG.CSE}>
                             <IconButton onClick={() => props.history.push("/admin/cse/EDIT-CSE?userId="+ user._id )}>
                                 <EditRoundedIcon />
                             </IconButton>
                         </Tooltip>
     
                         <ConfirmAlert msg={`Are you sure you want delete ${user.name}`} onClickEvent={() => props.onUserDelete(user._id)}>
-                            <Tooltip title="Delete User">
+                            <Tooltip title={LANG.DELETE + " " + LANG.CSE}>
                                 <IconButton>
                                     <DeleteRoundedIcon />
                                 </IconButton>
@@ -72,13 +72,13 @@ const ViewUsers = (props) => {
         <div className={styles.container}>
             <div className={styles.header}>
                 <div className={styles.leftHeader}>
-                    <p>Show Entires</p>
+                    <p>{LANG.SHOWENTRIES}</p>
                     <Select value={showEntries} onChange={e => setShowEntries(e.target.value)}>
                         <MenuItem value={10}>10</MenuItem>
                         <MenuItem value={20}>20</MenuItem>
                         <MenuItem value={30}>30</MenuItem>
                         <MenuItem value={30}>50</MenuItem>
-                        <MenuItem value={"All"}>All</MenuItem>
+                        <MenuItem value={LANG.ALL}>{LANG.ALL}</MenuItem>
                     </Select>
                 </div>
 
@@ -90,7 +90,7 @@ const ViewUsers = (props) => {
                         onChange={e => setSearchVal(e.target.value)}
                     />
 
-                    <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/admin/cse/ADD-CSE")}>Add CSE</Button>
+                    <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/admin/cse/ADD-CSE")}>{LANG.ADD} {LANG.CSE}</Button>
                 </div>
             </div>
 
@@ -98,7 +98,7 @@ const ViewUsers = (props) => {
 
             {showData &&
             <TableComp 
-                columns={["Sl No","Name","Phone Number","User Type","Created At","Action"]}
+                columns={[LANG.SLNO,LANG.NAME,LANG.PHONE_NUMEBR,LANG.TYPE,LANG.CREATEDAT,LANG.ACTION]}
                 rows={rowData}
             />}
 
