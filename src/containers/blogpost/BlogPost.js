@@ -15,25 +15,27 @@ const BlogPost = (props) => {
     React.useEffect(() => {
         if(Object.keys(navData).includes(props.match.params.type)) {
             setState(props.match.params.type)
-        }
+        } else { 
+            setState("VIEW-BLOG")
+        } 
     },[props.match.params.type]);
-
+ 
     const navData = {
         "VIEW-BLOG": {
             name: LANG.BLOG_LIST,
-            path: "/user/blogs/VIEW-BLOG"
+            path: "/user/blog-post/VIEW-BLOG"
         },
         "ADD-BLOG": {
             name: LANG.ADD + " " + LANG.BLOG_POST,
-            path: "/user/blogs/ADD-BLOG"
+            path: "/user/blog-post/ADD-BLOG"
         },
         "EDIT-BLOG": {
             name: LANG.EDIT + " " + LANG.BLOG_POST,
-            path: "/user/blogs/EDIT-BLOG"
+            path: "/user/blog-post/EDIT-BLOG"
         },
         "VIEW-BLOG-POST": {
             name: LANG.VIEW + " " + LANG.BLOG_POST,
-            path: "/user/blogs/VIEW-BLOG-POST"
+            path: "/user/blog-post/VIEW-BLOG-POST"
         },
     }
     return (
