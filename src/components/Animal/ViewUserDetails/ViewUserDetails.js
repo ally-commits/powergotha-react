@@ -21,6 +21,7 @@ import {withRouter,useLocation} from 'react-router-dom'
 
 import ConfirmAlert from '../../utils/ConfirmAlert/ConfirmAlert'
 import LANG from '../../../translator';
+import QrCode from '../QrCode/QrCode';
 
 const ViewUserDetails = (props) => { 
     let { search } = useLocation();
@@ -83,6 +84,8 @@ const ViewUserDetails = (props) => {
                     animal.purchasingPrice,
                     
                     <React.Fragment>
+                        <QrCode qrCode={animal.tagNumber} />
+
                         <Tooltip title={LANG.EDIT + " " +  LANG.ANIMAL}>
                             <IconButton onClick={() => props.history.push("/admin/animals/EDIT-ANIMAL?userId=" + query.get("userId") + "&animalId=" + animal._id )}>
                                 <EditRoundedIcon />

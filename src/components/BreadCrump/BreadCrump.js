@@ -3,7 +3,6 @@ import styles from './BreadCrump.module.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Typography from '@material-ui/core/Typography';
-import {Link} from 'react-router-dom';
 import KeyboardArrowRightRoundedIcon from '@material-ui/icons/KeyboardArrowRightRounded';
 import {withRouter} from 'react-router-dom'
 
@@ -30,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 const BreadCrump = (props) => {
     const classes = useStyles();
-    console.log(props)
     return (
         <React.Fragment>
             <div className={styles.container}>

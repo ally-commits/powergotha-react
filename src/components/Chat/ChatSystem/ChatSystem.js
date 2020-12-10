@@ -24,7 +24,11 @@ const ChatSystem = (props) => {
         });
     },[props.userId]);
 
-
+    const checkIfSubmit = (e) => {
+        if (e.keyCode === 13) {
+            onSubmit();
+        }
+    }
     const onSubmit = () => {
         if(value == "") {
             console.log("Enter something")
@@ -59,7 +63,7 @@ const ChatSystem = (props) => {
                 </div>  
 
                 <div className={styles.footer}>
-                    <input type="text" value={value} onChange={e => setValue(e.target.value)} placeholder="Type Something" />
+                    <input type="text" value={value} onChange={e => setValue(e.target.value)} placeholder="Type Something" onKeyDown={checkIfSubmit}/>
                     <button onClick={onSubmit}>Send</button>
                 </div>
             </div>

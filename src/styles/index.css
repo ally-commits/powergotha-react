@@ -76,6 +76,11 @@ button:active {
 .MuiButton-containedPrimary {
     color: white !important;
 }
+.modal-padding {
+    padding: 20px;
+}
+
+
 @media only screen and (max-width: 1450px) {
     :root {
         --nav-width: 220px;
