@@ -33,6 +33,8 @@ import Home from './containers/home/Home';
 
 import AdminRoute from './routes/AdminRoute'
 import PrivateRoute from './routes/PrivateRoute'
+import Doctor from './containers/doctor/Doctor';
+import Subscription from './containers/subscription/Subscription';
 
 const hist = createBrowserHistory();
 
@@ -105,6 +107,9 @@ const App = (props) => {
                 <AdminRoute exact path="/admin/farms/:type" component={Farm} />
                 <AdminRoute exact path="/admin/animals/:type" component={Animal} />
                 <AdminRoute exact path="/admin/cse/:type" component={Cse} />
+                <AdminRoute exact path="/admin/doctor/:type" component={Doctor} />
+
+                <AdminRoute exact path="/admin/subscription/:type" component={Subscription} />
 
                 <PrivateRoute exact path="/user/blog-post/:type" component={BlogPost} />
                 <PrivateRoute exact path="/user/feedback/:type" component={Feedback} />

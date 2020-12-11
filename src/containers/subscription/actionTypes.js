@@ -1,0 +1,1 @@
+export const SET_SUBSCRIPTION = "SET_SUBSCRIPTION"

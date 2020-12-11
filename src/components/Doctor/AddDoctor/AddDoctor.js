@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './AddUser.module.css'
+import styles from './AddDoctor.module.css'
 
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField' 
@@ -15,25 +15,23 @@ import AddRoundedIcon from '@material-ui/icons/AddRounded';
 
 import {connect} from 'react-redux'
 import {showAlert} from '../../../containers/app/actions' 
-import {getAllUsers} from '../../../containers/cse/actions'
+import {getAllDoctors} from '../../../containers/doctor/actions'
 import {withRouter} from 'react-router-dom'
 import axios from 'axios'  
 
 import LANG from '../../../translator'
 
-const AddUser = (props) => { 
+const AddDoctor = (props) => { 
     const [formData,setFormData] = React.useState({
         name: "",
-        phoneNumber: "",
-        userType: "CSE",
+        phoneNumber: "", 
         password: "", 
         email: ""
     });
 
     const [error,setError] = React.useState({
         name: false,
-        phoneNumber: false,
-        userType: false,
+        phoneNumber: false, 
         password: false,  
         email: false
     });
@@ -41,7 +39,7 @@ const AddUser = (props) => {
     const [loading,setLoading] = React.useState(false);  
 
     const validate = () => {
-        const err = {name: false,phoneNumber: false,userType: false,password: false,email: false};
+        const err = {name: false,phoneNumber: false,password: false,email: false};
         let validData = true;
         setError({...err});
         Object.keys(formData).forEach(key => {
@@ -61,15 +59,15 @@ const AddUser = (props) => {
 
             axios({
                 method: "post",
-                url: "/cse/addUser",
+                url: "/doctor/addDoctor",
                 data: {
                     ...formData
                 }
             }).then(res => {
                 setLoading(false);
-                props.showAlert("User Added Succesfully");
-                props.getAllUsers()
-                props.history.push("/admin/cse/VIEW-CSE")
+                props.showAlert("Doctor Added Succesfully");
+                props.getAllDoctors()
+                props.history.push("/admin/doctor/VIEW-DOCTOR")
             }).catch(err => {
                 setLoading(false);
                 if(err && err.response && err.response.data && err.response.data.error) {
@@ -84,7 +82,7 @@ const AddUser = (props) => {
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
-                <h1>{LANG.ADD} {LANG.CSE}</h1>
+                <h1>{LANG.ADD} {LANG.DOCTOR}</h1>
 
                 <div className={styles.row}>
                     <TextField 
@@ -127,35 +125,17 @@ const AddUser = (props) => {
                         error={error.password}
                         helperText={error.password}
                     /> 
-                </div> 
-        
-                <div className={styles.row}>
-                    <FormControl className={styles.halfWidth} error={error.category}>
-                        <InputLabel id="demo-simple-select-label">{LANG.TYPE}</InputLabel> 
-                        <Select 
-                            label="Select User Type"
-                            value={formData.userType}
-                            onChange={e => setFormData({...formData,userType: e.target.value})}
-                        > 
-                            <MenuItem value="CSE">{LANG.CSE}</MenuItem>    
-                            <MenuItem value="ADMIN">{LANG.ADMIN}</MenuItem>    
-                        </Select>
-
-                        {error.category &&
-                        <FormHelperText>{error.category}</FormHelperText>}
-
-                    </FormControl>
-                </div>
+                </div>  
 
                 <div className={styles.row}>
                     {loading
                         ?
                     <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>{LANG.LOADING}</Button>
                         :
-                    <Button color="primary" variant="contained" startIcon={<AddRoundedIcon />} onClick={onSubmit}>{LANG.ADD} {LANG.CSE}</Button>}
+                    <Button color="primary" variant="contained" startIcon={<AddRoundedIcon />} onClick={onSubmit}>{LANG.ADD} {LANG.DOCTOR}</Button>}
                 </div>
             </Paper>
         </div>
     )
 }  
-export default withRouter(connect(null,{showAlert,getAllUsers})(AddUser));
+export default withRouter(connect(null,{showAlert,getAllDoctors})(AddDoctor));
