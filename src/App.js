@@ -111,6 +111,7 @@ const App = (props) => {
                 <PrivateRoute exact path="/user/chat" component={Chat} />
                 <PrivateRoute exact path="/user/home" component={Home} />
 
+                <Redirect from="/" to="/user/home" />
               </Switch> 
             </div> 
           </React.Fragment>}
