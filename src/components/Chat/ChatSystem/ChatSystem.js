@@ -1,6 +1,8 @@
 import React from 'react'
 import firebase from 'firebase'
 import styles from './ChatSystem.module.css'
+import ScrollableFeed from 'react-scrollable-feed'
+
 
 const ChatSystem = (props) => {
     const [value,setValue] = React.useState("")
@@ -12,15 +14,21 @@ const ChatSystem = (props) => {
             setMsg(arr);
         }) 
     },[props.userId]);
+    const scroll = React.useRef(null)
+
+    React.useEffect(() => { 
+        if(scroll) {
+            console.log(scroll.current)
+            // scroll.current.scrollIntoView({ behavior: 'smooth' })
+        }
+    },[]);
 
     React.useEffect(() => {
         var messages = firebase.database().ref(props.userId);
         messages.on('child_added', (data) => {
             let arr = msg;
             arr.push(data.val())
-            setMsg([...arr]);
-
-            console.log(data.val())
+            setMsg([...arr]); 
         });
     },[props.userId]);
 
@@ -54,13 +62,15 @@ const ChatSystem = (props) => {
                 </div>
 
                 <div className={styles.content}>
-                    <div class={styles.fix}></div>
-                    {msg.map(val => {
-                        return (
-                            <p className={val.type == "ADMIN" ? styles.rightContent : styles.leftContent}>{val.msg}</p>
-                        )
-                    })}
-                </div>  
+                    <ScrollableFeed>
+                    
+                        {msg.map(val => {
+                            return (
+                                <p className={val.type == "ADMIN" ? styles.rightContent : styles.leftContent}>{val.msg}</p>
+                            )
+                        })}
+                    </ScrollableFeed>
+                </div>
 
                 <div className={styles.footer}>
                     <input type="text" value={value} onChange={e => setValue(e.target.value)} placeholder="Type Something" onKeyDown={checkIfSubmit}/>

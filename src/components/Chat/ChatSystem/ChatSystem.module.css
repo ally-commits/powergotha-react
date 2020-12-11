@@ -31,7 +31,9 @@
     background-color: rgba(32, 190, 77, 0.1);
 }
 .content > :first-child {
-    margin-top: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 .content::-webkit-scrollbar {
     width: 0px;
