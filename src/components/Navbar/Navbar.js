@@ -12,6 +12,8 @@ import EditLocationRoundedIcon from '@material-ui/icons/EditLocationRounded';
 import TocIcon from '@material-ui/icons/Toc';
 import ContactPhoneRoundedIcon from '@material-ui/icons/ContactPhoneRounded';
 import ForumRoundedIcon from '@material-ui/icons/ForumRounded';
+import LocalHospitalRoundedIcon from '@material-ui/icons/LocalHospitalRounded';
+import SubscriptionsRoundedIcon from '@material-ui/icons/SubscriptionsRounded';
 
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
@@ -72,6 +74,16 @@ const NavBar = (props) => {
                     <NavLink exact className={styles.navItem}  to="/admin/cse/VIEW-CSE" activeClassName={styles.activeNavItem}>
                         <ContactPhoneRoundedIcon />
                         <p>{LANG.CSE}</p>
+                    </NavLink> 
+                    
+                    <NavLink exact className={styles.navItem}  to="/admin/subscription/VIEW-SUBSCRIPTION" activeClassName={styles.activeNavItem}>
+                        <SubscriptionsRoundedIcon />
+                        <p>{LANG.SUBSCRIPTION}</p>
+                    </NavLink> 
+
+                    <NavLink exact className={styles.navItem}  to="/admin/doctor/VIEW-DOCTOR" activeClassName={styles.activeNavItem}>
+                        <LocalHospitalRoundedIcon />
+                        <p>{LANG.DOCTOR}</p>
                     </NavLink> 
                 </React.Fragment>}
             </div>

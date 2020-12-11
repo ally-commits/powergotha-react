@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './AddUser.module.css'
+import styles from './EditDoctor.module.css'
 
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField' 
@@ -15,36 +15,54 @@ import AddRoundedIcon from '@material-ui/icons/AddRounded';
 
 import {connect} from 'react-redux'
 import {showAlert} from '../../../containers/app/actions' 
-import {getAllUsers} from '../../../containers/cse/actions'
-import {withRouter} from 'react-router-dom'
+import {getAllDoctors} from '../../../containers/doctor/actions'
+import {withRouter,useLocation} from 'react-router-dom'
 import axios from 'axios'  
 
 import LANG from '../../../translator'
 
-const AddUser = (props) => { 
+const EditDoctor = (props) => { 
+    let { search } = useLocation();
+    const query = new URLSearchParams(search);
+
     const [formData,setFormData] = React.useState({
         name: "",
-        phoneNumber: "",
-        userType: "CSE",
-        password: "", 
-        email: ""
+        phoneNumber: "", 
+        password: "",
+        email: "" 
     });
 
     const [error,setError] = React.useState({
         name: false,
-        phoneNumber: false,
-        userType: false,
+        phoneNumber: false, 
+        email: false,
         password: false,  
-        email: false
     });
 
     const [loading,setLoading] = React.useState(false);  
 
+    React.useEffect(() => {
+        if(props.doctors) {
+            if(query.get("doctorId")) {
+                props.doctors.forEach(doctor => {
+                    if(doctor._id == query.get("doctorId")) { 
+                        setFormData({...formData,...doctor,doctorId: doctor._id})
+                    }
+                })
+            } else {
+                props.showAlert("Data Not Found")
+                props.history.push("/admin/doctor/VIEW-DOCTOR")
+            }
+        } else {
+            props.getAllDoctors();
+        }
+    },[props.doctors])
+
     const validate = () => {
-        const err = {name: false,phoneNumber: false,userType: false,password: false,email: false};
+        const err = {name: false,phoneNumber: false,password: false,email: false};
         let validData = true;
         setError({...err});
-        Object.keys(formData).forEach(key => {
+        Object.keys(err).forEach(key => {
             if(formData[key] == "") {
                 err[key] = `${key} field cannot be empty`
                 validData = false;
@@ -60,16 +78,16 @@ const AddUser = (props) => {
             setLoading(true);
 
             axios({
-                method: "post",
-                url: "/cse/addUser",
+                method: "put",
+                url: "/doctor/editDoctor",
                 data: {
                     ...formData
                 }
             }).then(res => {
                 setLoading(false);
-                props.showAlert("User Added Succesfully");
-                props.getAllUsers()
-                props.history.push("/admin/cse/VIEW-CSE")
+                props.showAlert("User Updated Succesfully");
+                props.getAllDoctors()
+                props.history.push("/admin/doctor/VIEW-DOCTOR")
             }).catch(err => {
                 setLoading(false);
                 if(err && err.response && err.response.data && err.response.data.error) {
@@ -84,7 +102,7 @@ const AddUser = (props) => {
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
-                <h1>{LANG.ADD} {LANG.CSE}</h1>
+                <h1>{LANG.UPDATE} {LANG.DOCTOR}</h1>
 
                 <div className={styles.row}>
                     <TextField 
@@ -107,10 +125,10 @@ const AddUser = (props) => {
                 </div>
 
                 <div className={styles.row}>
-                    
                     <TextField 
                         label={LANG.EMAIL}
-                        type="email"
+                        type="email" 
+                        
                         className={styles.halfWidth}
                         value={formData.email}
                         onChange={e => setFormData({...formData,email: e.target.value})}
@@ -118,9 +136,11 @@ const AddUser = (props) => {
                         helperText={error.email}
                     /> 
 
+
                     <TextField 
                         label={LANG.PASSWORD}
                         type="password"
+                        disabled
                         className={styles.halfWidth}
                         value={formData.password}
                         onChange={e => setFormData({...formData,password: e.target.value})}
@@ -128,34 +148,22 @@ const AddUser = (props) => {
                         helperText={error.password}
                     /> 
                 </div> 
-        
-                <div className={styles.row}>
-                    <FormControl className={styles.halfWidth} error={error.category}>
-                        <InputLabel id="demo-simple-select-label">{LANG.TYPE}</InputLabel> 
-                        <Select 
-                            label="Select User Type"
-                            value={formData.userType}
-                            onChange={e => setFormData({...formData,userType: e.target.value})}
-                        > 
-                            <MenuItem value="CSE">{LANG.CSE}</MenuItem>    
-                            <MenuItem value="ADMIN">{LANG.ADMIN}</MenuItem>    
-                        </Select>
-
-                        {error.category &&
-                        <FormHelperText>{error.category}</FormHelperText>}
-
-                    </FormControl>
-                </div>
+ 
+ 
 
                 <div className={styles.row}>
                     {loading
                         ?
                     <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>{LANG.LOADING}</Button>
                         :
-                    <Button color="primary" variant="contained" startIcon={<AddRoundedIcon />} onClick={onSubmit}>{LANG.ADD} {LANG.CSE}</Button>}
+                    <Button color="primary" variant="contained" startIcon={<AddRoundedIcon />} onClick={onSubmit}>{LANG.UPDATE} {LANG.DOCTOR}</Button>}
                 </div>
             </Paper>
         </div>
     )
 }  
-export default withRouter(connect(null,{showAlert,getAllUsers})(AddUser));
+
+const mapSateToProps = state => ({
+    doctors: state.doctor.doctors
+})
+export default withRouter(connect(mapSateToProps,{showAlert,getAllDoctors})(EditDoctor));

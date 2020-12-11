@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './ViewUsers.module.css';
+import styles from './ViewDoctors.module.css';
 
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -16,47 +16,46 @@ import TableComp from '../../utils/Table/Table';
 import AppLoader from '../../utils/AppLoader/AppLoader';
 
 import {connect} from 'react-redux'
-import {getAllUsers,onUserDelete} from '../../../containers/cse/actions'
+import {getAllDoctors,onDoctorDelete} from '../../../containers/doctor/actions'
 import {withRouter} from 'react-router-dom'
 import ConfirmAlert from '../../utils/ConfirmAlert/ConfirmAlert'
 import LANG from '../../../translator';
 
-const ViewUsers = (props) => { 
-    const [users,setUsers] = React.useState(props.users);
+const ViewDoctors = (props) => { 
+    const [doctors,setDoctors] = React.useState(props.doctors);
     const [showEntries,setShowEntries] = React.useState(10)
     const [searchVal,setSearchVal] = React.useState("");
 
     React.useEffect(() => {
-        if(!props.users) {
-            props.getAllUsers();
+        if(!props.doctors) {
+            props.getAllDoctors();
         }
-        setUsers(props.users);
-    },[props.users]);
+        setDoctors(props.doctors);
+    },[props.doctors]);
 
-    let isLoading = !users;
+    let isLoading = !doctors;
     let showData = !isLoading;
     let rowData = [];
 
-    !isLoading && users.forEach((user,index) => {
+    !isLoading && doctors.forEach((doctor,index) => {
         if(index+1 <= showEntries || showEntries == LANG.ALL) {
-            if(user.name.toLowerCase().includes(searchVal.toLowerCase()) || user.phoneNumber.toLowerCase().includes(searchVal.toLowerCase())) {
+            if(doctor.name.toLowerCase().includes(searchVal.toLowerCase()) || doctor.phoneNumber.toLowerCase().includes(searchVal.toLowerCase())) {
                 
                 rowData.push([
                     index + 1,
-                    user.name,
-                    user.phoneNumber, 
-                    user.email,
-                    user.userType,
-                    user.createdAt.substr(0,10), 
+                    doctor.name,
+                    doctor.phoneNumber, 
+                    doctor.email, 
+                    doctor.createdAt.substr(0,10), 
                     <React.Fragment>
-                        <Tooltip title={LANG.EDIT + " " + LANG.CSE}>
-                            <IconButton onClick={() => props.history.push("/admin/cse/EDIT-CSE?userId="+ user._id )}>
+                        <Tooltip title={LANG.EDIT + " " + LANG.DOCTOR}>
+                            <IconButton onClick={() => props.history.push("/admin/doctor/EDIT-DOCTOR?doctorId="+ doctor._id )}>
                                 <EditRoundedIcon />
                             </IconButton>
                         </Tooltip>
     
-                        <ConfirmAlert msg={`Are you sure you want delete ${user.name}`} onClickEvent={() => props.onUserDelete(user._id)}>
-                            <Tooltip title={LANG.DELETE + " " + LANG.CSE}>
+                        <ConfirmAlert msg={`Are you sure you want delete ${doctor.name}`} onClickEvent={() => props.onDoctorDelete(doctor._id)}>
+                            <Tooltip title={LANG.DELETE + " " + LANG.DOCTOR}>
                                 <IconButton>
                                     <DeleteRoundedIcon />
                                 </IconButton>
@@ -91,7 +90,7 @@ const ViewUsers = (props) => {
                         onChange={e => setSearchVal(e.target.value)}
                     />
 
-                    <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/admin/cse/ADD-CSE")}>{LANG.ADD} {LANG.CSE}</Button>
+                    <Button color="primary" variant="contained" endIcon={<AddRoundedIcon />} onClick={() => props.history.push("/admin/doctor/ADD-DOCTOR")}>{LANG.ADD} {LANG.DOCTOR}</Button>
                 </div>
             </div>
 
@@ -99,7 +98,7 @@ const ViewUsers = (props) => {
 
             {showData &&
             <TableComp 
-                columns={[LANG.SLNO,LANG.NAME,LANG.PHONE_NUMEBR,LANG.EMAIL, LANG.TYPE,LANG.CREATEDAT,LANG.ACTION]}
+                columns={[LANG.SLNO,LANG.NAME,LANG.PHONE_NUMEBR,LANG.EMAIL,LANG.CREATEDAT,LANG.ACTION]}
                 rows={rowData}
             />}
 
@@ -107,6 +106,6 @@ const ViewUsers = (props) => {
     )
 }
 const mapStateToProps = state => ({
-    users: state.cse.users
+    doctors: state.doctor.doctors
 })
-export default withRouter(connect(mapStateToProps,{getAllUsers,onUserDelete})(ViewUsers));
+export default withRouter(connect(mapStateToProps,{getAllDoctors,onDoctorDelete})(ViewDoctors));

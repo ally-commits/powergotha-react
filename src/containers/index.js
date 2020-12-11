@@ -9,6 +9,9 @@ import blogReducer from './blogpost/reducer'
 import feedbackReducer from './feedback/reducer'
 import cseReducer from './cse/reducer'
 import homeReducer from './home/reducer'
+import doctorReducer from './doctor/reducer'
+import subscriptionReducer from './subscription/reducer'
+
 
 export default combineReducers({  
   category: categoryReducer, 
@@ -19,5 +22,7 @@ export default combineReducers({
   blog: blogReducer,
   cse: cseReducer,
   feedback: feedbackReducer,
-  home: homeReducer
+  home: homeReducer,
+  doctor: doctorReducer,
+  subscription: subscriptionReducer
 });

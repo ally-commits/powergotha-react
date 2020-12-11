@@ -72,6 +72,10 @@ const LANG = {
     BLOG_LIST: lang == "English" ? "News and feeds List" : "बातम्या आणि फीडची यादी", 
     ANIMAL_TYPE_LIST: lang == "English" ? "Animal Type List" : "प्राचिन प्रकार यादी", 
     LIST: lang == "English" ? "List" : "यादी", 
-    QR_CODE: lang == "English" ? "Qr Code" : "QR कोड"
+    QR_CODE: lang == "English" ? "Qr Code" : "QR कोड",
+    DOCTOR: lang == "English" ? "Doctor" : "डॉक्टर",
+    POINT: lang == "English" ? "Point" : "बिंदू",
+    SUBSCRIPTION: lang == "English" ? "Subscription" : "सदस्यता घ्या",
+    
 }
 export default LANG;

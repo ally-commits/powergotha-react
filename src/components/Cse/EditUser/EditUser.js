@@ -29,13 +29,15 @@ const EditUser = (props) => {
         name: "",
         phoneNumber: "",
         userType: "CSE",
-        password: "", 
+        password: "",
+        email: "" 
     });
 
     const [error,setError] = React.useState({
         name: false,
         phoneNumber: false,
         userType: false,
+        email: false,
         password: false,  
     });
 
@@ -59,7 +61,7 @@ const EditUser = (props) => {
     },[props.users])
 
     const validate = () => {
-        const err = {name: false,phoneNumber: false,userType: false,password: false};
+        const err = {name: false,phoneNumber: false,userType: false,password: false,email: false};
         let validData = true;
         setError({...err});
         Object.keys(err).forEach(key => {
@@ -125,6 +127,30 @@ const EditUser = (props) => {
                 </div>
 
                 <div className={styles.row}>
+                    <TextField 
+                        label={LANG.EMAIL}
+                        type="email" 
+                        className={styles.halfWidth}
+                        value={formData.email}
+                        onChange={e => setFormData({...formData,email: e.target.value})}
+                        error={error.email}
+                        helperText={error.email}
+                    /> 
+
+
+                    <TextField 
+                        label={LANG.PASSWORD}
+                        type="password"
+                        disabled
+                        className={styles.halfWidth}
+                        value={formData.password}
+                        onChange={e => setFormData({...formData,password: e.target.value})}
+                        error={error.password}
+                        helperText={error.password}
+                    /> 
+                </div> 
+
+                <div className="row">
                     <FormControl className={styles.halfWidth} error={error.category}>
                         <InputLabel id="demo-simple-select-label">{LANG.TYPE}</InputLabel> 
                         <Select 
@@ -140,19 +166,7 @@ const EditUser = (props) => {
                         <FormHelperText>{error.category}</FormHelperText>}
 
                     </FormControl>
-
-
-                    <TextField 
-                        label={LANG.PASSWORD}
-                        type="password"
-                        disabled
-                        className={styles.halfWidth}
-                        value={formData.password}
-                        onChange={e => setFormData({...formData,password: e.target.value})}
-                        error={error.password}
-                        helperText={error.password}
-                    /> 
-                </div> 
+                </div>
  
 
                 <div className={styles.row}>
