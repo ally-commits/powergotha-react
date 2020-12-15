@@ -5,9 +5,10 @@ if(localStorage.lang) {
 }
 
 const LANG = {
-    APP_NAME: lang == "English" ? "Agrowon Animal Care" : "अ‍ॅग्रोगोथा",
+    APP_NAME: lang == "English" ? "Agrowon Animal Care" : "अ‍ॅग्रोवन गोठा",
     BLOG_POST: lang == "English" ? "News and feeds" : "बातम्या आणि फीड",
-    FEEDBACK: lang == "English" ? "Feeback " : "अभिप्राय",
+    FEEDBACK: lang == "English" ? "Feedback " : "अभिप्राय",
+    NO_FEEDBACK_FOUND: lang == "English" ? "No Feeback Found" : "कोणताही अभिप्राय आढळला नाही",
     REPLIES: lang == "English" ? "Replies" : "प्रत्युत्तरे",
     ANIMAL: lang == "English" ? "Animal" : "प्राणी व्यवस्थापक",
     FARM: lang == "English" ? "Farm" : "बातम्या आणि फीड",
@@ -33,7 +34,7 @@ const LANG = {
     ACRE_AREA: lang == "English" ? "Acre area" : "एकर क्षेत्रफळ",
     DOWNLOADS: lang == "English" ? "Total app downloads" : "एकूण अ‍ॅप डाउनलोड",
     WELCOME: lang == "English" ? "Welcome" : "स्वागत आहे",
-    SLNO: lang == "English" ? "Sl No" : "स्ल न",
+    SLNO: lang == "English" ? "Sr No" : "स्ल न",
     TITLE: lang == "English" ? "Title" : "शीर्षक",
     CREATEDAT: lang == "English" ? "CreatedAt" : "तयार केलेले",
     ADDEDBY: lang == "English" ? "Added By" : "जोडले",
@@ -76,6 +77,7 @@ const LANG = {
     DOCTOR: lang == "English" ? "Doctor" : "डॉक्टर",
     POINT: lang == "English" ? "Point" : "बिंदू",
     SUBSCRIPTION: lang == "English" ? "Subscription" : "सदस्यता घ्या",
+    RATING: lang == "English" ? "Rating" : "रेटिंग",
     
 }
 export default LANG;

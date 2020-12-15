@@ -10,9 +10,10 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button' 
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Tooltip from '@material-ui/core/Tooltip'
-import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
 
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
+import EditRoundedIcon from '@material-ui/icons/EditRounded';
 
 import {connect} from 'react-redux'
 import {getAllBlogPost} from '../../../containers/blogpost/actions' 
@@ -22,16 +23,18 @@ import {withRouter} from 'react-router-dom'
 
 import ReactQuill from 'react-quill';
 import { defaultBlogImage } from '../../../config/config';
-import LANG from '../../../translator';
+import LANG from '../../../translator'; 
 
-
+import JoditEditor from "jodit-react";
 
 const AddBlog = (props) => { 
+    const editor = React.useRef("")
     const [formData,setFormData] = React.useState({
         title: "",
         postContent: "",
         image: defaultBlogImage
     });
+    const [content,setContent] = React.useState("");
 
     const [error,setError] = React.useState({
         title: false,
@@ -42,12 +45,12 @@ const AddBlog = (props) => {
     const [modal,setModal] = React.useState(false);
 
     const validate = () => {
-        const err = {title: false,postContent: false };
+        const err = {title: false};
         let validData = true;
         setError({...err});
         Object.keys(err).forEach(key => {
             if(formData[key] == "") {
-                err[key] = `${key} field cannot be empty`
+                err[key] = `Field cannot be empty`
                 validData = false;
             } 
         }) 
@@ -63,7 +66,8 @@ const AddBlog = (props) => {
                 method: "post",
                 url: "/blog-post/addBlogPost",
                 data: {
-                    ...formData
+                    ...formData,
+                    postContent: content
                 }
             }).then(res => {
                 setLoading(false);
@@ -80,7 +84,7 @@ const AddBlog = (props) => {
                 }
             })
         }
-    } 
+    }   
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
@@ -99,12 +103,16 @@ const AddBlog = (props) => {
                 </div>
 
                 <div className={styles.rowContent}>
-                    <div className={styles.content}>
-                        <ReactQuill 
-                            value={formData.postContent}
-                            className={styles.textEditor}
-                            onChange={e => setFormData({...formData,postContent: e})} 
-                        />
+                    <div className={styles.content}> 
+                        {editor != null && content != null &&
+                            <JoditEditor
+                                ref={editor}
+                                value={content} 
+                                tabIndex={1} 
+                                // onBlur={e => setFormData({...formData,postContent: e.target.value})} 
+                                onChange={e => setContent(e)} 
+                            />}
+
                         {error.content && <span className={styles.textRed}>{error.content}</span>}
                     </div>
 
@@ -119,8 +127,13 @@ const AddBlog = (props) => {
                             }}
                         />
                         <p>{LANG.PICTURE}</p>
+                        
+                        <img src={formData.image} alt="" className={styles.img} onClick={() => setModal(true)}/>
+
                         <Tooltip title={LANG.EDIT + " " + LANG.PICTURE}>
-                            <img src={formData.image} alt="" className={styles.img} onClick={() => setModal(true)}/>
+                            <IconButton className={styles.editButton} onClick={() => setModal(true)}>
+                                <EditRoundedIcon />
+                            </IconButton>
                         </Tooltip>
                     </div>
                 </div>

@@ -48,14 +48,18 @@ const AddSubscription = (props) => {
     }
 
     const onDeletePoint = (index) => {
-        let arr = formData.points;
-        let arrErr = arrError;
-        
-        arrErr = arrErr.filter((val,i) => index != i);
-        arr = arr.filter((val,i) => index != i);
-        
-        setFormData({...formData,points: [...arr]})
-        setArrError([...arrErr])
+        if(formData.points.length <= 1) {
+            props.showAlert("Atleast 1 point should be added");
+        } else {
+            let arr = formData.points;
+            let arrErr = arrError;
+            
+            arrErr = arrErr.filter((val,i) => index != i);
+            arr = arr.filter((val,i) => index != i);
+            
+            setFormData({...formData,points: [...arr]})
+            setArrError([...arrErr])
+        }
     }
 
     const validate = () => {
@@ -68,13 +72,13 @@ const AddSubscription = (props) => {
         let validData = true;
         Object.keys(formData).forEach(key => {
             if(formData[key] == "") {
-                err[key] = `${key} field cannot be empty`
+                err[key] = `Field cannot be empty`
                 validData = false;
             } 
         }); 
         formData.points.forEach((point,index) => {
             if(point == "") {
-                arrErr[index] = "Feild cannot be empty"
+                arrErr[index] = "Field cannot be empty"
                 validData = false;
             }
         })

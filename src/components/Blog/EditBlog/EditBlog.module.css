@@ -8,7 +8,7 @@
 .paper h1 {
     font-size: 20px;
     padding-top: 20px;
-    margin: 10px;
+    margin: 10px 0px;
     font-weight: 500;
 }
 .row {
@@ -31,6 +31,7 @@
 .rowContent {
     display: flex;
     min-height: 150px;
+    align-items: flex-start;
 }
 .textEditor {
     min-height: 170px;
@@ -46,6 +47,15 @@
     flex-direction: column;
     padding: 20px 0px;
     margin-left: 10px;
+    position: relative;
+}
+
+.editButton {
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+    background-color: rgba(255, 0, 0, 0.9) !important;
+    color: white !important;
 }
 .image:hover {
     cursor: pointer;

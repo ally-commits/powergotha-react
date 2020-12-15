@@ -61,7 +61,7 @@ const Content = (props) => {
             })
 
         } else {
-            setError("Feild cannot be empty")
+            setError("Field cannot be empty")
         }
     }
     const feedback = props.feedback;
@@ -101,11 +101,9 @@ const Content = (props) => {
                     <TextField
                         value={reply}
                         onChange={e => setReply(e.target.value)}
-                        label={LANG.REPLY}
-                        multiline
+                        label={LANG.REPLY} 
                         rows={4}
-                        fullWidth 
-                        variant="outlined"
+                        fullWidth  
                         error={error}
                         helperText={error}
                     />
@@ -115,7 +113,7 @@ const Content = (props) => {
                             ?
                         <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>{LANG.LOADING}</Button>
                             :
-                        <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>{LANG.UPDATE + " " + LANG.REPLY}</Button>}
+                        <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>{LANG.ADD + " " + LANG.REPLY}</Button>}
                     </div>
                 </div>
             </AccordionDetails>

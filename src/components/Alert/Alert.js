@@ -19,7 +19,7 @@ const AlertComp = (props) => {
     return (
         <React.Fragment>
             {show && 
-            <Snackbar open={show} onClose={() => props.showAlert(false)} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
+            <Snackbar open={show} onClose={() => {}} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
                 <Alert onClose={() =>  props.showAlert(false)} severity="info">
                     {show}
                 </Alert>

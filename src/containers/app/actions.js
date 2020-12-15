@@ -26,15 +26,14 @@ export const setAuth = (data) => dispatch => {
 
 export const getAllImages = () => dispatch => {
     var storageRef = storage.ref();
-    var listRef = storageRef.child('/product-images');
-
+    var listRef = storageRef.child('/media-images');
     
     listRef.listAll().then(async function(res) {
         await res.items.forEach(async function(itemRef,index) {
             await itemRef.getDownloadURL().then(url => {
                 dispatch(addImage(url))
             })
-        });
+        }); 
 
     }).catch(function(error) {
         

@@ -64,7 +64,7 @@ const EditDoctor = (props) => {
         setError({...err});
         Object.keys(err).forEach(key => {
             if(formData[key] == "") {
-                err[key] = `${key} field cannot be empty`
+                err[key] = `Field cannot be empty`
                 validData = false;
             } 
         }); 

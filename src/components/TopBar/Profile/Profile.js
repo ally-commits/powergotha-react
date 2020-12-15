@@ -49,7 +49,7 @@ const Profile = (props) => {
         setError({...err});
         Object.keys(err).forEach(key => {
             if(formData[key].length < 8) {
-                err[key] = `${key} should be mimimum 8 charactors`
+                err[key] = `${key == "oldPassword" ? "Old Password" : "New Password"} should be mimimum 8 charactors`
                 validData = false;
             } 
         })
@@ -88,7 +88,7 @@ const Profile = (props) => {
         setError({...err});
 
         if(user.name == "") {
-            err.name = "Name Feild cannot be empty"
+            err.name = "Name Field cannot be empty"
         }
 
         if(user.phoneNumber.length != 10) {

@@ -49,3 +49,18 @@
     cursor: pointer;
     border: 3px solid rgba(83, 83, 168, 0.5);
 }
+.textField { 
+    width: 350px !important;
+}
+.header {
+    width: 98%;
+    margin: 0 auto;
+    margin: 20px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.noData {
+    width: 100%;
+    text-align: center;
+}

@@ -11,6 +11,10 @@ import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Tooltip from '@material-ui/core/Tooltip' 
 
+import IconButton from '@material-ui/core/IconButton';
+
+import AddRoundedIcon from '@material-ui/icons/AddRounded';
+import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import UpdateRoundedIcon from '@material-ui/icons/UpdateRounded';
 
 import {connect} from 'react-redux'
@@ -66,7 +70,7 @@ const EditBlog = (props) => {
         setError({...err});
         Object.keys(err).forEach(key => {
             if(formData[key] == "") {
-                err[key] = `${key} field cannot be empty`
+                err[key] = `Field cannot be empty`
                 validData = false;
             } 
         }) 
@@ -140,8 +144,13 @@ const EditBlog = (props) => {
                             }}
                         />
                         <p>{LANG.PICTURE}</p>
+                        
+                        <img src={formData.image} alt="" className={styles.img} onClick={() => setModal(true)}/>
+                        
                         <Tooltip title={LANG.EDIT + " " + LANG.PICTURE}>
-                            <img src={formData.image} alt="" className={styles.img} onClick={() => setModal(true)}/>
+                            <IconButton className={styles.editButton} onClick={() => setModal(true)}>
+                                <EditRoundedIcon />
+                            </IconButton>
                         </Tooltip>
                     </div>
                 </div>
@@ -151,7 +160,7 @@ const EditBlog = (props) => {
                         ?
                     <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>{LANG.LOADING}</Button>
                         :
-                    <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>{LANG.EDIT + LANG.BLOG_POST}</Button>}
+                    <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>{LANG.EDIT + " " + LANG.BLOG_POST}</Button>}
                 </div>
             </Paper>
         </div>
