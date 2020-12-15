@@ -17,7 +17,7 @@ import {connect} from 'react-redux'
 import {showAlert} from '../../../containers/app/actions' 
 
 import {getFarmDetails} from '../../../containers/farm/actions'
-import {getAnimalDetails,getAnimalUserList} from '../../../containers/animals/actions'
+import {getAnimalDetails} from '../../../containers/animals/actions'
 import {getAllCategory} from '../../../containers/category/actions'
 
 import {withRouter,useLocation} from 'react-router-dom'
@@ -69,11 +69,10 @@ const AddAnimal = (props) => {
         setError({...err});
         Object.keys(err).forEach(key => {
             if(formData[key] == "") {
-                err[key] = `${key} field cannot be empty`
+                err[key] = `Field cannot be empty`
                 validData = false;
             }  
-        })
-        console.log(err)
+        });
         setError({...err});
         return validData;
     }
@@ -91,10 +90,11 @@ const AddAnimal = (props) => {
             }).then(res => {
                 setLoading(false);
                 props.showAlert("Animal Added Succesfully");
-                props.getAnimalUserList()
                 props.getAnimalDetails(query.get("userId"))
                 props.history.push("/admin/animals/VIEW-USER-DETAILS?userId=" + query.get("userId"))
             }).catch(err => {
+
+                console.log(err)
                 setLoading(false);
                 if(err && err.response && err.response.data && err.response.data.error) {
                     props.showAlert(err.response.data.error)

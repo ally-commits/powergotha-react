@@ -14,10 +14,15 @@ const ChatComp = (props) => {
     const [chats,setChats] = React.useState([]);
     const [users,setUsers] = React.useState({});
     const [activeUserId,setActiveUserId] = React.useState(false);
+    const [searchVal,setSearchVal] = React.useState("");
 
     React.useEffect(() => {
         firebase.database().ref("/").once('value').then((snapshot) => {
-            setChats(Object.keys(snapshot.val()))
+            let chatList = Object.keys(snapshot.val())
+            setChats(chatList)
+            if(chatList.length > 0) {
+                setActiveUserId(chatList[0])
+            }
         })
     },[]);
 
@@ -37,14 +42,20 @@ const ChatComp = (props) => {
         <Paper className={styles.container} variant="outlined"> 
             <div className={styles.leftContent}>
                 <h1>{LANG.REPLIES}</h1>
+
+                <div className={styles.searchBar}>
+                    <input type="text" placeholder="Search Here.." value={searchVal} onChange={e => setSearchVal(e.target.value)} />
+                </div>
                 {chats.map(userId => {
-                    return (
-                        <div 
-                            onClick={() => setActiveUserId(userId)}
-                            className={activeUserId == userId ? styles.activeListItem : styles.listItem}
-                        >{users[userId] && users[userId].name}
-                        </div>
-                    )
+                    if(users[userId] && users[userId].name.toLowerCase().includes(searchVal.toLowerCase())) {
+                        return (
+                            <div 
+                                onClick={() => setActiveUserId(userId)}
+                                className={activeUserId == userId ? styles.activeListItem : styles.listItem}
+                            >{users[userId] && users[userId].name}
+                            </div>
+                        )
+                    } else return;
                 })}
             </div>
             <div className={styles.rightContent}> 

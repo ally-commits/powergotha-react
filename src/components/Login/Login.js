@@ -42,7 +42,8 @@ const Login = (props) => {
         return value;
     }
 
-    const onSubmit = () => {
+    const onSubmit = (e) => {
+        e.preventDefault();
         if(validate()) {
             setLoading(true);
 
@@ -76,7 +77,7 @@ const Login = (props) => {
                     <h1 className={styles.head}>Agrowon Animal Care</h1>
                 </div> 
             
-                <div className={styles.loginContent}>
+                <form className={styles.loginContent} onSubmit={onSubmit}>
                     <h1 className={styles.loginHead}>Login</h1>
 
                     <TextField
@@ -107,12 +108,12 @@ const Login = (props) => {
                         Loading ... 
                     </button>
                         :
-                    <button className={styles.signIn} onClick={onSubmit}>
+                    <button className={styles.signIn} >
                         Login 
                     </button>}
 
                     <p>2019 © Agrowon Agrotech Industries Pvt. Ltd</p>
-                </div>
+                </form>
 
                 <div className={styles.loginFooter}>
                     &nbsp;

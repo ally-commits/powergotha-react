@@ -44,9 +44,9 @@ const ViewBlog = (props) => {
             if(blog.title.substring(0,10).toLowerCase().includes(searchVal.toLowerCase())){
                 rowData.push([
                     index + 1,
-                    blog.title,
+                    blog.title.substring(0,30) + " " + (blog.title.length > 30 ? "...." : ""),
                     blog.createdAt.substring(0,10),
-                    blog.addedBy.name,   
+                    blog.addedBy ? blog.addedBy.name : "----",   
                     <React.Fragment>
                         <Tooltip title={LANG.VIEW + " " + LANG.BLOG_POST}>
                             <IconButton onClick={() => props.history.push("/user/blog-post/VIEW-BLOG-POST?blogId="+ blog._id )}>

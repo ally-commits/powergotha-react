@@ -9,14 +9,16 @@ import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button'
 import {storage} from '../../App'
 import styles from './Media.module.css'
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, TextField } from '@material-ui/core';
 import {getAllImages,addImage} from '../../containers/app/actions'
 import {connect} from 'react-redux'
+import LANG from '../../translator';
 
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: 'relative',
+    background: 'white'
   },
   title: {
     marginLeft: theme.spacing(2),
@@ -32,6 +34,7 @@ const MediaHandler = (props) => {
     const classes = useStyles(); 
     const [images,setImages] = React.useState(false)
     const [progress,setProgress] = React.useState(false);
+    const [searchVal,setSearchVal] = React.useState("")
 
     React.useEffect(() => {
         if(!props.images)  {
@@ -46,7 +49,7 @@ const MediaHandler = (props) => {
     const handleImageUpload = (e) => {
         const img = e.target.files[0];
         if(img) {
-            const uploadTask = storage.ref(`/product-images/${img.name}`).put(img);
+            const uploadTask = storage.ref(`/media-images/${img.name}`).put(img);
             uploadTask.on('state_changed', 
                 (snapShot) => { 
                     setProgress(true);
@@ -56,7 +59,7 @@ const MediaHandler = (props) => {
                     setProgress(false);
                 },
                 () => { 
-                storage.ref('product-images').child(img.name).getDownloadURL()
+                storage.ref('media-images').child(img.name).getDownloadURL()
                     .then(fireBaseUrl => {
                         setProgress(false); 
                         props.addImage(fireBaseUrl) 
@@ -66,7 +69,13 @@ const MediaHandler = (props) => {
     } 
     let showLoading = !images;
     let showContent = !showLoading;
-
+    let imageRender = showContent && images.map((val,index) => {
+        if(val.toLowerCase().includes(searchVal.toLowerCase())) {
+            return (
+                <img src={val} className={styles.imgContent} key={val} onClick={() => props.onSelectImage(val)}/>
+            )
+        } else return;
+    })
     return ( 
         <Dialog fullScreen open={props.open} onClose={props.onClose} TransitionComponent={Transition}>
             <AppBar className={classes.appBar}>
@@ -80,8 +89,8 @@ const MediaHandler = (props) => {
 
                 <div className={styles.buttons}>
                     <input type={"file"} onChange={handleImageUpload} />
-                    <Button color="secondary" variant="contained"
-                        endIcon={progress && <CircularProgress size={20} />}
+                    <Button color="primary" variant="contained" className={styles.btnUpload}
+                        endIcon={progress && <CircularProgress size={20} style={{color: "white" }}/>}
                     >Add New Image</Button>
                 </div>
             </Toolbar>
@@ -94,13 +103,29 @@ const MediaHandler = (props) => {
                     </div>}
 
                 {showContent &&
-                    <div className={styles.container}>
-                        {images.map((val,index) => {
-                            return (
-                                <img src={val} className={styles.imgContent} key={index} onClick={() => props.onSelectImage(val)}/>
-                            )
-                        })}
-                    </div>
+                    <React.Fragment>
+                        <div className={styles.header}>
+                            <TextField 
+                                label={LANG.SEARCH_HERE}
+                                value={searchVal}
+                                onChange={e => setSearchVal(e.target.value)}
+                                className={styles.textField}
+                                variant="outlined"
+                            />
+                        </div>
+                        <div className={styles.container}>
+                            {imageRender.length > 0 
+                                ?
+                            <React.Fragment>
+                                {imageRender}
+                            </React.Fragment>
+                                :
+                            <div className={styles.noData}>
+                                <p>No Images Found</p>
+                            </div>
+                            }
+                        </div>
+                    </React.Fragment>
                 }
             </div>
         </Dialog>
