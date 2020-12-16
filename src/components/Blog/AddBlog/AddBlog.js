@@ -73,7 +73,7 @@ const AddBlog = (props) => {
                 setLoading(false);
                 props.showAlert("Blog Added Succesfully");
                 props.getAllBlogPost()
-                props.history.push("/user/blog-post/VIEW-BLOG")
+                window.location.replace("/user/blog-post/VIEW-BLOG")
             }).catch(err => {
                 setLoading(false);
                 if(err && err.response && err.response.data && err.response.data.error) {
@@ -108,8 +108,7 @@ const AddBlog = (props) => {
                             <JoditEditor
                                 ref={editor}
                                 value={content} 
-                                tabIndex={1} 
-                                // onBlur={e => setFormData({...formData,postContent: e.target.value})} 
+                                tabIndex={1}  
                                 onChange={e => setContent(e)} 
                             />}
 
