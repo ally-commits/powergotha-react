@@ -27,7 +27,10 @@ import ReactQuill from 'react-quill';
 import { defaultBlogImage } from '../../../config/config';
 import LANG from '../../../translator';
 
+import JoditEditor from "jodit-react";
+
 const EditBlog = (props) => { 
+    const editor = React.useRef("")
     let { search } = useLocation();
     const query = new URLSearchParams(search);
 
@@ -37,6 +40,8 @@ const EditBlog = (props) => {
         image: defaultBlogImage,
         blogId: ""
     });
+
+    const [content,setContent] = React.useState("");
 
     const [error,setError] = React.useState({
         title: false,
@@ -52,7 +57,7 @@ const EditBlog = (props) => {
                 props.blogs.forEach(blog => {
                     if(blog._id == query.get("blogId")) { 
                         setFormData({...formData,title: blog.title,image: blog.image,blogId: blog._id});
-                        setTimeout(() => {setFormData({...formData,postContent: blog.postContent})},500)
+                       setContent(blog.postContent)
                     }
                 })
             } else {
@@ -65,7 +70,7 @@ const EditBlog = (props) => {
     },[props.blogs])
 
     const validate = () => {
-        const err = {title: false,postContent: false };
+        const err = {title: false};
         let validData = true;
         setError({...err});
         Object.keys(err).forEach(key => {
@@ -86,13 +91,14 @@ const EditBlog = (props) => {
                 method: "put",
                 url: "/blog-post/editBlogPost",
                 data: {
-                    ...formData
+                    ...formData,
+                    postContent: content
                 }
             }).then(res => {
                 setLoading(false);
                 props.showAlert("Blog Updated Succesfully");
                 props.getAllBlogPost()
-                props.history.push("/user/blog-post/VIEW-BLOG")
+                window.location.replace("/user/blog-post/VIEW-BLOG")
             }).catch(err => {
                 setLoading(false);
                 if(err && err.response && err.response.data && err.response.data.error) {
@@ -104,8 +110,7 @@ const EditBlog = (props) => {
             })
         }
     }  
-
-    console.log(formData)
+ 
     return (
         <div className={styles.container}>
             <Paper variant="outlined" className={styles.paper}>
@@ -125,11 +130,13 @@ const EditBlog = (props) => {
 
                 <div className={styles.rowContent}>
                     <div className={styles.content}>
-                        <ReactQuill 
-                            value={formData.postContent}
-                            className={styles.textEditor}
-                            onChange={e => setFormData({...formData,postContent: e})} 
-                        />
+                        {editor != null && content != null &&
+                            <JoditEditor
+                                ref={editor}
+                                value={content} 
+                                tabIndex={1}  
+                                onChange={e => setContent(e)} 
+                            />}
                         {error.content && <span className={styles.textRed}>{error.content}</span>}
                     </div>
 

@@ -40,3 +40,12 @@
 .textFeild button {
     margin-top: 15px;
 }
+.container {
+    margin: 10px 0px;
+    width: 98%;
+    margin-left: auto;
+}
+.replyContent {
+    border-bottom: 1px solid rgb(0, 0, 0,0.08);
+    padding: 10px 0px;
+}

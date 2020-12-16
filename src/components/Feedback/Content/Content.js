@@ -31,25 +31,31 @@ const useStyles = makeStyles((theme) => ({
 
 const Content = (props) => {
     const classes = useStyles();
-    const [reply,setReply] = React.useState(props.feedback.reply)
+    const [reply,setReply] = React.useState("")
+    const [replies,setReplies] = React.useState(props.feedback.reply);
     const [loading,setLoading] = React.useState(false);
     const [error,setError] = React.useState(false);
 
-    const onSubmit = () => {
+    const onSubmit = (e) => {
+        e.preventDefault();
         if(reply) {
             setError(false);
             setLoading(true);
+            let data = replies;
+            data.push(reply);
 
             axios({
                 method: "put",
                 url: "/feedback/reply",
                 data: {
-                    reply,
+                    reply: data,
                     addedBy: props.feedback.addedBy._id,
                     feedbackId: props.feedback._id
                 }
             }).then(res => {
                 setLoading(false);
+                setReplies([...data])
+                setReply("")
                 props.showAlert("Feedback Updated Succesfully");
             }).catch(err => {
                 setLoading(false);
@@ -58,6 +64,7 @@ const Content = (props) => {
                 } else {
                     props.showAlert("Something went wrong ! Try Again")
                 }
+                console.log(err)
             })
 
         } else {
@@ -98,23 +105,35 @@ const Content = (props) => {
             </AccordionSummary>
             <AccordionDetails> 
                 <div className={styles.textFeild}>
-                    <TextField
-                        value={reply}
-                        onChange={e => setReply(e.target.value)}
-                        label={LANG.REPLY} 
-                        rows={4}
-                        fullWidth  
-                        error={error}
-                        helperText={error}
-                    />
-
-                    <div className={styles.row}>
-                        {loading
-                            ?
-                        <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>{LANG.LOADING}</Button>
-                            :
-                        <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />} onClick={onSubmit}>{LANG.ADD + " " + LANG.REPLY}</Button>}
+                    <div className={styles.container}>
+                        {replies.map(val => {
+                            return (
+                                <div className={styles.replyContent}>
+                                    <p>{val}</p>
+                                </div>
+                            )
+                        })}
                     </div>
+
+                    <form onSubmit={onSubmit}>
+                        <TextField
+                            value={reply}
+                            onChange={e => setReply(e.target.value)}
+                            label={LANG.REPLY} 
+                            rows={4}
+                            fullWidth  
+                            error={error}
+                            helperText={error}
+                        />
+
+                        <div className={styles.row}>
+                            {loading
+                                ?
+                            <Button color="primary" variant="contained" startIcon={<CircularProgress color="inherit" size={20} />}>{LANG.LOADING}</Button>
+                                :
+                            <Button color="primary" variant="contained" startIcon={<UpdateRoundedIcon />}>{LANG.ADD + " " + LANG.REPLY}</Button>}
+                        </div>
+                    </form>
                 </div>
             </AccordionDetails>
         </Accordion>
