@@ -29,14 +29,18 @@ const EditDoctor = (props) => {
         name: "",
         phoneNumber: "", 
         password: "",
-        email: "" 
+        email: "",
+        address: "",
+        pincode : "" 
     });
 
     const [error,setError] = React.useState({
         name: false,
         phoneNumber: false, 
         email: false,
-        password: false,  
+        password: false,
+        address: false,
+        pincode :false  
     });
 
     const [loading,setLoading] = React.useState(false);  
@@ -59,7 +63,7 @@ const EditDoctor = (props) => {
     },[props.doctors])
 
     const validate = () => {
-        const err = {name: false,phoneNumber: false,password: false,email: false};
+        const err = {name: false,phoneNumber: false,password: false,email: false,address: false,pincode: false};
         let validData = true;
         setError({...err});
         Object.keys(err).forEach(key => {
@@ -148,6 +152,30 @@ const EditDoctor = (props) => {
                         helperText={error.password}
                     /> 
                 </div> 
+
+                <div className={styles.row}>
+                    <TextField 
+                        label={LANG.ADDRESS}
+                        type="address" 
+                        
+                        className={styles.halfWidth}
+                        value={formData.address}
+                        onChange={e => setFormData({...formData,address: e.target.value})}
+                        error={error.address}
+                        helperText={error.address}
+                    /> 
+
+
+                    <TextField 
+                        label={LANG.PINCODE}
+                        type="pincode"
+                        className={styles.halfWidth}
+                        value={formData.pincode}
+                        onChange={e => setFormData({...formData,pincode: e.target.value})}
+                        error={error.pincode}
+                        helperText={error.pincode}
+                    /> 
+                </div>
  
  
 
