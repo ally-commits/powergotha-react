@@ -14,6 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
+import CloseIcon from '@material-ui/icons/Close';
 
 import {connect} from 'react-redux'
 import {getAllBlogPost} from '../../../containers/blogpost/actions' 
@@ -132,6 +133,11 @@ const AddBlog = (props) => {
                         <Tooltip title={LANG.EDIT + " " + LANG.PICTURE}>
                             <IconButton className={styles.editButton} onClick={() => setModal(true)}>
                                 <EditRoundedIcon />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title={LANG.DELETE + " " + LANG.PICTURE}>
+                            <IconButton className={styles.closeButton} onClick={() => setFormData({...formData,image: defaultBlogImage})}>
+                                <CloseIcon />
                             </IconButton>
                         </Tooltip>
                     </div>

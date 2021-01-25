@@ -2,6 +2,7 @@ import React from 'react'
 import firebase from 'firebase'
 import styles from './ChatSystem.module.css'
 import ScrollableFeed from 'react-scrollable-feed'
+import moment from 'moment';
 
 
 const ChatSystem = (props) => {
@@ -65,8 +66,9 @@ const ChatSystem = (props) => {
                     <ScrollableFeed>
                     
                         {msg.map(val => {
+                            console.log(val)
                             return (
-                                <p className={val.type == "ADMIN" ? styles.rightContent : styles.leftContent}>{val.msg}</p>
+                                <p className={val.type == "ADMIN" ? styles.rightContent : styles.leftContent}>{val.msg}<div className={styles.dateTime}>{ moment.unix(val.timeStamp).format("DD,MMM HH:mm")}</div></p>
                             )
                         })}
                     </ScrollableFeed>
