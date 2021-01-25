@@ -2,7 +2,7 @@
     height: var(--breadcrump-height); 
     position: fixed; 
     width: 100%;
-    background-color: white;
+    /* background-color: white; */
     z-index: 1;
 }
 .content {

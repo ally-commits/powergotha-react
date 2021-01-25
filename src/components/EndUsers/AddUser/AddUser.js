@@ -78,7 +78,9 @@ const AddUser = (props) => {
             }).catch(err => {
                 setLoading(false);
                 if(err && err.response && err.response.data && err.response.data.error) {
-                    props.showAlert(err.response.data.error)
+                    if(err.response.data.error === "phoneNumber already exists"){
+                         props.showAlert("Phone Number already exists")
+                    }
                 } else {
                     props.showAlert("Something went wrong ! Try Again")
                 }

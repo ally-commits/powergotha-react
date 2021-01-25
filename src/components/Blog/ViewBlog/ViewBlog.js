@@ -39,9 +39,9 @@ const ViewBlog = (props) => {
     let showData = !isLoading;
     let rowData = [];
 
-    !isLoading && blogs.forEach((blog,index) => {
+    !isLoading &&  blogs.forEach((blog,index) => {
         if(index+1 <= showEntries || showEntries == LANG.ALL) {
-            if(blog.title.substring(0,10).toLowerCase().includes(searchVal.toLowerCase())){
+            if(blog.title && blog.title.substring(0,10).toLowerCase().includes(searchVal.toLowerCase())){
                 rowData.push([
                     index + 1,
                     blog.title.substring(0,30) + " " + (blog.title.length > 30 ? "...." : ""),

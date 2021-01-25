@@ -30,13 +30,13 @@ const Login = (props) => {
         let value = true;
         let err = {phoneNumber: false,password: false}
         setFormError({...err});
-        if(formData.phoneNumber == "") {
+        if(formData.phoneNumber == "" || formData.phoneNumber.toString().length != 10) {
             value = false;
-            err.phoneNumber = "Enter valid Phone Number"
+            err.phoneNumber = "Enter valid 10 digit Phone Number"
         }
-        if(formData.password == "") {
+        if(formData.password == ""|| formData.password.toString().length < 8) {
             value = false;
-            err.password = "Enter valid Password"
+            err.password = "Password should be atleast 8 characters"
         }
         setFormError({...err});
         return value;
@@ -112,7 +112,7 @@ const Login = (props) => {
                         Login 
                     </button>}
 
-                    <p>2019 © Agrowon Agrotech Industries Pvt. Ltd</p>
+                    <p>2020 © Agrowon Agrotech Industries Pvt. Ltd</p>
                 </form>
 
                 <div className={styles.loginFooter}>
