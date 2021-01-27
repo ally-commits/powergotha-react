@@ -75,7 +75,14 @@ const ChatSystem = (props) => {
                 </div>
 
                 <div className={styles.footer}>
-                    <input type="text" value={value} onChange={e => setValue(e.target.value)} placeholder="Type Something" onKeyDown={checkIfSubmit}/>
+                    <input 
+                        type="text" 
+                        value={value} 
+                        onBlur={e => setValue(e.target.value.trim())}
+                        onChange={e => setValue(e.target.value)} 
+                        placeholder="Type Something" 
+                        onKeyDown={checkIfSubmit}
+                    />
                     <button onClick={onSubmit}>Send</button>
                 </div>
             </div>
